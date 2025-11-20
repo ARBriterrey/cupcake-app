@@ -1,25 +1,39 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 
-const supabaseUrl = process.env.SUPABASE_URL || '';
-const supabaseServiceRole = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
-
-if (!supabaseUrl || !supabaseServiceRole) {
-  console.warn('⚠️  Supabase credentials not configured. Check .env file.');
-}
+let _supabaseClient: SupabaseClient | null = null;
 
 /**
- * Supabase client with service role access
+ * Get Supabase client with service role access
  * This bypasses RLS policies - use carefully!
+ *
+ * Lazy-loaded to ensure environment variables are loaded first
  */
-export const supabaseClient: SupabaseClient = createClient(
-  supabaseUrl,
-  supabaseServiceRole,
-  {
-    auth: {
-      autoRefreshToken: false,
-      persistSession: false,
-    },
+export function getSupabaseClient(): SupabaseClient {
+  if (_supabaseClient) {
+    return _supabaseClient;
   }
-);
 
-export default supabaseClient;
+  const supabaseUrl = process.env.SUPABASE_URL || '';
+  const supabaseServiceRole = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
+
+  if (!supabaseUrl || !supabaseServiceRole) {
+    throw new Error('⚠️  Supabase credentials not configured. Check .env file.');
+  }
+
+  _supabaseClient = createClient(
+    supabaseUrl,
+    supabaseServiceRole,
+    {
+      auth: {
+        autoRefreshToken: false,
+        persistSession: false,
+      },
+    }
+  );
+
+  return _supabaseClient;
+}
+
+// For backwards compatibility
+export const supabaseClient = getSupabaseClient;
+export default getSupabaseClient;
