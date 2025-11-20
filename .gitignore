@@ -1,0 +1,79 @@
+# Environment Variables
+.env
+.env.local
+.env.*.local
+.env.production
+.env.development
+apps/mobile/.env
+apps/api/.env
+supabase/.env
+
+# Flutter
+apps/mobile/.dart_tool/
+apps/mobile/.flutter-plugins
+apps/mobile/.flutter-plugins-dependencies
+apps/mobile/.packages
+apps/mobile/build/
+apps/mobile/ios/Pods/
+apps/mobile/ios/.symlinks/
+apps/mobile/ios/Flutter/Flutter.framework
+apps/mobile/ios/Flutter/Flutter.podspec
+apps/mobile/pubspec.lock
+apps/mobile/.metadata
+
+# Node.js
+node_modules/
+apps/api/node_modules/
+packages/*/node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.pnpm-store/
+
+# Build outputs
+dist/
+build/
+out/
+apps/api/dist/
+apps/api/build/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Supabase
+supabase/.branches
+supabase/.temp
+
+# Turborepo
+.turbo/
+
+# Testing
+coverage/
+.nyc_output/
+*.lcov
+
+# Logs
+logs/
+*.log
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# API Keys and Secrets
+*.pem
+*.key
+secrets.json
+credentials.json
