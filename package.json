@@ -1,0 +1,33 @@
+{
+  "name": "cupcake",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Cupcake - A couples-first long-distance relationship app",
+  "keywords": ["couples", "ldr", "relationship", "flutter", "supabase"],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "test": "turbo run test",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "api:dev": "pnpm --filter api dev",
+    "api:build": "pnpm --filter api build",
+    "api:test": "pnpm --filter api test",
+    "mobile:run": "cd apps/mobile && flutter run",
+    "mobile:test": "cd apps/mobile && flutter test",
+    "mobile:build:android": "cd apps/mobile && flutter build apk",
+    "mobile:build:ios": "cd apps/mobile && flutter build ios",
+    "supabase:start": "npx supabase start",
+    "supabase:stop": "npx supabase stop",
+    "supabase:status": "npx supabase status",
+    "supabase:migration": "npx supabase migration new"
+  },
+  "devDependencies": {
+    "turbo": "^2.3.3"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  },
+  "packageManager": "pnpm@10.22.0"
+}

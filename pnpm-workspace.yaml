@@ -1,0 +1,7 @@
+packages:
+  # All apps in the monorepo
+  - 'apps/*'
+  # All shared packages
+  - 'packages/*'
+  # All sprinkles (add-on modules)
+  - 'packages/sprinkles/*'
