@@ -51,18 +51,25 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
           errorMessage = "Account not found. Please sign up first.";
 
           // Show option to go to sign up
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(
-              content: const Text('Account not found. Please sign up first.'),
-              backgroundColor: Colors.orange,
-              action: SnackBarAction(
-                label: 'Sign Up',
-                textColor: Colors.white,
-                onPressed: () => context.go('/sign-up'),
+          ScaffoldMessenger.of(context)
+            ..clearSnackBars() // Clear any existing messages
+            ..showSnackBar(
+              SnackBar(
+                content: const Text('Account not found. Please sign up first.'),
+                backgroundColor: Colors.orange,
+                action: SnackBarAction(
+                  label: 'Sign Up',
+                  textColor: Colors.white,
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).hideCurrentSnackBar();
+                    context.go('/sign-up');
+                  },
+                ),
+                duration: const Duration(seconds: 8),
+                behavior: SnackBarBehavior.floating,
+                dismissDirection: DismissDirection.horizontal,
               ),
-              duration: const Duration(seconds: 5),
-            ),
-          );
+            );
           return;
         } else if (errorString.contains('invalid password') ||
                    errorString.contains('wrong password')) {
@@ -196,7 +203,10 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                       TextButton(
                         onPressed: _isLoading
                             ? null
-                            : () => context.go('/sign-up'),
+                            : () {
+                                ScaffoldMessenger.of(context).clearSnackBars();
+                                context.go('/sign-up');
+                              },
                         child: const Text('Sign Up'),
                       ),
                     ],
