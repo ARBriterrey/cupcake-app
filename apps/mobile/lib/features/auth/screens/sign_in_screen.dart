@@ -41,9 +41,39 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
       }
     } catch (e) {
       if (mounted) {
+        String errorMessage = 'Sign in failed';
+
+        // Parse Supabase errors for user-friendly messages
+        final errorString = e.toString().toLowerCase();
+        if (errorString.contains('invalid login credentials') ||
+            errorString.contains('email not confirmed') ||
+            errorString.contains('user not found')) {
+          errorMessage = "Account not found. Please sign up first.";
+
+          // Show option to go to sign up
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: const Text('Account not found. Please sign up first.'),
+              backgroundColor: Colors.orange,
+              action: SnackBarAction(
+                label: 'Sign Up',
+                textColor: Colors.white,
+                onPressed: () => context.go('/sign-up'),
+              ),
+              duration: const Duration(seconds: 5),
+            ),
+          );
+          return;
+        } else if (errorString.contains('invalid password') ||
+                   errorString.contains('wrong password')) {
+          errorMessage = 'Incorrect password. Please try again.';
+        } else if (errorString.contains('network')) {
+          errorMessage = 'Network error. Please check your connection.';
+        }
+
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Sign in failed: ${e.toString()}'),
+            content: Text(errorMessage),
             backgroundColor: Colors.red,
           ),
         );

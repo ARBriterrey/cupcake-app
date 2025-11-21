@@ -11,23 +11,24 @@ class PairRepository {
     final userId = _supabase.auth.currentUser?.id;
     if (userId == null) return null;
 
-    // Get user's active pair
-    final profileResponse = await _supabase
-        .from('profiles')
-        .select('active_pair_id')
-        .eq('id', userId)
-        .single();
+    try {
+      // Try to get active pair directly from pairs table
+      // This works even if active_pair_id column doesn't exist yet
+      final pairResponse = await _supabase
+          .from('pairs')
+          .select()
+          .or('user1_id.eq.$userId,user2_id.eq.$userId')
+          .eq('status', 'active')
+          .maybeSingle();
 
-    final activePairId = profileResponse['active_pair_id'];
-    if (activePairId == null) return null;
+      if (pairResponse == null) return null;
 
-    final pairResponse = await _supabase
-        .from('pairs')
-        .select()
-        .eq('id', activePairId)
-        .single();
-
-    return Pair.fromJson(pairResponse);
+      return Pair.fromJson(pairResponse);
+    } catch (e) {
+      // If there's an error (like column doesn't exist), return null
+      // User is simply not paired yet
+      return null;
+    }
   }
 
   Future<Pair> getPair(String pairId) async {

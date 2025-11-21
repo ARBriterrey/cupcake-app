@@ -10,13 +10,19 @@ class UserRepository {
     final userId = _supabase.auth.currentUser?.id;
     if (userId == null) return null;
 
-    final response = await _supabase
-        .from('profiles')
-        .select()
-        .eq('id', userId)
-        .single();
+    try {
+      final response = await _supabase
+          .from('profiles')
+          .select()
+          .eq('id', userId)
+          .single();
 
-    return UserProfile.fromJson(response);
+      return UserProfile.fromJson(response);
+    } catch (e) {
+      // If profile doesn't exist or has errors, return null
+      // This can happen if the profile was deleted or hasn't been created yet
+      return null;
+    }
   }
 
   Future<UserProfile> getUserProfile(String userId) async {
