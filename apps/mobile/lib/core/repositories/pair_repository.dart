@@ -76,21 +76,23 @@ class PairRepository {
     final userId = _supabase.auth.currentUser?.id;
     if (userId == null) throw Exception('User not authenticated');
 
-    // Check if the recipient already has an account
-    String? toUserId;
-    try {
-      final existingUser = await _supabase
-          .from('profiles')
-          .select('id')
-          .eq('email', toUserEmail)
-          .maybeSingle();
+    // Check if the recipient already has an account - REQUIRED
+    final existingUser = await _supabase
+        .from('profiles')
+        .select('id')
+        .eq('email', toUserEmail)
+        .maybeSingle();
 
-      if (existingUser != null) {
-        toUserId = existingUser['id'] as String;
-      }
-    } catch (e) {
-      // User doesn't exist yet, that's fine
-      toUserId = null;
+    if (existingUser == null) {
+      // User doesn't exist - throw error
+      throw Exception('Your partner hasn\'t signed up yet. Ask them to create an account first!');
+    }
+
+    final toUserId = existingUser['id'] as String;
+
+    // Check if trying to invite yourself
+    if (toUserId == userId) {
+      throw Exception('You cannot send an invitation to yourself!');
     }
 
     final response = await _supabase
@@ -98,7 +100,7 @@ class PairRepository {
         .insert({
           'from_user_id': userId,
           'to_user_email': toUserEmail,
-          'to_user_id': toUserId, // Set if user exists, null otherwise
+          'to_user_id': toUserId,
           'status': InvitationStatus.pending.name,
           'message': message,
           'expires_at': DateTime.now()
