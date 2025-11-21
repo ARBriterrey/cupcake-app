@@ -76,11 +76,29 @@ class PairRepository {
     final userId = _supabase.auth.currentUser?.id;
     if (userId == null) throw Exception('User not authenticated');
 
+    // Check if the recipient already has an account
+    String? toUserId;
+    try {
+      final existingUser = await _supabase
+          .from('profiles')
+          .select('id')
+          .eq('email', toUserEmail)
+          .maybeSingle();
+
+      if (existingUser != null) {
+        toUserId = existingUser['id'] as String;
+      }
+    } catch (e) {
+      // User doesn't exist yet, that's fine
+      toUserId = null;
+    }
+
     final response = await _supabase
         .from('pair_invitations')
         .insert({
           'from_user_id': userId,
           'to_user_email': toUserEmail,
+          'to_user_id': toUserId, // Set if user exists, null otherwise
           'status': InvitationStatus.pending.name,
           'message': message,
           'expires_at': DateTime.now()
@@ -153,13 +171,12 @@ class PairRepository {
 
     final pair = Pair.fromJson(pairResponse);
 
-    // Update invitation status
+    // Update invitation status (updated_at is auto-updated by trigger)
     await _supabase
         .from('pair_invitations')
         .update({
           'status': InvitationStatus.accepted.name,
           'to_user_id': userId,
-          'updated_at': DateTime.now().toIso8601String(),
         })
         .eq('id', invitationId);
 
@@ -176,12 +193,12 @@ class PairRepository {
     final userId = _supabase.auth.currentUser?.id;
     if (userId == null) throw Exception('User not authenticated');
 
+    // updated_at is auto-updated by trigger
     await _supabase
         .from('pair_invitations')
         .update({
           'status': InvitationStatus.rejected.name,
           'to_user_id': userId,
-          'updated_at': DateTime.now().toIso8601String(),
         })
         .eq('id', invitationId);
   }
