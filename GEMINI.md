@@ -2,7 +2,7 @@
 
 This document provides a comprehensive overview of the Cupcake application, based on the project's planning and architecture documents.
 
-**Project Status:** This is a skeleton project. The directory structure has been created, but the core configuration and code have not yet been implemented. The information below reflects the intended design and architecture.
+**Project Status:** This is a skeleton project. The directory structure has been created, and the initial scaffolding for core components (monorepo, mobile app, API) is partially complete. The information below reflects the intended design and architecture and has been updated to reflect confirmed technology choices.
 
 ---
 
@@ -19,7 +19,7 @@ The core philosophy is built around a "Cupcake & Sprinkles" metaphor:
 The project is a monorepo intended to be managed by **pnpm** and **Turborepo**.
 
 - **Frontend (`apps/mobile`):** A cross-platform mobile application.
-  - **Note:** There is a conflict in the planning documents. The `Architecture Decision Book` specifies **React Native**, but the more detailed `Developer Setup Guide` and `Knowledge Base` specify **Flutter**. The setup guide's detailed commands suggest **Flutter is the most likely final choice.**
+  - **Framework:** **Flutter** has been chosen for the mobile application, as evidenced by the project's scaffolding.
 
 - **Backend (`apps/api`):** A lightweight **Node.js** middleware (using Express or NestJS). Its primary roles are to proxy requests to third-party services like OpenAI and to handle payment webhooks from RevenueCat/Stripe.
 
