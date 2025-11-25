@@ -1,0 +1,21 @@
+{
+  "name": "cupcake_theme",
+  "version": "1.0.0",
+  "description": "Dark-mode peach romantic theme for Cupcake app. Ensures consistent UI styling, tokens, and component generation.",
+  "author": "Andhan",
+  "tags": ["theme", "ui", "styling", "cupcake", "design"],
+  "entrypoint": "SKILL.md",
+  "type": "skill",
+  "format": "anthropic.skillpack",
+  "files": [
+    "SKILL.md",
+    "tokens/colors.json",
+    "tokens/typography.json",
+    "tokens/shapes.json",
+    "examples/widget_styling.flutter.txt",
+    "examples/card_layout.flutter.txt",
+    "examples/icon_usage.md",
+    "prompts/guidelines.md",
+    "prompts/do_and_dont.md"
+  ]
+}

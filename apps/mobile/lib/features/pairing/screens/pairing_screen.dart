@@ -39,9 +39,9 @@ class PairingScreen extends ConsumerWidget {
         child: currentPairAsync.when(
           data: (pair) {
             if (pair != null) {
-              // User is paired, go to dashboard
+              // User is paired, redirect to home
               WidgetsBinding.instance.addPostFrameCallback((_) {
-                context.go('/dashboard');
+                context.go('/home');
               });
               return const Center(
                 child: CircularProgressIndicator(),
@@ -78,7 +78,7 @@ class PairingScreen extends ConsumerWidget {
                   ),
                   const SizedBox(height: 32),
                   ElevatedButton.icon(
-                    onPressed: () => context.push('/send-invitation'),
+                    onPressed: () => context.push('/pairing/send-invitation'),
                     icon: const Icon(Icons.send),
                     label: const Text('Send Invitation'),
                     style: ElevatedButton.styleFrom(
@@ -117,7 +117,7 @@ class PairingScreen extends ConsumerWidget {
                           return Card(
                             margin: const EdgeInsets.only(bottom: 12),
                             child: ListTile(
-                              title: Text('Invitation from ${invitation.fromUserId}'),
+                              title: Text('Invitation from ${invitation.fromUserName ?? invitation.toUserEmail}'),
                               subtitle: invitation.message != null
                                   ? Text(invitation.message!)
                                   : null,
@@ -140,6 +140,8 @@ class PairingScreen extends ConsumerWidget {
                                                   'Invitation accepted!'),
                                             ),
                                           );
+                                          // Navigate to home
+                                          context.go('/home');
                                         }
                                       } catch (e) {
                                         if (context.mounted) {

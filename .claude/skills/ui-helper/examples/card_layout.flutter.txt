@@ -1,0 +1,25 @@
+Container(
+  margin: const EdgeInsets.all(20),
+  padding: const EdgeInsets.all(24),
+  decoration: BoxDecoration(
+    color: Color(0xFF0B0B0B),
+    borderRadius: BorderRadius.circular(12),
+    border: Border.all(
+      color: Color(0xFFFFC8A2),
+      width: 1.2,
+    ),
+  ),
+  child: Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+      Text(
+        "a shared moment that made us smile...",
+        style: TextStyle(
+          fontFamily: "Cormorant Garamond",
+          fontSize: 22,
+          color: Color(0xFFFFC8A2),
+        ),
+      ),
+    ],
+  ),
+);

@@ -1,0 +1,4 @@
+- Use thin-line icons with a peach stroke.
+- Avoid bold or filled icons.
+- Prefer gently rounded icon corners.
+- Icons should feel “hand-drawn” or “crafted”.

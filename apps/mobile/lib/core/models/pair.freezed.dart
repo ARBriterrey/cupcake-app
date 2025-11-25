@@ -22,13 +22,21 @@ Pair _$PairFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$Pair {
   String get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'user1_id')
   String get user1Id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'user2_id')
   String get user2Id => throw _privateConstructorUsedError;
+  PairStatus get status => throw _privateConstructorUsedError;
+  @JsonKey(name: 'couple_name')
   String? get coupleName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'anniversary_date')
   DateTime? get anniversaryDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'shared_preferences')
   Map<String, dynamic> get sharedPreferences =>
       throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_at')
   DateTime get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'updated_at')
   DateTime get updatedAt => throw _privateConstructorUsedError;
 
   /// Serializes this Pair to a JSON map.
@@ -47,13 +55,14 @@ abstract class $PairCopyWith<$Res> {
   @useResult
   $Res call({
     String id,
-    String user1Id,
-    String user2Id,
-    String? coupleName,
-    DateTime? anniversaryDate,
-    Map<String, dynamic> sharedPreferences,
-    DateTime createdAt,
-    DateTime updatedAt,
+    @JsonKey(name: 'user1_id') String user1Id,
+    @JsonKey(name: 'user2_id') String user2Id,
+    PairStatus status,
+    @JsonKey(name: 'couple_name') String? coupleName,
+    @JsonKey(name: 'anniversary_date') DateTime? anniversaryDate,
+    @JsonKey(name: 'shared_preferences') Map<String, dynamic> sharedPreferences,
+    @JsonKey(name: 'created_at') DateTime createdAt,
+    @JsonKey(name: 'updated_at') DateTime updatedAt,
   });
 }
 
@@ -75,6 +84,7 @@ class _$PairCopyWithImpl<$Res, $Val extends Pair>
     Object? id = null,
     Object? user1Id = null,
     Object? user2Id = null,
+    Object? status = null,
     Object? coupleName = freezed,
     Object? anniversaryDate = freezed,
     Object? sharedPreferences = null,
@@ -95,6 +105,10 @@ class _$PairCopyWithImpl<$Res, $Val extends Pair>
                 ? _value.user2Id
                 : user2Id // ignore: cast_nullable_to_non_nullable
                       as String,
+            status: null == status
+                ? _value.status
+                : status // ignore: cast_nullable_to_non_nullable
+                      as PairStatus,
             coupleName: freezed == coupleName
                 ? _value.coupleName
                 : coupleName // ignore: cast_nullable_to_non_nullable
@@ -131,13 +145,14 @@ abstract class _$$PairImplCopyWith<$Res> implements $PairCopyWith<$Res> {
   @useResult
   $Res call({
     String id,
-    String user1Id,
-    String user2Id,
-    String? coupleName,
-    DateTime? anniversaryDate,
-    Map<String, dynamic> sharedPreferences,
-    DateTime createdAt,
-    DateTime updatedAt,
+    @JsonKey(name: 'user1_id') String user1Id,
+    @JsonKey(name: 'user2_id') String user2Id,
+    PairStatus status,
+    @JsonKey(name: 'couple_name') String? coupleName,
+    @JsonKey(name: 'anniversary_date') DateTime? anniversaryDate,
+    @JsonKey(name: 'shared_preferences') Map<String, dynamic> sharedPreferences,
+    @JsonKey(name: 'created_at') DateTime createdAt,
+    @JsonKey(name: 'updated_at') DateTime updatedAt,
   });
 }
 
@@ -156,6 +171,7 @@ class __$$PairImplCopyWithImpl<$Res>
     Object? id = null,
     Object? user1Id = null,
     Object? user2Id = null,
+    Object? status = null,
     Object? coupleName = freezed,
     Object? anniversaryDate = freezed,
     Object? sharedPreferences = null,
@@ -176,6 +192,10 @@ class __$$PairImplCopyWithImpl<$Res>
             ? _value.user2Id
             : user2Id // ignore: cast_nullable_to_non_nullable
                   as String,
+        status: null == status
+            ? _value.status
+            : status // ignore: cast_nullable_to_non_nullable
+                  as PairStatus,
         coupleName: freezed == coupleName
             ? _value.coupleName
             : coupleName // ignore: cast_nullable_to_non_nullable
@@ -206,13 +226,15 @@ class __$$PairImplCopyWithImpl<$Res>
 class _$PairImpl implements _Pair {
   const _$PairImpl({
     required this.id,
-    required this.user1Id,
-    required this.user2Id,
-    this.coupleName,
-    this.anniversaryDate,
+    @JsonKey(name: 'user1_id') required this.user1Id,
+    @JsonKey(name: 'user2_id') required this.user2Id,
+    required this.status,
+    @JsonKey(name: 'couple_name') this.coupleName,
+    @JsonKey(name: 'anniversary_date') this.anniversaryDate,
+    @JsonKey(name: 'shared_preferences')
     final Map<String, dynamic> sharedPreferences = const {},
-    required this.createdAt,
-    required this.updatedAt,
+    @JsonKey(name: 'created_at') required this.createdAt,
+    @JsonKey(name: 'updated_at') required this.updatedAt,
   }) : _sharedPreferences = sharedPreferences;
 
   factory _$PairImpl.fromJson(Map<String, dynamic> json) =>
@@ -221,16 +243,22 @@ class _$PairImpl implements _Pair {
   @override
   final String id;
   @override
+  @JsonKey(name: 'user1_id')
   final String user1Id;
   @override
+  @JsonKey(name: 'user2_id')
   final String user2Id;
   @override
+  final PairStatus status;
+  @override
+  @JsonKey(name: 'couple_name')
   final String? coupleName;
   @override
+  @JsonKey(name: 'anniversary_date')
   final DateTime? anniversaryDate;
   final Map<String, dynamic> _sharedPreferences;
   @override
-  @JsonKey()
+  @JsonKey(name: 'shared_preferences')
   Map<String, dynamic> get sharedPreferences {
     if (_sharedPreferences is EqualUnmodifiableMapView)
       return _sharedPreferences;
@@ -239,13 +267,15 @@ class _$PairImpl implements _Pair {
   }
 
   @override
+  @JsonKey(name: 'created_at')
   final DateTime createdAt;
   @override
+  @JsonKey(name: 'updated_at')
   final DateTime updatedAt;
 
   @override
   String toString() {
-    return 'Pair(id: $id, user1Id: $user1Id, user2Id: $user2Id, coupleName: $coupleName, anniversaryDate: $anniversaryDate, sharedPreferences: $sharedPreferences, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'Pair(id: $id, user1Id: $user1Id, user2Id: $user2Id, status: $status, coupleName: $coupleName, anniversaryDate: $anniversaryDate, sharedPreferences: $sharedPreferences, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -256,6 +286,7 @@ class _$PairImpl implements _Pair {
             (identical(other.id, id) || other.id == id) &&
             (identical(other.user1Id, user1Id) || other.user1Id == user1Id) &&
             (identical(other.user2Id, user2Id) || other.user2Id == user2Id) &&
+            (identical(other.status, status) || other.status == status) &&
             (identical(other.coupleName, coupleName) ||
                 other.coupleName == coupleName) &&
             (identical(other.anniversaryDate, anniversaryDate) ||
@@ -277,6 +308,7 @@ class _$PairImpl implements _Pair {
     id,
     user1Id,
     user2Id,
+    status,
     coupleName,
     anniversaryDate,
     const DeepCollectionEquality().hash(_sharedPreferences),
@@ -301,13 +333,15 @@ class _$PairImpl implements _Pair {
 abstract class _Pair implements Pair {
   const factory _Pair({
     required final String id,
-    required final String user1Id,
-    required final String user2Id,
-    final String? coupleName,
-    final DateTime? anniversaryDate,
+    @JsonKey(name: 'user1_id') required final String user1Id,
+    @JsonKey(name: 'user2_id') required final String user2Id,
+    required final PairStatus status,
+    @JsonKey(name: 'couple_name') final String? coupleName,
+    @JsonKey(name: 'anniversary_date') final DateTime? anniversaryDate,
+    @JsonKey(name: 'shared_preferences')
     final Map<String, dynamic> sharedPreferences,
-    required final DateTime createdAt,
-    required final DateTime updatedAt,
+    @JsonKey(name: 'created_at') required final DateTime createdAt,
+    @JsonKey(name: 'updated_at') required final DateTime updatedAt,
   }) = _$PairImpl;
 
   factory _Pair.fromJson(Map<String, dynamic> json) = _$PairImpl.fromJson;
@@ -315,18 +349,27 @@ abstract class _Pair implements Pair {
   @override
   String get id;
   @override
+  @JsonKey(name: 'user1_id')
   String get user1Id;
   @override
+  @JsonKey(name: 'user2_id')
   String get user2Id;
   @override
+  PairStatus get status;
+  @override
+  @JsonKey(name: 'couple_name')
   String? get coupleName;
   @override
+  @JsonKey(name: 'anniversary_date')
   DateTime? get anniversaryDate;
   @override
+  @JsonKey(name: 'shared_preferences')
   Map<String, dynamic> get sharedPreferences;
   @override
+  @JsonKey(name: 'created_at')
   DateTime get createdAt;
   @override
+  @JsonKey(name: 'updated_at')
   DateTime get updatedAt;
 
   /// Create a copy of Pair

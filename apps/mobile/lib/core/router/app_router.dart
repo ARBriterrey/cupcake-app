@@ -2,10 +2,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../features/auth/screens/sign_in_screen.dart';
 import '../../features/auth/screens/sign_up_screen.dart';
+import '../../features/calendar/screens/calendar_screen.dart';
 import '../../features/dashboard/screens/dashboard_screen.dart';
 import '../../features/pairing/screens/pairing_screen.dart';
 import '../../features/pairing/screens/send_invitation_screen.dart';
+import '../../features/sprinkles/screens/sprinkles_screen.dart';
 import '../providers/supabase_providers.dart';
+import 'navigation_shell.dart';
 
 final appRouterProvider = Provider<GoRouter>((ref) {
   final supabase = ref.watch(supabaseClientProvider);
@@ -22,7 +25,8 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         return '/sign-in';
       }
 
-      // If authenticated and trying to access auth route
+      // If authenticated and trying to access auth route, go to pairing
+      // Let pairing screen handle redirect to home if already paired
       if (isAuthenticated && isAuthRoute) {
         return '/pairing';
       }
@@ -32,23 +36,59 @@ final appRouterProvider = Provider<GoRouter>((ref) {
     routes: [
       GoRoute(
         path: '/sign-in',
+        name: 'sign-in',
         builder: (context, state) => const SignInScreen(),
       ),
       GoRoute(
         path: '/sign-up',
+        name: 'sign-up',
         builder: (context, state) => const SignUpScreen(),
       ),
       GoRoute(
         path: '/pairing',
+        name: 'pairing',
         builder: (context, state) => const PairingScreen(),
+        routes: [
+          GoRoute(
+            path: 'send-invitation',
+            name: 'send-invitation',
+            builder: (context, state) => const SendInvitationScreen(),
+          ),
+        ],
       ),
-      GoRoute(
-        path: '/send-invitation',
-        builder: (context, state) => const SendInvitationScreen(),
-      ),
-      GoRoute(
-        path: '/dashboard',
-        builder: (context, state) => const DashboardScreen(),
+      StatefulShellRoute.indexedStack(
+        builder: (context, state, navigationShell) {
+          return NavigationShell(navigationShell: navigationShell);
+        },
+        branches: [
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/calendar',
+                name: 'calendar',
+                builder: (context, state) => const CalendarScreen(),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/home',
+                name: 'home',
+                builder: (context, state) => const DashboardScreen(),
+              ),
+            ],
+          ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: '/sprinkles',
+                name: 'sprinkles',
+                builder: (context, state) => const SprinklesScreen(),
+              ),
+            ],
+          ),
+        ],
       ),
     ],
   );

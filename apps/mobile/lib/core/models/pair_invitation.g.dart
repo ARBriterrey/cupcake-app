@@ -9,30 +9,32 @@ part of 'pair_invitation.dart';
 _$PairInvitationImpl _$$PairInvitationImplFromJson(Map<String, dynamic> json) =>
     _$PairInvitationImpl(
       id: json['id'] as String,
-      fromUserId: json['fromUserId'] as String,
-      toUserEmail: json['toUserEmail'] as String,
-      toUserId: json['toUserId'] as String?,
+      fromUserId: json['from_user_id'] as String,
+      toUserEmail: json['to_user_email'] as String,
+      toUserId: json['to_user_id'] as String?,
       status: $enumDecode(_$InvitationStatusEnumMap, json['status']),
       message: json['message'] as String?,
-      expiresAt: json['expiresAt'] == null
+      expiresAt: json['expires_at'] == null
           ? null
-          : DateTime.parse(json['expiresAt'] as String),
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      updatedAt: DateTime.parse(json['updatedAt'] as String),
+          : DateTime.parse(json['expires_at'] as String),
+      createdAt: DateTime.parse(json['created_at'] as String),
+      updatedAt: DateTime.parse(json['updated_at'] as String),
+      fromUserName: json['from_user_name'] as String?,
     );
 
 Map<String, dynamic> _$$PairInvitationImplToJson(
   _$PairInvitationImpl instance,
 ) => <String, dynamic>{
   'id': instance.id,
-  'fromUserId': instance.fromUserId,
-  'toUserEmail': instance.toUserEmail,
-  'toUserId': instance.toUserId,
+  'from_user_id': instance.fromUserId,
+  'to_user_email': instance.toUserEmail,
+  'to_user_id': instance.toUserId,
   'status': _$InvitationStatusEnumMap[instance.status]!,
   'message': instance.message,
-  'expiresAt': instance.expiresAt?.toIso8601String(),
-  'createdAt': instance.createdAt.toIso8601String(),
-  'updatedAt': instance.updatedAt.toIso8601String(),
+  'expires_at': instance.expiresAt?.toIso8601String(),
+  'created_at': instance.createdAt.toIso8601String(),
+  'updated_at': instance.updatedAt.toIso8601String(),
+  'from_user_name': instance.fromUserName,
 };
 
 const _$InvitationStatusEnumMap = {

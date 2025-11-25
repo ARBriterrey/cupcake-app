@@ -23,12 +23,17 @@ UserProfile _$UserProfileFromJson(Map<String, dynamic> json) {
 mixin _$UserProfile {
   String get id => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
+  @JsonKey(name: 'display_name')
   String? get displayName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'avatar_url')
   String? get avatarUrl => throw _privateConstructorUsedError;
   String? get timezone => throw _privateConstructorUsedError;
   Map<String, dynamic> get preferences => throw _privateConstructorUsedError;
+  @JsonKey(name: 'active_pair_id')
   String? get activePairId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_at')
   DateTime get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'updated_at')
   DateTime get updatedAt => throw _privateConstructorUsedError;
 
   /// Serializes this UserProfile to a JSON map.
@@ -51,13 +56,13 @@ abstract class $UserProfileCopyWith<$Res> {
   $Res call({
     String id,
     String? email,
-    String? displayName,
-    String? avatarUrl,
+    @JsonKey(name: 'display_name') String? displayName,
+    @JsonKey(name: 'avatar_url') String? avatarUrl,
     String? timezone,
     Map<String, dynamic> preferences,
-    String? activePairId,
-    DateTime createdAt,
-    DateTime updatedAt,
+    @JsonKey(name: 'active_pair_id') String? activePairId,
+    @JsonKey(name: 'created_at') DateTime createdAt,
+    @JsonKey(name: 'updated_at') DateTime updatedAt,
   });
 }
 
@@ -142,13 +147,13 @@ abstract class _$$UserProfileImplCopyWith<$Res>
   $Res call({
     String id,
     String? email,
-    String? displayName,
-    String? avatarUrl,
+    @JsonKey(name: 'display_name') String? displayName,
+    @JsonKey(name: 'avatar_url') String? avatarUrl,
     String? timezone,
     Map<String, dynamic> preferences,
-    String? activePairId,
-    DateTime createdAt,
-    DateTime updatedAt,
+    @JsonKey(name: 'active_pair_id') String? activePairId,
+    @JsonKey(name: 'created_at') DateTime createdAt,
+    @JsonKey(name: 'updated_at') DateTime updatedAt,
   });
 }
 
@@ -225,13 +230,13 @@ class _$UserProfileImpl implements _UserProfile {
   const _$UserProfileImpl({
     required this.id,
     this.email,
-    this.displayName,
-    this.avatarUrl,
+    @JsonKey(name: 'display_name') this.displayName,
+    @JsonKey(name: 'avatar_url') this.avatarUrl,
     this.timezone,
     final Map<String, dynamic> preferences = const {},
-    this.activePairId,
-    required this.createdAt,
-    required this.updatedAt,
+    @JsonKey(name: 'active_pair_id') this.activePairId,
+    @JsonKey(name: 'created_at') required this.createdAt,
+    @JsonKey(name: 'updated_at') required this.updatedAt,
   }) : _preferences = preferences;
 
   factory _$UserProfileImpl.fromJson(Map<String, dynamic> json) =>
@@ -242,8 +247,10 @@ class _$UserProfileImpl implements _UserProfile {
   @override
   final String? email;
   @override
+  @JsonKey(name: 'display_name')
   final String? displayName;
   @override
+  @JsonKey(name: 'avatar_url')
   final String? avatarUrl;
   @override
   final String? timezone;
@@ -257,10 +264,13 @@ class _$UserProfileImpl implements _UserProfile {
   }
 
   @override
+  @JsonKey(name: 'active_pair_id')
   final String? activePairId;
   @override
+  @JsonKey(name: 'created_at')
   final DateTime createdAt;
   @override
+  @JsonKey(name: 'updated_at')
   final DateTime updatedAt;
 
   @override
@@ -326,13 +336,13 @@ abstract class _UserProfile implements UserProfile {
   const factory _UserProfile({
     required final String id,
     final String? email,
-    final String? displayName,
-    final String? avatarUrl,
+    @JsonKey(name: 'display_name') final String? displayName,
+    @JsonKey(name: 'avatar_url') final String? avatarUrl,
     final String? timezone,
     final Map<String, dynamic> preferences,
-    final String? activePairId,
-    required final DateTime createdAt,
-    required final DateTime updatedAt,
+    @JsonKey(name: 'active_pair_id') final String? activePairId,
+    @JsonKey(name: 'created_at') required final DateTime createdAt,
+    @JsonKey(name: 'updated_at') required final DateTime updatedAt,
   }) = _$UserProfileImpl;
 
   factory _UserProfile.fromJson(Map<String, dynamic> json) =
@@ -343,18 +353,23 @@ abstract class _UserProfile implements UserProfile {
   @override
   String? get email;
   @override
+  @JsonKey(name: 'display_name')
   String? get displayName;
   @override
+  @JsonKey(name: 'avatar_url')
   String? get avatarUrl;
   @override
   String? get timezone;
   @override
   Map<String, dynamic> get preferences;
   @override
+  @JsonKey(name: 'active_pair_id')
   String? get activePairId;
   @override
+  @JsonKey(name: 'created_at')
   DateTime get createdAt;
   @override
+  @JsonKey(name: 'updated_at')
   DateTime get updatedAt;
 
   /// Create a copy of UserProfile

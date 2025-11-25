@@ -22,14 +22,22 @@ PairInvitation _$PairInvitationFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$PairInvitation {
   String get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'from_user_id')
   String get fromUserId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'to_user_email')
   String get toUserEmail => throw _privateConstructorUsedError;
+  @JsonKey(name: 'to_user_id')
   String? get toUserId => throw _privateConstructorUsedError;
   InvitationStatus get status => throw _privateConstructorUsedError;
   String? get message => throw _privateConstructorUsedError;
+  @JsonKey(name: 'expires_at')
   DateTime? get expiresAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_at')
   DateTime get createdAt => throw _privateConstructorUsedError;
-  DateTime get updatedAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'updated_at')
+  DateTime get updatedAt => throw _privateConstructorUsedError; // Sender profile info (populated via join)
+  @JsonKey(name: 'from_user_name')
+  String? get fromUserName => throw _privateConstructorUsedError;
 
   /// Serializes this PairInvitation to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -50,14 +58,15 @@ abstract class $PairInvitationCopyWith<$Res> {
   @useResult
   $Res call({
     String id,
-    String fromUserId,
-    String toUserEmail,
-    String? toUserId,
+    @JsonKey(name: 'from_user_id') String fromUserId,
+    @JsonKey(name: 'to_user_email') String toUserEmail,
+    @JsonKey(name: 'to_user_id') String? toUserId,
     InvitationStatus status,
     String? message,
-    DateTime? expiresAt,
-    DateTime createdAt,
-    DateTime updatedAt,
+    @JsonKey(name: 'expires_at') DateTime? expiresAt,
+    @JsonKey(name: 'created_at') DateTime createdAt,
+    @JsonKey(name: 'updated_at') DateTime updatedAt,
+    @JsonKey(name: 'from_user_name') String? fromUserName,
   });
 }
 
@@ -85,6 +94,7 @@ class _$PairInvitationCopyWithImpl<$Res, $Val extends PairInvitation>
     Object? expiresAt = freezed,
     Object? createdAt = null,
     Object? updatedAt = null,
+    Object? fromUserName = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -124,6 +134,10 @@ class _$PairInvitationCopyWithImpl<$Res, $Val extends PairInvitation>
                 ? _value.updatedAt
                 : updatedAt // ignore: cast_nullable_to_non_nullable
                       as DateTime,
+            fromUserName: freezed == fromUserName
+                ? _value.fromUserName
+                : fromUserName // ignore: cast_nullable_to_non_nullable
+                      as String?,
           )
           as $Val,
     );
@@ -141,14 +155,15 @@ abstract class _$$PairInvitationImplCopyWith<$Res>
   @useResult
   $Res call({
     String id,
-    String fromUserId,
-    String toUserEmail,
-    String? toUserId,
+    @JsonKey(name: 'from_user_id') String fromUserId,
+    @JsonKey(name: 'to_user_email') String toUserEmail,
+    @JsonKey(name: 'to_user_id') String? toUserId,
     InvitationStatus status,
     String? message,
-    DateTime? expiresAt,
-    DateTime createdAt,
-    DateTime updatedAt,
+    @JsonKey(name: 'expires_at') DateTime? expiresAt,
+    @JsonKey(name: 'created_at') DateTime createdAt,
+    @JsonKey(name: 'updated_at') DateTime updatedAt,
+    @JsonKey(name: 'from_user_name') String? fromUserName,
   });
 }
 
@@ -175,6 +190,7 @@ class __$$PairInvitationImplCopyWithImpl<$Res>
     Object? expiresAt = freezed,
     Object? createdAt = null,
     Object? updatedAt = null,
+    Object? fromUserName = freezed,
   }) {
     return _then(
       _$PairInvitationImpl(
@@ -214,6 +230,10 @@ class __$$PairInvitationImplCopyWithImpl<$Res>
             ? _value.updatedAt
             : updatedAt // ignore: cast_nullable_to_non_nullable
                   as DateTime,
+        fromUserName: freezed == fromUserName
+            ? _value.fromUserName
+            : fromUserName // ignore: cast_nullable_to_non_nullable
+                  as String?,
       ),
     );
   }
@@ -224,14 +244,15 @@ class __$$PairInvitationImplCopyWithImpl<$Res>
 class _$PairInvitationImpl implements _PairInvitation {
   const _$PairInvitationImpl({
     required this.id,
-    required this.fromUserId,
-    required this.toUserEmail,
-    this.toUserId,
+    @JsonKey(name: 'from_user_id') required this.fromUserId,
+    @JsonKey(name: 'to_user_email') required this.toUserEmail,
+    @JsonKey(name: 'to_user_id') this.toUserId,
     required this.status,
     this.message,
-    this.expiresAt,
-    required this.createdAt,
-    required this.updatedAt,
+    @JsonKey(name: 'expires_at') this.expiresAt,
+    @JsonKey(name: 'created_at') required this.createdAt,
+    @JsonKey(name: 'updated_at') required this.updatedAt,
+    @JsonKey(name: 'from_user_name') this.fromUserName,
   });
 
   factory _$PairInvitationImpl.fromJson(Map<String, dynamic> json) =>
@@ -240,25 +261,35 @@ class _$PairInvitationImpl implements _PairInvitation {
   @override
   final String id;
   @override
+  @JsonKey(name: 'from_user_id')
   final String fromUserId;
   @override
+  @JsonKey(name: 'to_user_email')
   final String toUserEmail;
   @override
+  @JsonKey(name: 'to_user_id')
   final String? toUserId;
   @override
   final InvitationStatus status;
   @override
   final String? message;
   @override
+  @JsonKey(name: 'expires_at')
   final DateTime? expiresAt;
   @override
+  @JsonKey(name: 'created_at')
   final DateTime createdAt;
   @override
+  @JsonKey(name: 'updated_at')
   final DateTime updatedAt;
+  // Sender profile info (populated via join)
+  @override
+  @JsonKey(name: 'from_user_name')
+  final String? fromUserName;
 
   @override
   String toString() {
-    return 'PairInvitation(id: $id, fromUserId: $fromUserId, toUserEmail: $toUserEmail, toUserId: $toUserId, status: $status, message: $message, expiresAt: $expiresAt, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'PairInvitation(id: $id, fromUserId: $fromUserId, toUserEmail: $toUserEmail, toUserId: $toUserId, status: $status, message: $message, expiresAt: $expiresAt, createdAt: $createdAt, updatedAt: $updatedAt, fromUserName: $fromUserName)';
   }
 
   @override
@@ -280,7 +311,9 @@ class _$PairInvitationImpl implements _PairInvitation {
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
+                other.updatedAt == updatedAt) &&
+            (identical(other.fromUserName, fromUserName) ||
+                other.fromUserName == fromUserName));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -296,6 +329,7 @@ class _$PairInvitationImpl implements _PairInvitation {
     expiresAt,
     createdAt,
     updatedAt,
+    fromUserName,
   );
 
   /// Create a copy of PairInvitation
@@ -318,14 +352,15 @@ class _$PairInvitationImpl implements _PairInvitation {
 abstract class _PairInvitation implements PairInvitation {
   const factory _PairInvitation({
     required final String id,
-    required final String fromUserId,
-    required final String toUserEmail,
-    final String? toUserId,
+    @JsonKey(name: 'from_user_id') required final String fromUserId,
+    @JsonKey(name: 'to_user_email') required final String toUserEmail,
+    @JsonKey(name: 'to_user_id') final String? toUserId,
     required final InvitationStatus status,
     final String? message,
-    final DateTime? expiresAt,
-    required final DateTime createdAt,
-    required final DateTime updatedAt,
+    @JsonKey(name: 'expires_at') final DateTime? expiresAt,
+    @JsonKey(name: 'created_at') required final DateTime createdAt,
+    @JsonKey(name: 'updated_at') required final DateTime updatedAt,
+    @JsonKey(name: 'from_user_name') final String? fromUserName,
   }) = _$PairInvitationImpl;
 
   factory _PairInvitation.fromJson(Map<String, dynamic> json) =
@@ -334,21 +369,30 @@ abstract class _PairInvitation implements PairInvitation {
   @override
   String get id;
   @override
+  @JsonKey(name: 'from_user_id')
   String get fromUserId;
   @override
+  @JsonKey(name: 'to_user_email')
   String get toUserEmail;
   @override
+  @JsonKey(name: 'to_user_id')
   String? get toUserId;
   @override
   InvitationStatus get status;
   @override
   String? get message;
   @override
+  @JsonKey(name: 'expires_at')
   DateTime? get expiresAt;
   @override
+  @JsonKey(name: 'created_at')
   DateTime get createdAt;
   @override
-  DateTime get updatedAt;
+  @JsonKey(name: 'updated_at')
+  DateTime get updatedAt; // Sender profile info (populated via join)
+  @override
+  @JsonKey(name: 'from_user_name')
+  String? get fromUserName;
 
   /// Create a copy of PairInvitation
   /// with the given fields replaced by the non-null parameter values.

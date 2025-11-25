@@ -5,21 +5,21 @@ import '../../../core/models/pair_invitation.dart';
 import '../../../core/repositories/pair_repository.dart';
 
 /// Provides the current user's pair (if they are paired)
-final currentPairProvider = FutureProvider<Pair?>((ref) async {
+final currentPairProvider = FutureProvider.autoDispose<Pair?>((ref) async {
   final pairRepository = ref.watch(pairRepositoryProvider);
   return await pairRepository.getCurrentPair();
 });
 
 /// Provides pending invitations for the current user
 final pendingInvitationsProvider =
-    FutureProvider<List<PairInvitation>>((ref) async {
+    FutureProvider.autoDispose<List<PairInvitation>>((ref) async {
   final pairRepository = ref.watch(pairRepositoryProvider);
   return await pairRepository.getPendingInvitations();
 });
 
 /// Provides sent invitations from the current user
 final sentInvitationsProvider =
-    FutureProvider<List<PairInvitation>>((ref) async {
+    FutureProvider.autoDispose<List<PairInvitation>>((ref) async {
   final pairRepository = ref.watch(pairRepositoryProvider);
   return await pairRepository.getSentInvitations();
 });

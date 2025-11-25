@@ -77,18 +77,26 @@ class PairRepository {
     if (userId == null) throw Exception('User not authenticated');
 
     // Check if the recipient already has an account - REQUIRED
-    final existingUser = await _supabase
-        .from('profiles')
-        .select('id')
-        .eq('email', toUserEmail)
-        .maybeSingle();
+    // Use RPC function to bypass RLS restrictions
+    String? toUserId;
+    try {
+      final result = await _supabase
+          .rpc('get_user_id_by_email', params: {'p_email': toUserEmail});
 
-    if (existingUser == null) {
-      // User doesn't exist - throw error
-      throw Exception('Your partner hasn\'t signed up yet. Ask them to create an account first!');
+      if (result == null) {
+        // User doesn't exist - throw error
+        throw Exception('Your partner hasn\'t signed up yet. Ask them to create an account first!');
+      }
+
+      toUserId = result as String;
+    } catch (e) {
+      // If RPC function doesn't exist, show helpful error
+      if (e.toString().contains('function') || e.toString().contains('does not exist')) {
+        throw Exception('Database migration needed. Please run: supabase db push');
+      }
+      // Otherwise re-throw the original error
+      rethrow;
     }
-
-    final toUserId = existingUser['id'] as String;
 
     // Check if trying to invite yourself
     if (toUserId == userId) {
@@ -119,14 +127,20 @@ class PairRepository {
 
     final response = await _supabase
         .from('pair_invitations')
-        .select()
+        .select('*, from_user:profiles!from_user_id(display_name)')
         .eq('to_user_email', userEmail)
         .eq('status', InvitationStatus.pending.name)
         .order('created_at', ascending: false);
 
-    return (response as List)
-        .map((json) => PairInvitation.fromJson(json))
-        .toList();
+    // Transform response to flatten the from_user object
+    return (response as List).map((json) {
+      final transformed = Map<String, dynamic>.from(json);
+      // Extract display_name from nested from_user object
+      if (json['from_user'] != null) {
+        transformed['from_user_name'] = json['from_user']['display_name'];
+      }
+      return PairInvitation.fromJson(transformed);
+    }).toList();
   }
 
   Future<List<PairInvitation>> getSentInvitations() async {
@@ -162,11 +176,13 @@ class PairRepository {
     }
 
     // Create the pair
+    // IMPORTANT: Current user must be user1_id to satisfy RLS policy
     final pairResponse = await _supabase
         .from('pairs')
         .insert({
-          'user1_id': invitation.fromUserId,
-          'user2_id': userId,
+          'user1_id': userId, // Current user (acceptor) is user1
+          'user2_id': invitation.fromUserId, // Sender is user2
+          'status': 'active', // Set pair as active immediately
         })
         .select()
         .single();
