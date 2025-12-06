@@ -46,12 +46,12 @@ class _AddEventBottomSheetState extends ConsumerState<AddEventBottomSheet> {
     _descriptionController = TextEditingController(text: event?.description ?? '');
     _locationController = TextEditingController(text: event?.location ?? '');
     
-    _selectedType = event != null 
-        ? EventType.values.firstWhere((e) => e.name == event.eventType, orElse: () => EventType.moment)
+    _selectedType = event != null
+        ? event.eventType
         : EventType.moment;
-        
+
     _visibility = event != null
-        ? EventVisibility.values.firstWhere((e) => e.name == event.visibility, orElse: () => EventVisibility.shared)
+        ? event.visibility
         : EventVisibility.shared;
 
     if (event != null) {
@@ -118,26 +118,6 @@ class _AddEventBottomSheetState extends ConsumerState<AddEventBottomSheet> {
                       ),
                     ],
                   ),
-                  
-                  // ... existing UI code ...
-                  
-                  // Note: I am replacing the whole file content block logic conceptually here but due to tool limits I need to be careful.
-                  // Wait, I can't minimize the existing UI code easily without replacing it all.
-                  // I will just replace the top part and result of _saveEvent.
-                  
-                  // ACTUALLY, I should use multi_replace for safety or replace specific blocks.
-                  // Since I changed specific logic in initState and Header and _saveEvent, I will break this into chunks.
-                  // This tool call is REPLACING the whole file initiation part.
-                  // I'll Cancel this REPLACE and use multi_replace.
-                  
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
 
                   const SizedBox(height: 24),
 
@@ -154,7 +134,7 @@ class _AddEventBottomSheetState extends ConsumerState<AddEventBottomSheet> {
                       }
                       return null;
                     },
-                    autofocus: true,
+                    autofocus: widget.eventToEdit == null,
                   ),
 
                   const SizedBox(height: 16),
@@ -236,7 +216,7 @@ class _AddEventBottomSheetState extends ConsumerState<AddEventBottomSheet> {
                                     color: Colors.white,
                                   ),
                                 )
-                              : const Text('Save'),
+                              : Text(widget.eventToEdit != null ? 'Update' : 'Save'),
                         ),
                       ),
                     ],
