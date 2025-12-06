@@ -7,7 +7,12 @@ import '../providers/calendar_providers.dart';
 
 /// Bottom sheet for adding a new calendar event
 class AddEventBottomSheet extends ConsumerStatefulWidget {
-  const AddEventBottomSheet({super.key});
+  final DateTime? initialDate;
+
+  const AddEventBottomSheet({
+    super.key,
+    this.initialDate,
+  });
 
   @override
   ConsumerState<AddEventBottomSheet> createState() => _AddEventBottomSheetState();
@@ -21,7 +26,7 @@ class _AddEventBottomSheetState extends ConsumerState<AddEventBottomSheet> {
 
   EventType _selectedType = EventType.moment;
   EventVisibility _visibility = EventVisibility.shared;
-  DateTime _selectedDate = DateTime.now();
+  late DateTime _selectedDate;
   TimeOfDay _startTime = TimeOfDay.now();
   TimeOfDay? _endTime;
   bool _isAllDay = false;
@@ -29,6 +34,12 @@ class _AddEventBottomSheetState extends ConsumerState<AddEventBottomSheet> {
   final List<String> _tags = [];
 
   bool _isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedDate = widget.initialDate ?? DateTime.now();
+  }
 
   @override
   void dispose() {

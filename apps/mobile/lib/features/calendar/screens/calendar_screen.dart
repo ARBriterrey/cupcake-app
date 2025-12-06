@@ -207,11 +207,14 @@ class CalendarScreen extends ConsumerWidget {
   }
 
   void _showAddEventBottomSheet(BuildContext context, WidgetRef ref) {
+    final selectedDate = ref.read(selectedDateProvider);
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (context) => const AddEventBottomSheet(),
+      builder: (context) => AddEventBottomSheet(
+        initialDate: selectedDate,
+      ),
     );
   }
 
