@@ -22,7 +22,7 @@ class CalendarMonthView extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedDate = ref.watch(selectedDateProvider);
     final eventsAsync = ref.watch(
-      monthlyEventsStreamProvider(year: year, month: month),
+      monthlyEventsProvider(year: year, month: month),
     );
 
     // Get the first day of the month and calculate the grid

@@ -158,17 +158,20 @@ class CalendarSync extends _$CalendarSync {
               value: pairId,
             ),
             callback: (payload) async {
-              _logger.d('CalendarSync: Received event: ${payload.eventType}');
+              _logger.i('CalendarSync: 🔔 REAL-TIME EVENT RECEIVED: ${payload.eventType}');
 
               try {
                 switch (payload.eventType) {
                   case PostgresChangeEvent.insert:
+                    _logger.d('CalendarSync: Processing INSERT payload');
                     await _handleInsert(payload.newRecord, localRepo);
                     break;
                   case PostgresChangeEvent.update:
+                    _logger.d('CalendarSync: Processing UPDATE payload');
                     await _handleUpdate(payload.newRecord, localRepo);
                     break;
                   case PostgresChangeEvent.delete:
+                    _logger.d('CalendarSync: Processing DELETE payload');
                     await _handleDelete(payload.oldRecord, localRepo);
                     break;
                   default:
@@ -176,6 +179,7 @@ class CalendarSync extends _$CalendarSync {
                 }
 
                 // Invalidate providers to refresh UI
+                _logger.i('CalendarSync: 🔄 Invalidating providers to trigger UI rebuild');
                 _invalidateProviders();
               } catch (e) {
                 _logger.e('CalendarSync: Error handling realtime event', error: e);

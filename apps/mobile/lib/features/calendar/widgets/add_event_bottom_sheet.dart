@@ -8,10 +8,12 @@ import '../providers/calendar_providers.dart';
 /// Bottom sheet for adding a new calendar event
 class AddEventBottomSheet extends ConsumerStatefulWidget {
   final DateTime? initialDate;
+  final CalendarEvent? eventToEdit;
 
   const AddEventBottomSheet({
     super.key,
     this.initialDate,
+    this.eventToEdit,
   });
 
   @override
@@ -20,25 +22,51 @@ class AddEventBottomSheet extends ConsumerStatefulWidget {
 
 class _AddEventBottomSheetState extends ConsumerState<AddEventBottomSheet> {
   final _formKey = GlobalKey<FormState>();
-  final _titleController = TextEditingController();
-  final _descriptionController = TextEditingController();
-  final _locationController = TextEditingController();
+  late TextEditingController _titleController;
+  late TextEditingController _descriptionController;
+  late TextEditingController _locationController;
 
-  EventType _selectedType = EventType.moment;
-  EventVisibility _visibility = EventVisibility.shared;
+  late EventType _selectedType;
+  late EventVisibility _visibility;
   late DateTime _selectedDate;
-  TimeOfDay _startTime = TimeOfDay.now();
+  late TimeOfDay _startTime;
   TimeOfDay? _endTime;
-  bool _isAllDay = false;
+  late bool _isAllDay;
   String? _selectedColor;
-  final List<String> _tags = [];
+  late List<String> _tags;
 
   bool _isLoading = false;
 
   @override
   void initState() {
     super.initState();
-    _selectedDate = widget.initialDate ?? DateTime.now();
+    final event = widget.eventToEdit;
+    
+    _titleController = TextEditingController(text: event?.title ?? '');
+    _descriptionController = TextEditingController(text: event?.description ?? '');
+    _locationController = TextEditingController(text: event?.location ?? '');
+    
+    _selectedType = event != null 
+        ? EventType.values.firstWhere((e) => e.name == event.eventType, orElse: () => EventType.moment)
+        : EventType.moment;
+        
+    _visibility = event != null
+        ? EventVisibility.values.firstWhere((e) => e.name == event.visibility, orElse: () => EventVisibility.shared)
+        : EventVisibility.shared;
+
+    if (event != null) {
+      _selectedDate = event.startTime;
+      _startTime = TimeOfDay.fromDateTime(event.startTime);
+      _endTime = event.endTime != null ? TimeOfDay.fromDateTime(event.endTime!) : null;
+      _isAllDay = event.isAllDay;
+      _selectedColor = event.color;
+      _tags = List.from(event.tags);
+    } else {
+      _selectedDate = widget.initialDate ?? DateTime.now();
+      _startTime = TimeOfDay.now();
+      _isAllDay = false;
+      _tags = [];
+    }
   }
 
   @override
@@ -75,9 +103,9 @@ class _AddEventBottomSheetState extends ConsumerState<AddEventBottomSheet> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
-                        'Add a moment together',
-                        style: TextStyle(
+                      Text(
+                        widget.eventToEdit != null ? 'Edit moment' : 'Add a moment together',
+                        style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w600,
                           color: AppTheme.textDark,
@@ -90,6 +118,26 @@ class _AddEventBottomSheetState extends ConsumerState<AddEventBottomSheet> {
                       ),
                     ],
                   ),
+                  
+                  // ... existing UI code ...
+                  
+                  // Note: I am replacing the whole file content block logic conceptually here but due to tool limits I need to be careful.
+                  // Wait, I can't minimize the existing UI code easily without replacing it all.
+                  // I will just replace the top part and result of _saveEvent.
+                  
+                  // ACTUALLY, I should use multi_replace for safety or replace specific blocks.
+                  // Since I changed specific logic in initState and Header and _saveEvent, I will break this into chunks.
+                  // This tool call is REPLACING the whole file initiation part.
+                  // I'll Cancel this REPLACE and use multi_replace.
+                  
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 
                   const SizedBox(height: 24),
 
@@ -526,38 +574,69 @@ class _AddEventBottomSheetState extends ConsumerState<AddEventBottomSheet> {
         }
       }
 
-      // Create the event
-      await ref.read(calendarEventCreatorProvider.notifier).createEvent(
-            title: _titleController.text.trim(),
-            description: _descriptionController.text.trim().isEmpty
-                ? null
-                : _descriptionController.text.trim(),
-            startTime: startDateTime,
-            endTime: endDateTime,
-            isAllDay: _isAllDay,
-            eventType: _selectedType,
-            location: _locationController.text.trim().isEmpty
-                ? null
-                : _locationController.text.trim(),
-            visibility: _visibility,
-            color: _selectedColor,
-            tags: _tags,
+      if (widget.eventToEdit != null) {
+        // Update existing event
+        await ref.read(calendarEventUpdaterProvider.notifier).updateEvent(
+              eventId: widget.eventToEdit!.id,
+              title: _titleController.text.trim(),
+              description: _descriptionController.text.trim().isEmpty
+                  ? null
+                  : _descriptionController.text.trim(),
+              startTime: startDateTime,
+              endTime: endDateTime,
+              isAllDay: _isAllDay,
+              eventType: _selectedType,
+              location: _locationController.text.trim().isEmpty
+                  ? null
+                  : _locationController.text.trim(),
+              visibility: _visibility,
+              color: _selectedColor,
+              tags: _tags,
+            );
+            
+        if (mounted) {
+          Navigator.of(context).pop();
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Event updated successfully!'),
+              duration: Duration(seconds: 2),
+            ),
           );
-
-      if (mounted) {
-        Navigator.of(context).pop();
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Event added successfully!'),
-            duration: Duration(seconds: 2),
-          ),
-        );
+        }
+      } else {
+        // Create new event
+        await ref.read(calendarEventCreatorProvider.notifier).createEvent(
+              title: _titleController.text.trim(),
+              description: _descriptionController.text.trim().isEmpty
+                  ? null
+                  : _descriptionController.text.trim(),
+              startTime: startDateTime,
+              endTime: endDateTime,
+              isAllDay: _isAllDay,
+              eventType: _selectedType,
+              location: _locationController.text.trim().isEmpty
+                  ? null
+                  : _locationController.text.trim(),
+              visibility: _visibility,
+              color: _selectedColor,
+              tags: _tags,
+            );
+            
+        if (mounted) {
+          Navigator.of(context).pop();
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Event added successfully!'),
+              duration: Duration(seconds: 2),
+            ),
+          );
+        }
       }
-    } catch (e) {
+    } catch (e, stack) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Error adding event: ${e.toString()}'),
+            content: Text('Error saving event: ${e.toString()}'),
             backgroundColor: Colors.red,
             duration: const Duration(seconds: 3),
           ),

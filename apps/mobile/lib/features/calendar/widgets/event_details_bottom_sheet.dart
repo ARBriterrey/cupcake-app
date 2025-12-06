@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import '../../../core/models/calendar_event.dart';
 import '../../../core/theme/app_theme.dart';
 import '../providers/calendar_providers.dart';
+import 'add_event_bottom_sheet.dart';
 
 /// Bottom sheet for viewing and managing an event
 class EventDetailsBottomSheet extends ConsumerStatefulWidget {
@@ -391,11 +392,13 @@ class _EventDetailsBottomSheetState
   }
 
   void _editEvent() {
-    // TODO: Implement edit functionality
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text('Edit functionality coming soon!'),
-        duration: Duration(seconds: 2),
+    Navigator.of(context).pop();
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (context) => AddEventBottomSheet(
+        eventToEdit: widget.event,
       ),
     );
   }
