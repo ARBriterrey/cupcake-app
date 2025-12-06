@@ -7,6 +7,7 @@
 apps/mobile/.env
 apps/api/.env
 supabase/.env
+variable.env
 
 # Flutter
 apps/mobile/.dart_tool/
