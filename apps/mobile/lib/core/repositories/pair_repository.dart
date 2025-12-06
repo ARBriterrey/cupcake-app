@@ -198,11 +198,7 @@ class PairRepository {
         })
         .eq('id', invitationId);
 
-    // Update both users' active_pair_id
-    await _supabase
-        .from('profiles')
-        .update({'active_pair_id': pair.id})
-        .inFilter('id', [invitation.fromUserId, userId]);
+    // Manual profile update removed - handled by DB trigger 'on_pair_created'
 
     return pair;
   }

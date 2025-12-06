@@ -1361,7 +1361,7 @@ final selectedDateProvider =
 
 typedef _$SelectedDate = AutoDisposeNotifier<DateTime>;
 String _$calendarEventCreatorHash() =>
-    r'a608f0cd8d24f6837f58c2501862f6c020097706';
+    r'e8eaf2582fafac6f5e04cce54f918899d8cc34a0';
 
 /// Controller for creating calendar events
 ///
@@ -1380,7 +1380,7 @@ final calendarEventCreatorProvider = AutoDisposeAsyncNotifierProvider<
 
 typedef _$CalendarEventCreator = AutoDisposeAsyncNotifier<CalendarEvent?>;
 String _$calendarEventUpdaterHash() =>
-    r'e1c57a3d5d4e25478a4884d6426531c1eb51b648';
+    r'333f307aacdf877861057822c5f89ae850554d01';
 
 /// Controller for updating calendar events
 ///

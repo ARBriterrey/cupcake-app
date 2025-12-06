@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import '../../../core/models/calendar_event.dart';
+import '../../../core/models/sync_status.dart';
 import '../../../core/theme/app_theme.dart';
 import '../providers/calendar_providers.dart';
+import '../providers/calendar_sync_provider.dart';
 import '../widgets/calendar_header.dart';
 import '../widgets/calendar_month_view.dart';
 import '../widgets/calendar_event_list.dart';
@@ -17,6 +19,26 @@ class CalendarScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final selectedDate = ref.watch(selectedDateProvider);
     final selectedDateEventsAsync = ref.watch(selectedDateEventsProvider);
+
+    // Watch sync provider to activate real-time synchronization
+    ref.watch(calendarSyncProvider);
+
+    // Listen for sync errors and show snackbar
+    ref.listen<AsyncValue<SyncStatus>>(calendarSyncProvider, (previous, next) {
+      next.whenData((status) {
+        status.whenOrNull(
+          error: (message, lastSyncedAt, retryCount) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Sync error: $message'),
+                backgroundColor: Colors.red.shade400,
+                duration: const Duration(seconds: 3),
+              ),
+            );
+          },
+        );
+      });
+    });
 
     return Scaffold(
       backgroundColor: AppTheme.warmGray,

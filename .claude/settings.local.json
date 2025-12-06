@@ -54,7 +54,8 @@
       "Bash(cmd.exe /c \"cd /d D:\\Project\\Cupcake app\\apps\\mobile && flutter analyze --no-fatal-infos 2>&1 | findstr /C:\"\"error\"\" /C:\"\"warning\"\" /C:\"\"No issues found\"\"\")",
       "Bash(cmd.exe /c \"cd /d D:\\Project\\Cupcake app\\apps\\mobile && flutter analyze --no-fatal-infos 2>&1 | findstr /C:\"\"Error\"\" /C:\"\"error\"\" /I\")",
       "Bash(cmd.exe /c \"cd /d D:\\Project\\Cupcake app\\apps\\mobile && flutter build web --release --no-pub 2>&1 | findstr /C:\"\"Error:\"\" /C:\"\"error:\"\"\")",
-      "Bash(cmd.exe /c \"cd /d D:\\Project\\Cupcake app\\apps\\mobile && flutter clean\")"
+      "Bash(cmd.exe /c \"cd /d D:\\Project\\Cupcake app\\apps\\mobile && flutter clean\")",
+      "Bash(flutter analyze:*)"
     ],
     "deny": [],
     "ask": []
