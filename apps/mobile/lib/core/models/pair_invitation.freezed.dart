@@ -12,8 +12,7 @@ part of 'pair_invitation.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 PairInvitation _$PairInvitationFromJson(Map<String, dynamic> json) {
   return _PairInvitation.fromJson(json);
@@ -35,16 +34,13 @@ mixin _$PairInvitation {
   @JsonKey(name: 'created_at')
   DateTime get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
-  DateTime get updatedAt => throw _privateConstructorUsedError; // Sender profile info (populated via join)
+  DateTime get updatedAt =>
+      throw _privateConstructorUsedError; // Sender profile info (populated via join)
   @JsonKey(name: 'from_user_name')
   String? get fromUserName => throw _privateConstructorUsedError;
 
-  /// Serializes this PairInvitation to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of PairInvitation
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $PairInvitationCopyWith<PairInvitation> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -52,22 +48,20 @@ mixin _$PairInvitation {
 /// @nodoc
 abstract class $PairInvitationCopyWith<$Res> {
   factory $PairInvitationCopyWith(
-    PairInvitation value,
-    $Res Function(PairInvitation) then,
-  ) = _$PairInvitationCopyWithImpl<$Res, PairInvitation>;
+          PairInvitation value, $Res Function(PairInvitation) then) =
+      _$PairInvitationCopyWithImpl<$Res, PairInvitation>;
   @useResult
-  $Res call({
-    String id,
-    @JsonKey(name: 'from_user_id') String fromUserId,
-    @JsonKey(name: 'to_user_email') String toUserEmail,
-    @JsonKey(name: 'to_user_id') String? toUserId,
-    InvitationStatus status,
-    String? message,
-    @JsonKey(name: 'expires_at') DateTime? expiresAt,
-    @JsonKey(name: 'created_at') DateTime createdAt,
-    @JsonKey(name: 'updated_at') DateTime updatedAt,
-    @JsonKey(name: 'from_user_name') String? fromUserName,
-  });
+  $Res call(
+      {String id,
+      @JsonKey(name: 'from_user_id') String fromUserId,
+      @JsonKey(name: 'to_user_email') String toUserEmail,
+      @JsonKey(name: 'to_user_id') String? toUserId,
+      InvitationStatus status,
+      String? message,
+      @JsonKey(name: 'expires_at') DateTime? expiresAt,
+      @JsonKey(name: 'created_at') DateTime createdAt,
+      @JsonKey(name: 'updated_at') DateTime updatedAt,
+      @JsonKey(name: 'from_user_name') String? fromUserName});
 }
 
 /// @nodoc
@@ -80,8 +74,6 @@ class _$PairInvitationCopyWithImpl<$Res, $Val extends PairInvitation>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of PairInvitation
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -96,75 +88,70 @@ class _$PairInvitationCopyWithImpl<$Res, $Val extends PairInvitation>
     Object? updatedAt = null,
     Object? fromUserName = freezed,
   }) {
-    return _then(
-      _value.copyWith(
-            id: null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                      as String,
-            fromUserId: null == fromUserId
-                ? _value.fromUserId
-                : fromUserId // ignore: cast_nullable_to_non_nullable
-                      as String,
-            toUserEmail: null == toUserEmail
-                ? _value.toUserEmail
-                : toUserEmail // ignore: cast_nullable_to_non_nullable
-                      as String,
-            toUserId: freezed == toUserId
-                ? _value.toUserId
-                : toUserId // ignore: cast_nullable_to_non_nullable
-                      as String?,
-            status: null == status
-                ? _value.status
-                : status // ignore: cast_nullable_to_non_nullable
-                      as InvitationStatus,
-            message: freezed == message
-                ? _value.message
-                : message // ignore: cast_nullable_to_non_nullable
-                      as String?,
-            expiresAt: freezed == expiresAt
-                ? _value.expiresAt
-                : expiresAt // ignore: cast_nullable_to_non_nullable
-                      as DateTime?,
-            createdAt: null == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                      as DateTime,
-            updatedAt: null == updatedAt
-                ? _value.updatedAt
-                : updatedAt // ignore: cast_nullable_to_non_nullable
-                      as DateTime,
-            fromUserName: freezed == fromUserName
-                ? _value.fromUserName
-                : fromUserName // ignore: cast_nullable_to_non_nullable
-                      as String?,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      fromUserId: null == fromUserId
+          ? _value.fromUserId
+          : fromUserId // ignore: cast_nullable_to_non_nullable
+              as String,
+      toUserEmail: null == toUserEmail
+          ? _value.toUserEmail
+          : toUserEmail // ignore: cast_nullable_to_non_nullable
+              as String,
+      toUserId: freezed == toUserId
+          ? _value.toUserId
+          : toUserId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as InvitationStatus,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      expiresAt: freezed == expiresAt
+          ? _value.expiresAt
+          : expiresAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      fromUserName: freezed == fromUserName
+          ? _value.fromUserName
+          : fromUserName // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$PairInvitationImplCopyWith<$Res>
     implements $PairInvitationCopyWith<$Res> {
-  factory _$$PairInvitationImplCopyWith(
-    _$PairInvitationImpl value,
-    $Res Function(_$PairInvitationImpl) then,
-  ) = __$$PairInvitationImplCopyWithImpl<$Res>;
+  factory _$$PairInvitationImplCopyWith(_$PairInvitationImpl value,
+          $Res Function(_$PairInvitationImpl) then) =
+      __$$PairInvitationImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    @JsonKey(name: 'from_user_id') String fromUserId,
-    @JsonKey(name: 'to_user_email') String toUserEmail,
-    @JsonKey(name: 'to_user_id') String? toUserId,
-    InvitationStatus status,
-    String? message,
-    @JsonKey(name: 'expires_at') DateTime? expiresAt,
-    @JsonKey(name: 'created_at') DateTime createdAt,
-    @JsonKey(name: 'updated_at') DateTime updatedAt,
-    @JsonKey(name: 'from_user_name') String? fromUserName,
-  });
+  $Res call(
+      {String id,
+      @JsonKey(name: 'from_user_id') String fromUserId,
+      @JsonKey(name: 'to_user_email') String toUserEmail,
+      @JsonKey(name: 'to_user_id') String? toUserId,
+      InvitationStatus status,
+      String? message,
+      @JsonKey(name: 'expires_at') DateTime? expiresAt,
+      @JsonKey(name: 'created_at') DateTime createdAt,
+      @JsonKey(name: 'updated_at') DateTime updatedAt,
+      @JsonKey(name: 'from_user_name') String? fromUserName});
 }
 
 /// @nodoc
@@ -172,12 +159,9 @@ class __$$PairInvitationImplCopyWithImpl<$Res>
     extends _$PairInvitationCopyWithImpl<$Res, _$PairInvitationImpl>
     implements _$$PairInvitationImplCopyWith<$Res> {
   __$$PairInvitationImplCopyWithImpl(
-    _$PairInvitationImpl _value,
-    $Res Function(_$PairInvitationImpl) _then,
-  ) : super(_value, _then);
+      _$PairInvitationImpl _value, $Res Function(_$PairInvitationImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of PairInvitation
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -192,68 +176,65 @@ class __$$PairInvitationImplCopyWithImpl<$Res>
     Object? updatedAt = null,
     Object? fromUserName = freezed,
   }) {
-    return _then(
-      _$PairInvitationImpl(
-        id: null == id
-            ? _value.id
-            : id // ignore: cast_nullable_to_non_nullable
-                  as String,
-        fromUserId: null == fromUserId
-            ? _value.fromUserId
-            : fromUserId // ignore: cast_nullable_to_non_nullable
-                  as String,
-        toUserEmail: null == toUserEmail
-            ? _value.toUserEmail
-            : toUserEmail // ignore: cast_nullable_to_non_nullable
-                  as String,
-        toUserId: freezed == toUserId
-            ? _value.toUserId
-            : toUserId // ignore: cast_nullable_to_non_nullable
-                  as String?,
-        status: null == status
-            ? _value.status
-            : status // ignore: cast_nullable_to_non_nullable
-                  as InvitationStatus,
-        message: freezed == message
-            ? _value.message
-            : message // ignore: cast_nullable_to_non_nullable
-                  as String?,
-        expiresAt: freezed == expiresAt
-            ? _value.expiresAt
-            : expiresAt // ignore: cast_nullable_to_non_nullable
-                  as DateTime?,
-        createdAt: null == createdAt
-            ? _value.createdAt
-            : createdAt // ignore: cast_nullable_to_non_nullable
-                  as DateTime,
-        updatedAt: null == updatedAt
-            ? _value.updatedAt
-            : updatedAt // ignore: cast_nullable_to_non_nullable
-                  as DateTime,
-        fromUserName: freezed == fromUserName
-            ? _value.fromUserName
-            : fromUserName // ignore: cast_nullable_to_non_nullable
-                  as String?,
-      ),
-    );
+    return _then(_$PairInvitationImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      fromUserId: null == fromUserId
+          ? _value.fromUserId
+          : fromUserId // ignore: cast_nullable_to_non_nullable
+              as String,
+      toUserEmail: null == toUserEmail
+          ? _value.toUserEmail
+          : toUserEmail // ignore: cast_nullable_to_non_nullable
+              as String,
+      toUserId: freezed == toUserId
+          ? _value.toUserId
+          : toUserId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as InvitationStatus,
+      message: freezed == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String?,
+      expiresAt: freezed == expiresAt
+          ? _value.expiresAt
+          : expiresAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      fromUserName: freezed == fromUserName
+          ? _value.fromUserName
+          : fromUserName // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$PairInvitationImpl implements _PairInvitation {
-  const _$PairInvitationImpl({
-    required this.id,
-    @JsonKey(name: 'from_user_id') required this.fromUserId,
-    @JsonKey(name: 'to_user_email') required this.toUserEmail,
-    @JsonKey(name: 'to_user_id') this.toUserId,
-    required this.status,
-    this.message,
-    @JsonKey(name: 'expires_at') this.expiresAt,
-    @JsonKey(name: 'created_at') required this.createdAt,
-    @JsonKey(name: 'updated_at') required this.updatedAt,
-    @JsonKey(name: 'from_user_name') this.fromUserName,
-  });
+  const _$PairInvitationImpl(
+      {required this.id,
+      @JsonKey(name: 'from_user_id') required this.fromUserId,
+      @JsonKey(name: 'to_user_email') required this.toUserEmail,
+      @JsonKey(name: 'to_user_id') this.toUserId,
+      required this.status,
+      this.message,
+      @JsonKey(name: 'expires_at') this.expiresAt,
+      @JsonKey(name: 'created_at') required this.createdAt,
+      @JsonKey(name: 'updated_at') required this.updatedAt,
+      @JsonKey(name: 'from_user_name') this.fromUserName});
 
   factory _$PairInvitationImpl.fromJson(Map<String, dynamic> json) =>
       _$$PairInvitationImplFromJson(json);
@@ -282,7 +263,7 @@ class _$PairInvitationImpl implements _PairInvitation {
   @override
   @JsonKey(name: 'updated_at')
   final DateTime updatedAt;
-  // Sender profile info (populated via join)
+// Sender profile info (populated via join)
   @override
   @JsonKey(name: 'from_user_name')
   final String? fromUserName;
@@ -316,52 +297,39 @@ class _$PairInvitationImpl implements _PairInvitation {
                 other.fromUserName == fromUserName));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    fromUserId,
-    toUserEmail,
-    toUserId,
-    status,
-    message,
-    expiresAt,
-    createdAt,
-    updatedAt,
-    fromUserName,
-  );
+  int get hashCode => Object.hash(runtimeType, id, fromUserId, toUserEmail,
+      toUserId, status, message, expiresAt, createdAt, updatedAt, fromUserName);
 
-  /// Create a copy of PairInvitation
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$PairInvitationImplCopyWith<_$PairInvitationImpl> get copyWith =>
       __$$PairInvitationImplCopyWithImpl<_$PairInvitationImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PairInvitationImplToJson(this);
+    return _$$PairInvitationImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _PairInvitation implements PairInvitation {
-  const factory _PairInvitation({
-    required final String id,
-    @JsonKey(name: 'from_user_id') required final String fromUserId,
-    @JsonKey(name: 'to_user_email') required final String toUserEmail,
-    @JsonKey(name: 'to_user_id') final String? toUserId,
-    required final InvitationStatus status,
-    final String? message,
-    @JsonKey(name: 'expires_at') final DateTime? expiresAt,
-    @JsonKey(name: 'created_at') required final DateTime createdAt,
-    @JsonKey(name: 'updated_at') required final DateTime updatedAt,
-    @JsonKey(name: 'from_user_name') final String? fromUserName,
-  }) = _$PairInvitationImpl;
+  const factory _PairInvitation(
+          {required final String id,
+          @JsonKey(name: 'from_user_id') required final String fromUserId,
+          @JsonKey(name: 'to_user_email') required final String toUserEmail,
+          @JsonKey(name: 'to_user_id') final String? toUserId,
+          required final InvitationStatus status,
+          final String? message,
+          @JsonKey(name: 'expires_at') final DateTime? expiresAt,
+          @JsonKey(name: 'created_at') required final DateTime createdAt,
+          @JsonKey(name: 'updated_at') required final DateTime updatedAt,
+          @JsonKey(name: 'from_user_name') final String? fromUserName}) =
+      _$PairInvitationImpl;
 
   factory _PairInvitation.fromJson(Map<String, dynamic> json) =
       _$PairInvitationImpl.fromJson;
@@ -389,15 +357,12 @@ abstract class _PairInvitation implements PairInvitation {
   DateTime get createdAt;
   @override
   @JsonKey(name: 'updated_at')
-  DateTime get updatedAt; // Sender profile info (populated via join)
-  @override
+  DateTime get updatedAt;
+  @override // Sender profile info (populated via join)
   @JsonKey(name: 'from_user_name')
   String? get fromUserName;
-
-  /// Create a copy of PairInvitation
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$PairInvitationImplCopyWith<_$PairInvitationImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

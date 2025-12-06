@@ -23,19 +23,19 @@ _$PairInvitationImpl _$$PairInvitationImplFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$$PairInvitationImplToJson(
-  _$PairInvitationImpl instance,
-) => <String, dynamic>{
-  'id': instance.id,
-  'from_user_id': instance.fromUserId,
-  'to_user_email': instance.toUserEmail,
-  'to_user_id': instance.toUserId,
-  'status': _$InvitationStatusEnumMap[instance.status]!,
-  'message': instance.message,
-  'expires_at': instance.expiresAt?.toIso8601String(),
-  'created_at': instance.createdAt.toIso8601String(),
-  'updated_at': instance.updatedAt.toIso8601String(),
-  'from_user_name': instance.fromUserName,
-};
+        _$PairInvitationImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'from_user_id': instance.fromUserId,
+      'to_user_email': instance.toUserEmail,
+      'to_user_id': instance.toUserId,
+      'status': _$InvitationStatusEnumMap[instance.status]!,
+      'message': instance.message,
+      'expires_at': instance.expiresAt?.toIso8601String(),
+      'created_at': instance.createdAt.toIso8601String(),
+      'updated_at': instance.updatedAt.toIso8601String(),
+      'from_user_name': instance.fromUserName,
+    };
 
 const _$InvitationStatusEnumMap = {
   InvitationStatus.pending: 'pending',

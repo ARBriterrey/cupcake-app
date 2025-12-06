@@ -7,19 +7,19 @@ part of 'pair.dart';
 // **************************************************************************
 
 _$PairImpl _$$PairImplFromJson(Map<String, dynamic> json) => _$PairImpl(
-  id: json['id'] as String,
-  user1Id: json['user1_id'] as String,
-  user2Id: json['user2_id'] as String,
-  status: $enumDecode(_$PairStatusEnumMap, json['status']),
-  coupleName: json['couple_name'] as String?,
-  anniversaryDate: json['anniversary_date'] == null
-      ? null
-      : DateTime.parse(json['anniversary_date'] as String),
-  sharedPreferences:
-      json['shared_preferences'] as Map<String, dynamic>? ?? const {},
-  createdAt: DateTime.parse(json['created_at'] as String),
-  updatedAt: DateTime.parse(json['updated_at'] as String),
-);
+      id: json['id'] as String,
+      user1Id: json['user1_id'] as String,
+      user2Id: json['user2_id'] as String,
+      status: $enumDecode(_$PairStatusEnumMap, json['status']),
+      coupleName: json['couple_name'] as String?,
+      anniversaryDate: json['anniversary_date'] == null
+          ? null
+          : DateTime.parse(json['anniversary_date'] as String),
+      sharedPreferences:
+          json['shared_preferences'] as Map<String, dynamic>? ?? const {},
+      createdAt: DateTime.parse(json['created_at'] as String),
+      updatedAt: DateTime.parse(json['updated_at'] as String),
+    );
 
 Map<String, dynamic> _$$PairImplToJson(_$PairImpl instance) =>
     <String, dynamic>{

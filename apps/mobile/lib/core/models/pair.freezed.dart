@@ -12,8 +12,7 @@ part of 'pair.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 Pair _$PairFromJson(Map<String, dynamic> json) {
   return _Pair.fromJson(json);
@@ -39,12 +38,8 @@ mixin _$Pair {
   @JsonKey(name: 'updated_at')
   DateTime get updatedAt => throw _privateConstructorUsedError;
 
-  /// Serializes this Pair to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of Pair
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $PairCopyWith<Pair> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -53,17 +48,17 @@ abstract class $PairCopyWith<$Res> {
   factory $PairCopyWith(Pair value, $Res Function(Pair) then) =
       _$PairCopyWithImpl<$Res, Pair>;
   @useResult
-  $Res call({
-    String id,
-    @JsonKey(name: 'user1_id') String user1Id,
-    @JsonKey(name: 'user2_id') String user2Id,
-    PairStatus status,
-    @JsonKey(name: 'couple_name') String? coupleName,
-    @JsonKey(name: 'anniversary_date') DateTime? anniversaryDate,
-    @JsonKey(name: 'shared_preferences') Map<String, dynamic> sharedPreferences,
-    @JsonKey(name: 'created_at') DateTime createdAt,
-    @JsonKey(name: 'updated_at') DateTime updatedAt,
-  });
+  $Res call(
+      {String id,
+      @JsonKey(name: 'user1_id') String user1Id,
+      @JsonKey(name: 'user2_id') String user2Id,
+      PairStatus status,
+      @JsonKey(name: 'couple_name') String? coupleName,
+      @JsonKey(name: 'anniversary_date') DateTime? anniversaryDate,
+      @JsonKey(name: 'shared_preferences')
+      Map<String, dynamic> sharedPreferences,
+      @JsonKey(name: 'created_at') DateTime createdAt,
+      @JsonKey(name: 'updated_at') DateTime updatedAt});
 }
 
 /// @nodoc
@@ -76,8 +71,6 @@ class _$PairCopyWithImpl<$Res, $Val extends Pair>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of Pair
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -91,69 +84,65 @@ class _$PairCopyWithImpl<$Res, $Val extends Pair>
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
-    return _then(
-      _value.copyWith(
-            id: null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                      as String,
-            user1Id: null == user1Id
-                ? _value.user1Id
-                : user1Id // ignore: cast_nullable_to_non_nullable
-                      as String,
-            user2Id: null == user2Id
-                ? _value.user2Id
-                : user2Id // ignore: cast_nullable_to_non_nullable
-                      as String,
-            status: null == status
-                ? _value.status
-                : status // ignore: cast_nullable_to_non_nullable
-                      as PairStatus,
-            coupleName: freezed == coupleName
-                ? _value.coupleName
-                : coupleName // ignore: cast_nullable_to_non_nullable
-                      as String?,
-            anniversaryDate: freezed == anniversaryDate
-                ? _value.anniversaryDate
-                : anniversaryDate // ignore: cast_nullable_to_non_nullable
-                      as DateTime?,
-            sharedPreferences: null == sharedPreferences
-                ? _value.sharedPreferences
-                : sharedPreferences // ignore: cast_nullable_to_non_nullable
-                      as Map<String, dynamic>,
-            createdAt: null == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                      as DateTime,
-            updatedAt: null == updatedAt
-                ? _value.updatedAt
-                : updatedAt // ignore: cast_nullable_to_non_nullable
-                      as DateTime,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      user1Id: null == user1Id
+          ? _value.user1Id
+          : user1Id // ignore: cast_nullable_to_non_nullable
+              as String,
+      user2Id: null == user2Id
+          ? _value.user2Id
+          : user2Id // ignore: cast_nullable_to_non_nullable
+              as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as PairStatus,
+      coupleName: freezed == coupleName
+          ? _value.coupleName
+          : coupleName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      anniversaryDate: freezed == anniversaryDate
+          ? _value.anniversaryDate
+          : anniversaryDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      sharedPreferences: null == sharedPreferences
+          ? _value.sharedPreferences
+          : sharedPreferences // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$PairImplCopyWith<$Res> implements $PairCopyWith<$Res> {
   factory _$$PairImplCopyWith(
-    _$PairImpl value,
-    $Res Function(_$PairImpl) then,
-  ) = __$$PairImplCopyWithImpl<$Res>;
+          _$PairImpl value, $Res Function(_$PairImpl) then) =
+      __$$PairImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    @JsonKey(name: 'user1_id') String user1Id,
-    @JsonKey(name: 'user2_id') String user2Id,
-    PairStatus status,
-    @JsonKey(name: 'couple_name') String? coupleName,
-    @JsonKey(name: 'anniversary_date') DateTime? anniversaryDate,
-    @JsonKey(name: 'shared_preferences') Map<String, dynamic> sharedPreferences,
-    @JsonKey(name: 'created_at') DateTime createdAt,
-    @JsonKey(name: 'updated_at') DateTime updatedAt,
-  });
+  $Res call(
+      {String id,
+      @JsonKey(name: 'user1_id') String user1Id,
+      @JsonKey(name: 'user2_id') String user2Id,
+      PairStatus status,
+      @JsonKey(name: 'couple_name') String? coupleName,
+      @JsonKey(name: 'anniversary_date') DateTime? anniversaryDate,
+      @JsonKey(name: 'shared_preferences')
+      Map<String, dynamic> sharedPreferences,
+      @JsonKey(name: 'created_at') DateTime createdAt,
+      @JsonKey(name: 'updated_at') DateTime updatedAt});
 }
 
 /// @nodoc
@@ -161,10 +150,8 @@ class __$$PairImplCopyWithImpl<$Res>
     extends _$PairCopyWithImpl<$Res, _$PairImpl>
     implements _$$PairImplCopyWith<$Res> {
   __$$PairImplCopyWithImpl(_$PairImpl _value, $Res Function(_$PairImpl) _then)
-    : super(_value, _then);
+      : super(_value, _then);
 
-  /// Create a copy of Pair
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -178,64 +165,62 @@ class __$$PairImplCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
-    return _then(
-      _$PairImpl(
-        id: null == id
-            ? _value.id
-            : id // ignore: cast_nullable_to_non_nullable
-                  as String,
-        user1Id: null == user1Id
-            ? _value.user1Id
-            : user1Id // ignore: cast_nullable_to_non_nullable
-                  as String,
-        user2Id: null == user2Id
-            ? _value.user2Id
-            : user2Id // ignore: cast_nullable_to_non_nullable
-                  as String,
-        status: null == status
-            ? _value.status
-            : status // ignore: cast_nullable_to_non_nullable
-                  as PairStatus,
-        coupleName: freezed == coupleName
-            ? _value.coupleName
-            : coupleName // ignore: cast_nullable_to_non_nullable
-                  as String?,
-        anniversaryDate: freezed == anniversaryDate
-            ? _value.anniversaryDate
-            : anniversaryDate // ignore: cast_nullable_to_non_nullable
-                  as DateTime?,
-        sharedPreferences: null == sharedPreferences
-            ? _value._sharedPreferences
-            : sharedPreferences // ignore: cast_nullable_to_non_nullable
-                  as Map<String, dynamic>,
-        createdAt: null == createdAt
-            ? _value.createdAt
-            : createdAt // ignore: cast_nullable_to_non_nullable
-                  as DateTime,
-        updatedAt: null == updatedAt
-            ? _value.updatedAt
-            : updatedAt // ignore: cast_nullable_to_non_nullable
-                  as DateTime,
-      ),
-    );
+    return _then(_$PairImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      user1Id: null == user1Id
+          ? _value.user1Id
+          : user1Id // ignore: cast_nullable_to_non_nullable
+              as String,
+      user2Id: null == user2Id
+          ? _value.user2Id
+          : user2Id // ignore: cast_nullable_to_non_nullable
+              as String,
+      status: null == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as PairStatus,
+      coupleName: freezed == coupleName
+          ? _value.coupleName
+          : coupleName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      anniversaryDate: freezed == anniversaryDate
+          ? _value.anniversaryDate
+          : anniversaryDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      sharedPreferences: null == sharedPreferences
+          ? _value._sharedPreferences
+          : sharedPreferences // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$PairImpl implements _Pair {
-  const _$PairImpl({
-    required this.id,
-    @JsonKey(name: 'user1_id') required this.user1Id,
-    @JsonKey(name: 'user2_id') required this.user2Id,
-    required this.status,
-    @JsonKey(name: 'couple_name') this.coupleName,
-    @JsonKey(name: 'anniversary_date') this.anniversaryDate,
-    @JsonKey(name: 'shared_preferences')
-    final Map<String, dynamic> sharedPreferences = const {},
-    @JsonKey(name: 'created_at') required this.createdAt,
-    @JsonKey(name: 'updated_at') required this.updatedAt,
-  }) : _sharedPreferences = sharedPreferences;
+  const _$PairImpl(
+      {required this.id,
+      @JsonKey(name: 'user1_id') required this.user1Id,
+      @JsonKey(name: 'user2_id') required this.user2Id,
+      required this.status,
+      @JsonKey(name: 'couple_name') this.coupleName,
+      @JsonKey(name: 'anniversary_date') this.anniversaryDate,
+      @JsonKey(name: 'shared_preferences')
+      final Map<String, dynamic> sharedPreferences = const {},
+      @JsonKey(name: 'created_at') required this.createdAt,
+      @JsonKey(name: 'updated_at') required this.updatedAt})
+      : _sharedPreferences = sharedPreferences;
 
   factory _$PairImpl.fromJson(Map<String, dynamic> json) =>
       _$$PairImplFromJson(json);
@@ -291,34 +276,29 @@ class _$PairImpl implements _Pair {
                 other.coupleName == coupleName) &&
             (identical(other.anniversaryDate, anniversaryDate) ||
                 other.anniversaryDate == anniversaryDate) &&
-            const DeepCollectionEquality().equals(
-              other._sharedPreferences,
-              _sharedPreferences,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._sharedPreferences, _sharedPreferences) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    user1Id,
-    user2Id,
-    status,
-    coupleName,
-    anniversaryDate,
-    const DeepCollectionEquality().hash(_sharedPreferences),
-    createdAt,
-    updatedAt,
-  );
+      runtimeType,
+      id,
+      user1Id,
+      user2Id,
+      status,
+      coupleName,
+      anniversaryDate,
+      const DeepCollectionEquality().hash(_sharedPreferences),
+      createdAt,
+      updatedAt);
 
-  /// Create a copy of Pair
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$PairImplCopyWith<_$PairImpl> get copyWith =>
@@ -326,23 +306,25 @@ class _$PairImpl implements _Pair {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PairImplToJson(this);
+    return _$$PairImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _Pair implements Pair {
-  const factory _Pair({
-    required final String id,
-    @JsonKey(name: 'user1_id') required final String user1Id,
-    @JsonKey(name: 'user2_id') required final String user2Id,
-    required final PairStatus status,
-    @JsonKey(name: 'couple_name') final String? coupleName,
-    @JsonKey(name: 'anniversary_date') final DateTime? anniversaryDate,
-    @JsonKey(name: 'shared_preferences')
-    final Map<String, dynamic> sharedPreferences,
-    @JsonKey(name: 'created_at') required final DateTime createdAt,
-    @JsonKey(name: 'updated_at') required final DateTime updatedAt,
-  }) = _$PairImpl;
+  const factory _Pair(
+          {required final String id,
+          @JsonKey(name: 'user1_id') required final String user1Id,
+          @JsonKey(name: 'user2_id') required final String user2Id,
+          required final PairStatus status,
+          @JsonKey(name: 'couple_name') final String? coupleName,
+          @JsonKey(name: 'anniversary_date') final DateTime? anniversaryDate,
+          @JsonKey(name: 'shared_preferences')
+          final Map<String, dynamic> sharedPreferences,
+          @JsonKey(name: 'created_at') required final DateTime createdAt,
+          @JsonKey(name: 'updated_at') required final DateTime updatedAt}) =
+      _$PairImpl;
 
   factory _Pair.fromJson(Map<String, dynamic> json) = _$PairImpl.fromJson;
 
@@ -371,11 +353,8 @@ abstract class _Pair implements Pair {
   @override
   @JsonKey(name: 'updated_at')
   DateTime get updatedAt;
-
-  /// Create a copy of Pair
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$PairImplCopyWith<_$PairImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -12,8 +12,7 @@ part of 'user_profile.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 UserProfile _$UserProfileFromJson(Map<String, dynamic> json) {
   return _UserProfile.fromJson(json);
@@ -36,12 +35,8 @@ mixin _$UserProfile {
   @JsonKey(name: 'updated_at')
   DateTime get updatedAt => throw _privateConstructorUsedError;
 
-  /// Serializes this UserProfile to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of UserProfile
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $UserProfileCopyWith<UserProfile> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -49,21 +44,19 @@ mixin _$UserProfile {
 /// @nodoc
 abstract class $UserProfileCopyWith<$Res> {
   factory $UserProfileCopyWith(
-    UserProfile value,
-    $Res Function(UserProfile) then,
-  ) = _$UserProfileCopyWithImpl<$Res, UserProfile>;
+          UserProfile value, $Res Function(UserProfile) then) =
+      _$UserProfileCopyWithImpl<$Res, UserProfile>;
   @useResult
-  $Res call({
-    String id,
-    String? email,
-    @JsonKey(name: 'display_name') String? displayName,
-    @JsonKey(name: 'avatar_url') String? avatarUrl,
-    String? timezone,
-    Map<String, dynamic> preferences,
-    @JsonKey(name: 'active_pair_id') String? activePairId,
-    @JsonKey(name: 'created_at') DateTime createdAt,
-    @JsonKey(name: 'updated_at') DateTime updatedAt,
-  });
+  $Res call(
+      {String id,
+      String? email,
+      @JsonKey(name: 'display_name') String? displayName,
+      @JsonKey(name: 'avatar_url') String? avatarUrl,
+      String? timezone,
+      Map<String, dynamic> preferences,
+      @JsonKey(name: 'active_pair_id') String? activePairId,
+      @JsonKey(name: 'created_at') DateTime createdAt,
+      @JsonKey(name: 'updated_at') DateTime updatedAt});
 }
 
 /// @nodoc
@@ -76,8 +69,6 @@ class _$UserProfileCopyWithImpl<$Res, $Val extends UserProfile>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of UserProfile
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -91,47 +82,44 @@ class _$UserProfileCopyWithImpl<$Res, $Val extends UserProfile>
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
-    return _then(
-      _value.copyWith(
-            id: null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                      as String,
-            email: freezed == email
-                ? _value.email
-                : email // ignore: cast_nullable_to_non_nullable
-                      as String?,
-            displayName: freezed == displayName
-                ? _value.displayName
-                : displayName // ignore: cast_nullable_to_non_nullable
-                      as String?,
-            avatarUrl: freezed == avatarUrl
-                ? _value.avatarUrl
-                : avatarUrl // ignore: cast_nullable_to_non_nullable
-                      as String?,
-            timezone: freezed == timezone
-                ? _value.timezone
-                : timezone // ignore: cast_nullable_to_non_nullable
-                      as String?,
-            preferences: null == preferences
-                ? _value.preferences
-                : preferences // ignore: cast_nullable_to_non_nullable
-                      as Map<String, dynamic>,
-            activePairId: freezed == activePairId
-                ? _value.activePairId
-                : activePairId // ignore: cast_nullable_to_non_nullable
-                      as String?,
-            createdAt: null == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                      as DateTime,
-            updatedAt: null == updatedAt
-                ? _value.updatedAt
-                : updatedAt // ignore: cast_nullable_to_non_nullable
-                      as DateTime,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: freezed == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+      displayName: freezed == displayName
+          ? _value.displayName
+          : displayName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      avatarUrl: freezed == avatarUrl
+          ? _value.avatarUrl
+          : avatarUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      timezone: freezed == timezone
+          ? _value.timezone
+          : timezone // ignore: cast_nullable_to_non_nullable
+              as String?,
+      preferences: null == preferences
+          ? _value.preferences
+          : preferences // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      activePairId: freezed == activePairId
+          ? _value.activePairId
+          : activePairId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ) as $Val);
   }
 }
 
@@ -139,22 +127,20 @@ class _$UserProfileCopyWithImpl<$Res, $Val extends UserProfile>
 abstract class _$$UserProfileImplCopyWith<$Res>
     implements $UserProfileCopyWith<$Res> {
   factory _$$UserProfileImplCopyWith(
-    _$UserProfileImpl value,
-    $Res Function(_$UserProfileImpl) then,
-  ) = __$$UserProfileImplCopyWithImpl<$Res>;
+          _$UserProfileImpl value, $Res Function(_$UserProfileImpl) then) =
+      __$$UserProfileImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String? email,
-    @JsonKey(name: 'display_name') String? displayName,
-    @JsonKey(name: 'avatar_url') String? avatarUrl,
-    String? timezone,
-    Map<String, dynamic> preferences,
-    @JsonKey(name: 'active_pair_id') String? activePairId,
-    @JsonKey(name: 'created_at') DateTime createdAt,
-    @JsonKey(name: 'updated_at') DateTime updatedAt,
-  });
+  $Res call(
+      {String id,
+      String? email,
+      @JsonKey(name: 'display_name') String? displayName,
+      @JsonKey(name: 'avatar_url') String? avatarUrl,
+      String? timezone,
+      Map<String, dynamic> preferences,
+      @JsonKey(name: 'active_pair_id') String? activePairId,
+      @JsonKey(name: 'created_at') DateTime createdAt,
+      @JsonKey(name: 'updated_at') DateTime updatedAt});
 }
 
 /// @nodoc
@@ -162,12 +148,9 @@ class __$$UserProfileImplCopyWithImpl<$Res>
     extends _$UserProfileCopyWithImpl<$Res, _$UserProfileImpl>
     implements _$$UserProfileImplCopyWith<$Res> {
   __$$UserProfileImplCopyWithImpl(
-    _$UserProfileImpl _value,
-    $Res Function(_$UserProfileImpl) _then,
-  ) : super(_value, _then);
+      _$UserProfileImpl _value, $Res Function(_$UserProfileImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of UserProfile
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -181,63 +164,61 @@ class __$$UserProfileImplCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
-    return _then(
-      _$UserProfileImpl(
-        id: null == id
-            ? _value.id
-            : id // ignore: cast_nullable_to_non_nullable
-                  as String,
-        email: freezed == email
-            ? _value.email
-            : email // ignore: cast_nullable_to_non_nullable
-                  as String?,
-        displayName: freezed == displayName
-            ? _value.displayName
-            : displayName // ignore: cast_nullable_to_non_nullable
-                  as String?,
-        avatarUrl: freezed == avatarUrl
-            ? _value.avatarUrl
-            : avatarUrl // ignore: cast_nullable_to_non_nullable
-                  as String?,
-        timezone: freezed == timezone
-            ? _value.timezone
-            : timezone // ignore: cast_nullable_to_non_nullable
-                  as String?,
-        preferences: null == preferences
-            ? _value._preferences
-            : preferences // ignore: cast_nullable_to_non_nullable
-                  as Map<String, dynamic>,
-        activePairId: freezed == activePairId
-            ? _value.activePairId
-            : activePairId // ignore: cast_nullable_to_non_nullable
-                  as String?,
-        createdAt: null == createdAt
-            ? _value.createdAt
-            : createdAt // ignore: cast_nullable_to_non_nullable
-                  as DateTime,
-        updatedAt: null == updatedAt
-            ? _value.updatedAt
-            : updatedAt // ignore: cast_nullable_to_non_nullable
-                  as DateTime,
-      ),
-    );
+    return _then(_$UserProfileImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      email: freezed == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String?,
+      displayName: freezed == displayName
+          ? _value.displayName
+          : displayName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      avatarUrl: freezed == avatarUrl
+          ? _value.avatarUrl
+          : avatarUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      timezone: freezed == timezone
+          ? _value.timezone
+          : timezone // ignore: cast_nullable_to_non_nullable
+              as String?,
+      preferences: null == preferences
+          ? _value._preferences
+          : preferences // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      activePairId: freezed == activePairId
+          ? _value.activePairId
+          : activePairId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$UserProfileImpl implements _UserProfile {
-  const _$UserProfileImpl({
-    required this.id,
-    this.email,
-    @JsonKey(name: 'display_name') this.displayName,
-    @JsonKey(name: 'avatar_url') this.avatarUrl,
-    this.timezone,
-    final Map<String, dynamic> preferences = const {},
-    @JsonKey(name: 'active_pair_id') this.activePairId,
-    @JsonKey(name: 'created_at') required this.createdAt,
-    @JsonKey(name: 'updated_at') required this.updatedAt,
-  }) : _preferences = preferences;
+  const _$UserProfileImpl(
+      {required this.id,
+      this.email,
+      @JsonKey(name: 'display_name') this.displayName,
+      @JsonKey(name: 'avatar_url') this.avatarUrl,
+      this.timezone,
+      final Map<String, dynamic> preferences = const {},
+      @JsonKey(name: 'active_pair_id') this.activePairId,
+      @JsonKey(name: 'created_at') required this.createdAt,
+      @JsonKey(name: 'updated_at') required this.updatedAt})
+      : _preferences = preferences;
 
   factory _$UserProfileImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserProfileImplFromJson(json);
@@ -291,10 +272,8 @@ class _$UserProfileImpl implements _UserProfile {
                 other.avatarUrl == avatarUrl) &&
             (identical(other.timezone, timezone) ||
                 other.timezone == timezone) &&
-            const DeepCollectionEquality().equals(
-              other._preferences,
-              _preferences,
-            ) &&
+            const DeepCollectionEquality()
+                .equals(other._preferences, _preferences) &&
             (identical(other.activePairId, activePairId) ||
                 other.activePairId == activePairId) &&
             (identical(other.createdAt, createdAt) ||
@@ -303,24 +282,21 @@ class _$UserProfileImpl implements _UserProfile {
                 other.updatedAt == updatedAt));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    email,
-    displayName,
-    avatarUrl,
-    timezone,
-    const DeepCollectionEquality().hash(_preferences),
-    activePairId,
-    createdAt,
-    updatedAt,
-  );
+      runtimeType,
+      id,
+      email,
+      displayName,
+      avatarUrl,
+      timezone,
+      const DeepCollectionEquality().hash(_preferences),
+      activePairId,
+      createdAt,
+      updatedAt);
 
-  /// Create a copy of UserProfile
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$UserProfileImplCopyWith<_$UserProfileImpl> get copyWith =>
@@ -328,22 +304,24 @@ class _$UserProfileImpl implements _UserProfile {
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$UserProfileImplToJson(this);
+    return _$$UserProfileImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _UserProfile implements UserProfile {
-  const factory _UserProfile({
-    required final String id,
-    final String? email,
-    @JsonKey(name: 'display_name') final String? displayName,
-    @JsonKey(name: 'avatar_url') final String? avatarUrl,
-    final String? timezone,
-    final Map<String, dynamic> preferences,
-    @JsonKey(name: 'active_pair_id') final String? activePairId,
-    @JsonKey(name: 'created_at') required final DateTime createdAt,
-    @JsonKey(name: 'updated_at') required final DateTime updatedAt,
-  }) = _$UserProfileImpl;
+  const factory _UserProfile(
+          {required final String id,
+          final String? email,
+          @JsonKey(name: 'display_name') final String? displayName,
+          @JsonKey(name: 'avatar_url') final String? avatarUrl,
+          final String? timezone,
+          final Map<String, dynamic> preferences,
+          @JsonKey(name: 'active_pair_id') final String? activePairId,
+          @JsonKey(name: 'created_at') required final DateTime createdAt,
+          @JsonKey(name: 'updated_at') required final DateTime updatedAt}) =
+      _$UserProfileImpl;
 
   factory _UserProfile.fromJson(Map<String, dynamic> json) =
       _$UserProfileImpl.fromJson;
@@ -371,11 +349,8 @@ abstract class _UserProfile implements UserProfile {
   @override
   @JsonKey(name: 'updated_at')
   DateTime get updatedAt;
-
-  /// Create a copy of UserProfile
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$UserProfileImplCopyWith<_$UserProfileImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

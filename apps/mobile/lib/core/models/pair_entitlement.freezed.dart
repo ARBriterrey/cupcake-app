@@ -12,8 +12,7 @@ part of 'pair_entitlement.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
-);
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 PairEntitlement _$PairEntitlementFromJson(Map<String, dynamic> json) {
   return _PairEntitlement.fromJson(json);
@@ -30,12 +29,8 @@ mixin _$PairEntitlement {
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
 
-  /// Serializes this PairEntitlement to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-
-  /// Create a copy of PairEntitlement
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   $PairEntitlementCopyWith<PairEntitlement> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -43,20 +38,18 @@ mixin _$PairEntitlement {
 /// @nodoc
 abstract class $PairEntitlementCopyWith<$Res> {
   factory $PairEntitlementCopyWith(
-    PairEntitlement value,
-    $Res Function(PairEntitlement) then,
-  ) = _$PairEntitlementCopyWithImpl<$Res, PairEntitlement>;
+          PairEntitlement value, $Res Function(PairEntitlement) then) =
+      _$PairEntitlementCopyWithImpl<$Res, PairEntitlement>;
   @useResult
-  $Res call({
-    String id,
-    String pairId,
-    String sprinkleId,
-    bool isActive,
-    DateTime? expiresAt,
-    Map<String, dynamic> metadata,
-    DateTime createdAt,
-    DateTime updatedAt,
-  });
+  $Res call(
+      {String id,
+      String pairId,
+      String sprinkleId,
+      bool isActive,
+      DateTime? expiresAt,
+      Map<String, dynamic> metadata,
+      DateTime createdAt,
+      DateTime updatedAt});
 }
 
 /// @nodoc
@@ -69,8 +62,6 @@ class _$PairEntitlementCopyWithImpl<$Res, $Val extends PairEntitlement>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
-  /// Create a copy of PairEntitlement
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -83,65 +74,60 @@ class _$PairEntitlementCopyWithImpl<$Res, $Val extends PairEntitlement>
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
-    return _then(
-      _value.copyWith(
-            id: null == id
-                ? _value.id
-                : id // ignore: cast_nullable_to_non_nullable
-                      as String,
-            pairId: null == pairId
-                ? _value.pairId
-                : pairId // ignore: cast_nullable_to_non_nullable
-                      as String,
-            sprinkleId: null == sprinkleId
-                ? _value.sprinkleId
-                : sprinkleId // ignore: cast_nullable_to_non_nullable
-                      as String,
-            isActive: null == isActive
-                ? _value.isActive
-                : isActive // ignore: cast_nullable_to_non_nullable
-                      as bool,
-            expiresAt: freezed == expiresAt
-                ? _value.expiresAt
-                : expiresAt // ignore: cast_nullable_to_non_nullable
-                      as DateTime?,
-            metadata: null == metadata
-                ? _value.metadata
-                : metadata // ignore: cast_nullable_to_non_nullable
-                      as Map<String, dynamic>,
-            createdAt: null == createdAt
-                ? _value.createdAt
-                : createdAt // ignore: cast_nullable_to_non_nullable
-                      as DateTime,
-            updatedAt: null == updatedAt
-                ? _value.updatedAt
-                : updatedAt // ignore: cast_nullable_to_non_nullable
-                      as DateTime,
-          )
-          as $Val,
-    );
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      pairId: null == pairId
+          ? _value.pairId
+          : pairId // ignore: cast_nullable_to_non_nullable
+              as String,
+      sprinkleId: null == sprinkleId
+          ? _value.sprinkleId
+          : sprinkleId // ignore: cast_nullable_to_non_nullable
+              as String,
+      isActive: null == isActive
+          ? _value.isActive
+          : isActive // ignore: cast_nullable_to_non_nullable
+              as bool,
+      expiresAt: freezed == expiresAt
+          ? _value.expiresAt
+          : expiresAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      metadata: null == metadata
+          ? _value.metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ) as $Val);
   }
 }
 
 /// @nodoc
 abstract class _$$PairEntitlementImplCopyWith<$Res>
     implements $PairEntitlementCopyWith<$Res> {
-  factory _$$PairEntitlementImplCopyWith(
-    _$PairEntitlementImpl value,
-    $Res Function(_$PairEntitlementImpl) then,
-  ) = __$$PairEntitlementImplCopyWithImpl<$Res>;
+  factory _$$PairEntitlementImplCopyWith(_$PairEntitlementImpl value,
+          $Res Function(_$PairEntitlementImpl) then) =
+      __$$PairEntitlementImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String id,
-    String pairId,
-    String sprinkleId,
-    bool isActive,
-    DateTime? expiresAt,
-    Map<String, dynamic> metadata,
-    DateTime createdAt,
-    DateTime updatedAt,
-  });
+  $Res call(
+      {String id,
+      String pairId,
+      String sprinkleId,
+      bool isActive,
+      DateTime? expiresAt,
+      Map<String, dynamic> metadata,
+      DateTime createdAt,
+      DateTime updatedAt});
 }
 
 /// @nodoc
@@ -149,12 +135,9 @@ class __$$PairEntitlementImplCopyWithImpl<$Res>
     extends _$PairEntitlementCopyWithImpl<$Res, _$PairEntitlementImpl>
     implements _$$PairEntitlementImplCopyWith<$Res> {
   __$$PairEntitlementImplCopyWithImpl(
-    _$PairEntitlementImpl _value,
-    $Res Function(_$PairEntitlementImpl) _then,
-  ) : super(_value, _then);
+      _$PairEntitlementImpl _value, $Res Function(_$PairEntitlementImpl) _then)
+      : super(_value, _then);
 
-  /// Create a copy of PairEntitlement
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -167,58 +150,56 @@ class __$$PairEntitlementImplCopyWithImpl<$Res>
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
-    return _then(
-      _$PairEntitlementImpl(
-        id: null == id
-            ? _value.id
-            : id // ignore: cast_nullable_to_non_nullable
-                  as String,
-        pairId: null == pairId
-            ? _value.pairId
-            : pairId // ignore: cast_nullable_to_non_nullable
-                  as String,
-        sprinkleId: null == sprinkleId
-            ? _value.sprinkleId
-            : sprinkleId // ignore: cast_nullable_to_non_nullable
-                  as String,
-        isActive: null == isActive
-            ? _value.isActive
-            : isActive // ignore: cast_nullable_to_non_nullable
-                  as bool,
-        expiresAt: freezed == expiresAt
-            ? _value.expiresAt
-            : expiresAt // ignore: cast_nullable_to_non_nullable
-                  as DateTime?,
-        metadata: null == metadata
-            ? _value._metadata
-            : metadata // ignore: cast_nullable_to_non_nullable
-                  as Map<String, dynamic>,
-        createdAt: null == createdAt
-            ? _value.createdAt
-            : createdAt // ignore: cast_nullable_to_non_nullable
-                  as DateTime,
-        updatedAt: null == updatedAt
-            ? _value.updatedAt
-            : updatedAt // ignore: cast_nullable_to_non_nullable
-                  as DateTime,
-      ),
-    );
+    return _then(_$PairEntitlementImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      pairId: null == pairId
+          ? _value.pairId
+          : pairId // ignore: cast_nullable_to_non_nullable
+              as String,
+      sprinkleId: null == sprinkleId
+          ? _value.sprinkleId
+          : sprinkleId // ignore: cast_nullable_to_non_nullable
+              as String,
+      isActive: null == isActive
+          ? _value.isActive
+          : isActive // ignore: cast_nullable_to_non_nullable
+              as bool,
+      expiresAt: freezed == expiresAt
+          ? _value.expiresAt
+          : expiresAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      metadata: null == metadata
+          ? _value._metadata
+          : metadata // ignore: cast_nullable_to_non_nullable
+              as Map<String, dynamic>,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+    ));
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$PairEntitlementImpl implements _PairEntitlement {
-  const _$PairEntitlementImpl({
-    required this.id,
-    required this.pairId,
-    required this.sprinkleId,
-    required this.isActive,
-    this.expiresAt,
-    final Map<String, dynamic> metadata = const {},
-    required this.createdAt,
-    required this.updatedAt,
-  }) : _metadata = metadata;
+  const _$PairEntitlementImpl(
+      {required this.id,
+      required this.pairId,
+      required this.sprinkleId,
+      required this.isActive,
+      this.expiresAt,
+      final Map<String, dynamic> metadata = const {},
+      required this.createdAt,
+      required this.updatedAt})
+      : _metadata = metadata;
 
   factory _$PairEntitlementImpl.fromJson(Map<String, dynamic> json) =>
       _$$PairEntitlementImplFromJson(json);
@@ -272,48 +253,44 @@ class _$PairEntitlementImpl implements _PairEntitlement {
                 other.updatedAt == updatedAt));
   }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-    runtimeType,
-    id,
-    pairId,
-    sprinkleId,
-    isActive,
-    expiresAt,
-    const DeepCollectionEquality().hash(_metadata),
-    createdAt,
-    updatedAt,
-  );
+      runtimeType,
+      id,
+      pairId,
+      sprinkleId,
+      isActive,
+      expiresAt,
+      const DeepCollectionEquality().hash(_metadata),
+      createdAt,
+      updatedAt);
 
-  /// Create a copy of PairEntitlement
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$PairEntitlementImplCopyWith<_$PairEntitlementImpl> get copyWith =>
       __$$PairEntitlementImplCopyWithImpl<_$PairEntitlementImpl>(
-        this,
-        _$identity,
-      );
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$PairEntitlementImplToJson(this);
+    return _$$PairEntitlementImplToJson(
+      this,
+    );
   }
 }
 
 abstract class _PairEntitlement implements PairEntitlement {
-  const factory _PairEntitlement({
-    required final String id,
-    required final String pairId,
-    required final String sprinkleId,
-    required final bool isActive,
-    final DateTime? expiresAt,
-    final Map<String, dynamic> metadata,
-    required final DateTime createdAt,
-    required final DateTime updatedAt,
-  }) = _$PairEntitlementImpl;
+  const factory _PairEntitlement(
+      {required final String id,
+      required final String pairId,
+      required final String sprinkleId,
+      required final bool isActive,
+      final DateTime? expiresAt,
+      final Map<String, dynamic> metadata,
+      required final DateTime createdAt,
+      required final DateTime updatedAt}) = _$PairEntitlementImpl;
 
   factory _PairEntitlement.fromJson(Map<String, dynamic> json) =
       _$PairEntitlementImpl.fromJson;
@@ -334,11 +311,8 @@ abstract class _PairEntitlement implements PairEntitlement {
   DateTime get createdAt;
   @override
   DateTime get updatedAt;
-
-  /// Create a copy of PairEntitlement
-  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
+  @JsonKey(ignore: true)
   _$$PairEntitlementImplCopyWith<_$PairEntitlementImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
