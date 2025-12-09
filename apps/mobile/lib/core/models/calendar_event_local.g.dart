@@ -37,13 +37,17 @@ class CalendarEventLocalAdapter extends TypeAdapter<CalendarEventLocal> {
       updatedAt: fields[17] as DateTime,
       isSynced: fields[18] as bool,
       lastSyncAttempt: fields[19] as DateTime?,
+      isDeleted: fields[20] as bool,
+      deletedAt: fields[21] as DateTime?,
+      deletedBy: fields[22] as String?,
+      isPendingDelete: fields[23] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, CalendarEventLocal obj) {
     writer
-      ..writeByte(20)
+      ..writeByte(24)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -83,7 +87,15 @@ class CalendarEventLocalAdapter extends TypeAdapter<CalendarEventLocal> {
       ..writeByte(18)
       ..write(obj.isSynced)
       ..writeByte(19)
-      ..write(obj.lastSyncAttempt);
+      ..write(obj.lastSyncAttempt)
+      ..writeByte(20)
+      ..write(obj.isDeleted)
+      ..writeByte(21)
+      ..write(obj.deletedAt)
+      ..writeByte(22)
+      ..write(obj.deletedBy)
+      ..writeByte(23)
+      ..write(obj.isPendingDelete);
   }
 
   @override

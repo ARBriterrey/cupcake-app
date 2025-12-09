@@ -222,6 +222,11 @@ class CalendarSync extends _$CalendarSync {
       final cloudEvent = CalendarEvent.fromJson(record);
       final eventId = cloudEvent.id;
 
+      // Check if update is a soft delete
+      if (cloudEvent.isDeleted) {
+        _logger.d('CalendarSync: Received soft delete for ${cloudEvent.id}');
+      }
+
       // Check if we have a local version
       final localEvent = localRepo.getEventById(eventId);
 
@@ -254,17 +259,18 @@ class CalendarSync extends _$CalendarSync {
     }
   }
 
-  /// Handles DELETE events from Supabase
+  /// Handles DELETE events from Supabase (hard delete - actual removal from DB)
   Future<void> _handleDelete(
     Map<String, dynamic> record,
     CalendarLocalRepository localRepo,
   ) async {
     final eventId = record['id'] as String;
-    _logger.d('CalendarSync: Handling DELETE for event $eventId');
+    _logger.d('CalendarSync: Handling hard DELETE for event $eventId');
 
     try {
-      await localRepo.deleteEvent(eventId);
-      _logger.i('CalendarSync: Successfully deleted event $eventId');
+      // This is a hard delete (actual removal from database after retention period)
+      await localRepo.deleteEvent(eventId, hard: true);
+      _logger.i('CalendarSync: Successfully hard deleted event $eventId');
     } catch (e) {
       _logger.e('CalendarSync: Error handling DELETE', error: e);
     }

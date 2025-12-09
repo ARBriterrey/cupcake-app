@@ -68,6 +68,18 @@ class CalendarEventLocal extends HiveObject {
   @HiveField(19)
   DateTime? lastSyncAttempt; // Track last sync attempt for retry logic
 
+  @HiveField(20)
+  bool isDeleted; // Soft delete flag
+
+  @HiveField(21)
+  DateTime? deletedAt; // When was this event deleted
+
+  @HiveField(22)
+  String? deletedBy; // Who deleted this event
+
+  @HiveField(23)
+  bool isPendingDelete; // Track if delete is pending sync to cloud
+
   CalendarEventLocal({
     required this.id,
     required this.pairId,
@@ -89,6 +101,10 @@ class CalendarEventLocal extends HiveObject {
     required this.updatedAt,
     this.isSynced = false,
     this.lastSyncAttempt,
+    this.isDeleted = false,
+    this.deletedAt,
+    this.deletedBy,
+    this.isPendingDelete = false,
   });
 
   /// Convert from Hive model to app model (CalendarEvent)
@@ -118,6 +134,9 @@ class CalendarEventLocal extends HiveObject {
       metadata: Map<String, dynamic>.from(metadata),
       createdAt: createdAt,
       updatedAt: updatedAt,
+      isDeleted: isDeleted,
+      deletedAt: deletedAt,
+      deletedBy: deletedBy,
     );
   }
 
@@ -144,6 +163,10 @@ class CalendarEventLocal extends HiveObject {
       updatedAt: event.updatedAt,
       isSynced: isSynced ?? false,
       lastSyncAttempt: null,
+      isDeleted: event.isDeleted,
+      deletedAt: event.deletedAt,
+      deletedBy: event.deletedBy,
+      isPendingDelete: false,
     );
   }
 
@@ -186,6 +209,10 @@ class CalendarEventLocal extends HiveObject {
       updatedAt: now,
       isSynced: false,
       lastSyncAttempt: null,
+      isDeleted: false,
+      deletedAt: null,
+      deletedBy: null,
+      isPendingDelete: false,
     );
   }
 
@@ -243,8 +270,28 @@ class CalendarEventLocal extends HiveObject {
     return lastSyncAttempt!.isBefore(fiveMinutesAgo);
   }
 
+  /// Mark event for deletion (soft delete locally)
+  void markForDeletion(String userId) {
+    isDeleted = true;
+    deletedAt = DateTime.now();
+    deletedBy = userId;
+    isPendingDelete = true; // Mark as pending sync
+    updatedAt = DateTime.now();
+    isSynced = false;
+  }
+
+  /// Mark delete successfully synced to cloud
+  void markDeleteSynced() {
+    isPendingDelete = false;
+    isSynced = true;
+    lastSyncAttempt = DateTime.now();
+  }
+
+  /// Check if this event should be filtered from UI
+  bool get shouldHideFromUI => isDeleted;
+
   @override
   String toString() {
-    return 'CalendarEventLocal{id: $id, title: $title, isSynced: $isSynced}';
+    return 'CalendarEventLocal{id: $id, title: $title, isSynced: $isSynced, isDeleted: $isDeleted}';
   }
 }

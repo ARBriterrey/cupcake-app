@@ -50,6 +50,11 @@ class CalendarEvent with _$CalendarEvent {
     // Timestamps
     @JsonKey(name: 'created_at') required DateTime createdAt,
     @JsonKey(name: 'updated_at') required DateTime updatedAt,
+
+    // Soft delete tracking
+    @JsonKey(name: 'is_deleted') @Default(false) bool isDeleted,
+    @JsonKey(name: 'deleted_at') DateTime? deletedAt,
+    @JsonKey(name: 'deleted_by') String? deletedBy,
   }) = _CalendarEvent;
 
   factory CalendarEvent.fromJson(Map<String, dynamic> json) =>
@@ -61,7 +66,7 @@ extension CalendarEventExtensions on CalendarEvent {
   /// Check if the event is happening today
   bool get isToday {
     final now = DateTime.now();
-    final eventDate = startTime;
+    final eventDate = startTime.toLocal();
     return eventDate.year == now.year &&
         eventDate.month == now.month &&
         eventDate.day == now.day;
@@ -83,8 +88,8 @@ extension CalendarEventExtensions on CalendarEvent {
       if (endTime == null) {
         return 'All day';
       }
-      final startDate = startTime;
-      final endDate = endTime!;
+      final startDate = startTime.toLocal();
+      final endDate = endTime!.toLocal();
       if (startDate.day == endDate.day &&
           startDate.month == endDate.month &&
           startDate.year == endDate.year) {
@@ -93,11 +98,14 @@ extension CalendarEventExtensions on CalendarEvent {
       return 'All day, ${startDate.month}/${startDate.day} - ${endDate.month}/${endDate.day}';
     }
 
-    if (endTime == null) {
-      return '${startTime.hour}:${startTime.minute.toString().padLeft(2, '0')}';
+    final localStart = startTime.toLocal();
+    final localEnd = endTime?.toLocal();
+
+    if (localEnd == null) {
+      return '${localStart.hour}:${localStart.minute.toString().padLeft(2, '0')}';
     }
 
-    return '${startTime.hour}:${startTime.minute.toString().padLeft(2, '0')} - ${endTime!.hour}:${endTime!.minute.toString().padLeft(2, '0')}';
+    return '${localStart.hour}:${localStart.minute.toString().padLeft(2, '0')} - ${localEnd.hour}:${localEnd.minute.toString().padLeft(2, '0')}';
   }
 
   /// Check if the event is owned by the current user
@@ -123,6 +131,19 @@ extension CalendarEventExtensions on CalendarEvent {
   bool get isMultiDay {
     if (endTime == null) return false;
     return endTime!.difference(startTime).inDays > 0;
+  }
+
+  /// Check if this event is soft-deleted
+  bool get isSoftDeleted => isDeleted;
+
+  /// Check if this event was triggered by an app/sprinkle
+  bool get isAppTriggered {
+    return metadata['app_triggered'] == true || metadata['source'] == 'app';
+  }
+
+  /// Get the source of this event (user or sprinkle name)
+  String get eventSource {
+    return metadata['source'] as String? ?? 'user';
   }
 }
 

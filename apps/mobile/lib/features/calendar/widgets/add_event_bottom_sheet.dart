@@ -612,7 +612,7 @@ class _AddEventBottomSheetState extends ConsumerState<AddEventBottomSheet> {
           );
         }
       }
-    } catch (e, stack) {
+    } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(

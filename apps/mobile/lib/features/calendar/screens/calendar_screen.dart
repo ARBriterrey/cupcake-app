@@ -47,11 +47,20 @@ class CalendarScreen extends ConsumerWidget {
         backgroundColor: AppTheme.warmGray,
         actions: [
           IconButton(
-            icon: const Icon(Icons.add),
+            icon: const Icon(Icons.refresh),
             onPressed: () {
-              _showAddEventBottomSheet(context, ref);
+              // Refresh calendar by invalidating sync provider
+              ref.invalidate(calendarSyncProvider);
+
+              // Show feedback to user
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Refreshing calendar...'),
+                  duration: Duration(seconds: 2),
+                ),
+              );
             },
-            tooltip: 'Add event',
+            tooltip: 'Refresh calendar',
           ),
         ],
       ),

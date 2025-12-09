@@ -49,7 +49,14 @@ mixin _$CalendarEvent {
   @JsonKey(name: 'created_at')
   DateTime get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
-  DateTime get updatedAt => throw _privateConstructorUsedError;
+  DateTime get updatedAt =>
+      throw _privateConstructorUsedError; // Soft delete tracking
+  @JsonKey(name: 'is_deleted')
+  bool get isDeleted => throw _privateConstructorUsedError;
+  @JsonKey(name: 'deleted_at')
+  DateTime? get deletedAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'deleted_by')
+  String? get deletedBy => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -81,7 +88,10 @@ abstract class $CalendarEventCopyWith<$Res> {
       List<String> tags,
       Map<String, dynamic> metadata,
       @JsonKey(name: 'created_at') DateTime createdAt,
-      @JsonKey(name: 'updated_at') DateTime updatedAt});
+      @JsonKey(name: 'updated_at') DateTime updatedAt,
+      @JsonKey(name: 'is_deleted') bool isDeleted,
+      @JsonKey(name: 'deleted_at') DateTime? deletedAt,
+      @JsonKey(name: 'deleted_by') String? deletedBy});
 }
 
 /// @nodoc
@@ -115,6 +125,9 @@ class _$CalendarEventCopyWithImpl<$Res, $Val extends CalendarEvent>
     Object? metadata = null,
     Object? createdAt = null,
     Object? updatedAt = null,
+    Object? isDeleted = null,
+    Object? deletedAt = freezed,
+    Object? deletedBy = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -189,6 +202,18 @@ class _$CalendarEventCopyWithImpl<$Res, $Val extends CalendarEvent>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      isDeleted: null == isDeleted
+          ? _value.isDeleted
+          : isDeleted // ignore: cast_nullable_to_non_nullable
+              as bool,
+      deletedAt: freezed == deletedAt
+          ? _value.deletedAt
+          : deletedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      deletedBy: freezed == deletedBy
+          ? _value.deletedBy
+          : deletedBy // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -219,7 +244,10 @@ abstract class _$$CalendarEventImplCopyWith<$Res>
       List<String> tags,
       Map<String, dynamic> metadata,
       @JsonKey(name: 'created_at') DateTime createdAt,
-      @JsonKey(name: 'updated_at') DateTime updatedAt});
+      @JsonKey(name: 'updated_at') DateTime updatedAt,
+      @JsonKey(name: 'is_deleted') bool isDeleted,
+      @JsonKey(name: 'deleted_at') DateTime? deletedAt,
+      @JsonKey(name: 'deleted_by') String? deletedBy});
 }
 
 /// @nodoc
@@ -251,6 +279,9 @@ class __$$CalendarEventImplCopyWithImpl<$Res>
     Object? metadata = null,
     Object? createdAt = null,
     Object? updatedAt = null,
+    Object? isDeleted = null,
+    Object? deletedAt = freezed,
+    Object? deletedBy = freezed,
   }) {
     return _then(_$CalendarEventImpl(
       id: null == id
@@ -325,6 +356,18 @@ class __$$CalendarEventImplCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      isDeleted: null == isDeleted
+          ? _value.isDeleted
+          : isDeleted // ignore: cast_nullable_to_non_nullable
+              as bool,
+      deletedAt: freezed == deletedAt
+          ? _value.deletedAt
+          : deletedAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      deletedBy: freezed == deletedBy
+          ? _value.deletedBy
+          : deletedBy // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -350,7 +393,10 @@ class _$CalendarEventImpl implements _CalendarEvent {
       final List<String> tags = const [],
       final Map<String, dynamic> metadata = const {},
       @JsonKey(name: 'created_at') required this.createdAt,
-      @JsonKey(name: 'updated_at') required this.updatedAt})
+      @JsonKey(name: 'updated_at') required this.updatedAt,
+      @JsonKey(name: 'is_deleted') this.isDeleted = false,
+      @JsonKey(name: 'deleted_at') this.deletedAt,
+      @JsonKey(name: 'deleted_by') this.deletedBy})
       : _tags = tags,
         _metadata = metadata;
 
@@ -423,10 +469,20 @@ class _$CalendarEventImpl implements _CalendarEvent {
   @override
   @JsonKey(name: 'updated_at')
   final DateTime updatedAt;
+// Soft delete tracking
+  @override
+  @JsonKey(name: 'is_deleted')
+  final bool isDeleted;
+  @override
+  @JsonKey(name: 'deleted_at')
+  final DateTime? deletedAt;
+  @override
+  @JsonKey(name: 'deleted_by')
+  final String? deletedBy;
 
   @override
   String toString() {
-    return 'CalendarEvent(id: $id, pairId: $pairId, createdBy: $createdBy, title: $title, description: $description, eventType: $eventType, startTime: $startTime, endTime: $endTime, isAllDay: $isAllDay, location: $location, locationCoordinates: $locationCoordinates, visibility: $visibility, visibleToUserId: $visibleToUserId, color: $color, tags: $tags, metadata: $metadata, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'CalendarEvent(id: $id, pairId: $pairId, createdBy: $createdBy, title: $title, description: $description, eventType: $eventType, startTime: $startTime, endTime: $endTime, isAllDay: $isAllDay, location: $location, locationCoordinates: $locationCoordinates, visibility: $visibility, visibleToUserId: $visibleToUserId, color: $color, tags: $tags, metadata: $metadata, createdAt: $createdAt, updatedAt: $updatedAt, isDeleted: $isDeleted, deletedAt: $deletedAt, deletedBy: $deletedBy)';
   }
 
   @override
@@ -462,31 +518,41 @@ class _$CalendarEventImpl implements _CalendarEvent {
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt));
+                other.updatedAt == updatedAt) &&
+            (identical(other.isDeleted, isDeleted) ||
+                other.isDeleted == isDeleted) &&
+            (identical(other.deletedAt, deletedAt) ||
+                other.deletedAt == deletedAt) &&
+            (identical(other.deletedBy, deletedBy) ||
+                other.deletedBy == deletedBy));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      pairId,
-      createdBy,
-      title,
-      description,
-      eventType,
-      startTime,
-      endTime,
-      isAllDay,
-      location,
-      locationCoordinates,
-      visibility,
-      visibleToUserId,
-      color,
-      const DeepCollectionEquality().hash(_tags),
-      const DeepCollectionEquality().hash(_metadata),
-      createdAt,
-      updatedAt);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        pairId,
+        createdBy,
+        title,
+        description,
+        eventType,
+        startTime,
+        endTime,
+        isAllDay,
+        location,
+        locationCoordinates,
+        visibility,
+        visibleToUserId,
+        color,
+        const DeepCollectionEquality().hash(_tags),
+        const DeepCollectionEquality().hash(_metadata),
+        createdAt,
+        updatedAt,
+        isDeleted,
+        deletedAt,
+        deletedBy
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -521,8 +587,11 @@ abstract class _CalendarEvent implements CalendarEvent {
       final List<String> tags,
       final Map<String, dynamic> metadata,
       @JsonKey(name: 'created_at') required final DateTime createdAt,
-      @JsonKey(name: 'updated_at')
-      required final DateTime updatedAt}) = _$CalendarEventImpl;
+      @JsonKey(name: 'updated_at') required final DateTime updatedAt,
+      @JsonKey(name: 'is_deleted') final bool isDeleted,
+      @JsonKey(name: 'deleted_at') final DateTime? deletedAt,
+      @JsonKey(name: 'deleted_by')
+      final String? deletedBy}) = _$CalendarEventImpl;
 
   factory _CalendarEvent.fromJson(Map<String, dynamic> json) =
       _$CalendarEventImpl.fromJson;
@@ -573,6 +642,15 @@ abstract class _CalendarEvent implements CalendarEvent {
   @override
   @JsonKey(name: 'updated_at')
   DateTime get updatedAt;
+  @override // Soft delete tracking
+  @JsonKey(name: 'is_deleted')
+  bool get isDeleted;
+  @override
+  @JsonKey(name: 'deleted_at')
+  DateTime? get deletedAt;
+  @override
+  @JsonKey(name: 'deleted_by')
+  String? get deletedBy;
   @override
   @JsonKey(ignore: true)
   _$$CalendarEventImplCopyWith<_$CalendarEventImpl> get copyWith =>

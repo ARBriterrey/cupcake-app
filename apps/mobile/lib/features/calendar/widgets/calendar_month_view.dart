@@ -43,7 +43,7 @@ class CalendarMonthView extends ConsumerWidget {
             // Group events by day
             final eventsByDay = <int, List<CalendarEvent>>{};
             for (final event in events) {
-              final day = event.startTime.day;
+              final day = event.startTime.toLocal().day;
               eventsByDay.putIfAbsent(day, () => []).add(event);
             }
 

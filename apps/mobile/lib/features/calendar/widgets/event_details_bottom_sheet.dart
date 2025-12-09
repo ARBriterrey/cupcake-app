@@ -331,7 +331,7 @@ class _EventDetailsBottomSheetState
       builder: (context) => AlertDialog(
         title: const Text('Delete event?'),
         content: const Text(
-          'This event will be permanently deleted. This action cannot be undone.',
+          'This event will be deleted. Recoverable for 30 days.',
         ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),

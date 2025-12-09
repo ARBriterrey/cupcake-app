@@ -30,6 +30,11 @@ _$CalendarEventImpl _$$CalendarEventImplFromJson(Map<String, dynamic> json) =>
       metadata: json['metadata'] as Map<String, dynamic>? ?? const {},
       createdAt: DateTime.parse(json['created_at'] as String),
       updatedAt: DateTime.parse(json['updated_at'] as String),
+      isDeleted: json['is_deleted'] as bool? ?? false,
+      deletedAt: json['deleted_at'] == null
+          ? null
+          : DateTime.parse(json['deleted_at'] as String),
+      deletedBy: json['deleted_by'] as String?,
     );
 
 Map<String, dynamic> _$$CalendarEventImplToJson(_$CalendarEventImpl instance) =>
@@ -52,6 +57,9 @@ Map<String, dynamic> _$$CalendarEventImplToJson(_$CalendarEventImpl instance) =>
       'metadata': instance.metadata,
       'created_at': instance.createdAt.toIso8601String(),
       'updated_at': instance.updatedAt.toIso8601String(),
+      'is_deleted': instance.isDeleted,
+      'deleted_at': instance.deletedAt?.toIso8601String(),
+      'deleted_by': instance.deletedBy,
     };
 
 const _$EventTypeEnumMap = {

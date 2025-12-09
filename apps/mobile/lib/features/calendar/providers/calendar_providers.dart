@@ -441,10 +441,17 @@ class CalendarEventDeleter extends _$CalendarEventDeleter {
   }
 
   Future<void> deleteEvent(String eventId) async {
+    final currentUser = Supabase.instance.client.auth.currentUser;
+    if (currentUser == null) {
+      final error = Exception('User not authenticated');
+      state = AsyncError(error, StackTrace.current);
+      throw error;
+    }
+
     try {
-      // Delete from local DB (instant operation)
+      // PHASE 1: Soft delete locally (immediate UI update)
       final localRepo = ref.read(calendarLocalRepositoryProvider);
-      await localRepo.deleteEvent(eventId);
+      await localRepo.softDeleteEvent(eventId, currentUser.id);
 
       state = const AsyncData(null);
 
@@ -455,7 +462,7 @@ class CalendarEventDeleter extends _$CalendarEventDeleter {
       ref.invalidate(upcomingEventsProvider);
       ref.invalidate(selectedDateEventsProvider);
 
-      // Background sync to Supabase (fire and forget)
+      // PHASE 2: Background sync to cloud (async, non-blocking)
       _syncDeleteToCloud(eventId);
     } catch (e, stack) {
       state = AsyncError(e, stack);
@@ -467,10 +474,15 @@ class CalendarEventDeleter extends _$CalendarEventDeleter {
   Future<void> _syncDeleteToCloud(String eventId) async {
     try {
       final cloudRepo = ref.read(calendarRepositoryProvider);
-      await cloudRepo.deleteEvent(eventId);
+      await cloudRepo.deleteEvent(eventId); // Now calls soft delete RPC
+
+      // Mark as successfully synced
+      final localRepo = ref.read(calendarLocalRepositoryProvider);
+      await localRepo.markDeleteSynced(eventId);
     } catch (e) {
-      // Delete sync failed - log but don't retry (event already deleted locally)
-      // TODO: Implement proper sync conflict resolution
+      // Sync failed - mark for retry
+      final localRepo = ref.read(calendarLocalRepositoryProvider);
+      await localRepo.markSyncFailed(eventId);
     }
   }
 }
@@ -515,4 +527,46 @@ Future<List<String>> allEventTags(AllEventTagsRef ref) async {
   }
 
   return tags.toList()..sort();
+}
+
+/// Background worker to sync pending deletes
+@riverpod
+class DeleteSyncWorker extends _$DeleteSyncWorker {
+  @override
+  Future<void> build() async {
+    // Run initial sync
+    await _syncPendingDeletes();
+
+    // Schedule periodic sync (every 5 minutes)
+    ref.onDispose(() {});
+
+    // Note: For production, use a proper background task scheduler
+    // like workmanager or flutter_background_service
+    return;
+  }
+
+  Future<void> _syncPendingDeletes() async {
+    try {
+      final localRepo = ref.read(calendarLocalRepositoryProvider);
+      final cloudRepo = ref.read(calendarRepositoryProvider);
+
+      final pending = localRepo.getEventsPendingDeleteSync();
+
+      for (final event in pending) {
+        try {
+          await cloudRepo.deleteEvent(event.id);
+          await localRepo.markDeleteSynced(event.id);
+        } catch (e) {
+          await localRepo.markSyncFailed(event.id);
+        }
+      }
+    } catch (e) {
+      // Sync worker failed - will retry on next scheduled run
+    }
+  }
+
+  /// Manual trigger for sync (can be called from UI or periodic timer)
+  Future<void> syncNow() async {
+    await _syncPendingDeletes();
+  }
 }

@@ -1399,7 +1399,7 @@ final calendarEventUpdaterProvider = AutoDisposeAsyncNotifierProvider<
 
 typedef _$CalendarEventUpdater = AutoDisposeAsyncNotifier<CalendarEvent?>;
 String _$calendarEventDeleterHash() =>
-    r'670905c7ec23d39af7785c176c429e765551105b';
+    r'b1b7653a3cb9fe81b93c4b5915206c27a9dc3796';
 
 /// Controller for deleting calendar events
 ///
@@ -1417,5 +1417,23 @@ final calendarEventDeleterProvider =
 );
 
 typedef _$CalendarEventDeleter = AutoDisposeAsyncNotifier<void>;
+String _$deleteSyncWorkerHash() => r'721cd04d0768ccf5053e9734da2387e1381ea2f1';
+
+/// Background worker to sync pending deletes
+///
+/// Copied from [DeleteSyncWorker].
+@ProviderFor(DeleteSyncWorker)
+final deleteSyncWorkerProvider =
+    AutoDisposeAsyncNotifierProvider<DeleteSyncWorker, void>.internal(
+  DeleteSyncWorker.new,
+  name: r'deleteSyncWorkerProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$deleteSyncWorkerHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$DeleteSyncWorker = AutoDisposeAsyncNotifier<void>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member

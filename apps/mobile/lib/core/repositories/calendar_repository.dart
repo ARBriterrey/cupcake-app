@@ -18,6 +18,7 @@ class CalendarRepository {
       final response = await _supabase
           .from('calendar_events')
           .select()
+          .eq('is_deleted', false) // Filter out soft-deleted events
           .gte('start_time', startDate.toIso8601String())
           .lte('start_time', endDate.toIso8601String())
           .order('start_time', ascending: true);
@@ -62,6 +63,7 @@ class CalendarRepository {
       final response = await _supabase
           .from('calendar_events')
           .select()
+          .eq('is_deleted', false) // Filter out soft-deleted events
           .gte('start_time', now.toIso8601String())
           .lte('start_time', thirtyDaysFromNow.toIso8601String())
           .order('start_time', ascending: true)
@@ -170,12 +172,17 @@ class CalendarRepository {
     return CalendarEvent.fromJson(response);
   }
 
-  /// Delete a calendar event
+  /// Soft delete a calendar event (marks as deleted, doesn't remove from DB)
   Future<void> deleteEvent(String eventId) async {
-    await _supabase
-        .from('calendar_events')
-        .delete()
-        .eq('id', eventId);
+    await _supabase.rpc('soft_delete_calendar_event', params: {
+      'p_event_id': eventId,
+    });
+  }
+
+  /// Hard delete a calendar event (permanently remove from database)
+  /// Only used for cleanup/garbage collection
+  Future<void> hardDeleteEvent(String eventId) async {
+    await _supabase.from('calendar_events').delete().eq('id', eventId);
   }
 
   /// Get a single event by ID
@@ -206,6 +213,7 @@ class CalendarRepository {
       var query = _supabase
           .from('calendar_events')
           .select()
+          .eq('is_deleted', false) // Filter out soft-deleted events
           .eq('event_type', eventType.name);
 
       if (startDate != null) {
@@ -234,6 +242,7 @@ class CalendarRepository {
       final response = await _supabase
           .from('calendar_events')
           .select()
+          .eq('is_deleted', false) // Filter out soft-deleted events
           .contains('tags', [tag])
           .order('start_time', ascending: true);
 
@@ -265,6 +274,7 @@ class CalendarRepository {
           final events = data
               .map((json) => CalendarEvent.fromJson(json))
               .where((event) =>
+                  !event.isDeleted && // Filter out soft-deleted events
                   event.startTime.isAfter(startDate.subtract(const Duration(seconds: 1))) &&
                   event.startTime.isBefore(endDate.add(const Duration(seconds: 1))))
               .toList();

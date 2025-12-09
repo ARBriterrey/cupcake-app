@@ -56,6 +56,7 @@ class CalendarLocalRepository {
       final events = box.values
           .where((event) =>
               event.pairId == pairId &&
+              !event.isDeleted && // Filter out soft-deleted events
               event.startTime.isAfter(startDate.subtract(const Duration(seconds: 1))) &&
               event.startTime.isBefore(endDate.add(const Duration(seconds: 1))))
           .toList();
@@ -218,22 +219,97 @@ class CalendarLocalRepository {
     }
   }
 
-  /// Delete an event
-  Future<void> deleteEvent(String eventId) async {
+  /// Soft delete an event locally (marks as deleted, doesn't remove from Hive)
+  Future<void> softDeleteEvent(String eventId, String userId) async {
     try {
-      await box.delete(eventId);
-      _logger.d('Deleted event: $eventId');
+      final event = box.get(eventId);
+      if (event != null) {
+        event.markForDeletion(userId);
+        await event.save();
+        _logger.d('Soft deleted event: $eventId');
+      }
+    } catch (e, stack) {
+      _logger.e('Failed to soft delete event', error: e, stackTrace: stack);
+      rethrow;
+    }
+  }
+
+  /// Delete an event (supports both soft and hard delete)
+  Future<void> deleteEvent(String eventId, {String? userId, bool hard = false}) async {
+    try {
+      if (hard) {
+        // Hard delete: immediately remove from Hive
+        await box.delete(eventId);
+        _logger.d('Hard deleted event: $eventId');
+      } else {
+        // Soft delete: mark as deleted
+        if (userId == null) {
+          throw Exception('userId required for soft delete');
+        }
+        await softDeleteEvent(eventId, userId);
+      }
     } catch (e, stack) {
       _logger.e('Failed to delete event', error: e, stackTrace: stack);
       rethrow;
     }
   }
 
+  /// Get events pending delete sync (soft-deleted but not yet synced to cloud)
+  List<CalendarEventLocal> getEventsPendingDeleteSync() {
+    try {
+      final pending = box.values.where((event) => event.isPendingDelete).toList();
+      _logger.d('Found ${pending.length} events pending delete sync');
+      return pending;
+    } catch (e, stack) {
+      _logger.e('Failed to get events pending delete sync', error: e, stackTrace: stack);
+      return [];
+    }
+  }
+
+  /// Mark delete as successfully synced to cloud
+  Future<void> markDeleteSynced(String eventId) async {
+    try {
+      final event = box.get(eventId);
+      if (event != null) {
+        event.markDeleteSynced();
+        await event.save();
+        _logger.d('Marked delete synced for event $eventId');
+      }
+    } catch (e, stack) {
+      _logger.e('Failed to mark delete synced', error: e, stackTrace: stack);
+    }
+  }
+
+  /// Cleanup deleted events older than retention period (garbage collection)
+  Future<int> cleanupDeletedEvents({int retentionDays = 30}) async {
+    try {
+      final cutoffDate = DateTime.now().subtract(Duration(days: retentionDays));
+      final eventsToDelete = box.values
+          .where((event) =>
+              event.isDeleted &&
+              event.deletedAt != null &&
+              event.deletedAt!.isBefore(cutoffDate))
+          .toList();
+
+      for (final event in eventsToDelete) {
+        await box.delete(event.id);
+      }
+
+      _logger.i('Cleaned up ${eventsToDelete.length} deleted events older than $retentionDays days');
+      return eventsToDelete.length;
+    } catch (e, stack) {
+      _logger.e('Failed to cleanup deleted events', error: e, stackTrace: stack);
+      return 0;
+    }
+  }
+
   /// Get all events for a pair (useful for full sync)
-  List<CalendarEventLocal> getAllEventsForPair(String pairId) {
+  List<CalendarEventLocal> getAllEventsForPair(String pairId, {bool includeDeleted = false}) {
     try {
       final events = box.values
-          .where((event) => event.pairId == pairId)
+          .where((event) =>
+              event.pairId == pairId &&
+              (includeDeleted || !event.isDeleted))
           .toList();
 
       events.sort((a, b) => a.startTime.compareTo(b.startTime));
@@ -262,12 +338,16 @@ class CalendarLocalRepository {
       final total = box.length;
       final synced = box.values.where((e) => e.isSynced).length;
       final unsynced = box.values.where((e) => !e.isSynced).length;
+      final deleted = box.values.where((e) => e.isDeleted).length;
+      final pendingDelete = box.values.where((e) => e.isPendingDelete).length;
 
       return {
         'total': total,
         'synced': synced,
         'unsynced': unsynced,
         'needsRetry': box.values.where((e) => e.needsSyncRetry).length,
+        'deleted': deleted,
+        'pendingDelete': pendingDelete,
       };
     } catch (e) {
       return {'error': e.toString()};
