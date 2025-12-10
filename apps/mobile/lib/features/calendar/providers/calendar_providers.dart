@@ -55,6 +55,7 @@ class SelectedDate extends _$SelectedDate {
 }
 
 /// Get events for a specific month (from local DB)
+/// Filtered by active event type filters
 @riverpod
 Future<List<CalendarEvent>> monthlyEvents(
   MonthlyEventsRef ref, {
@@ -62,6 +63,8 @@ Future<List<CalendarEvent>> monthlyEvents(
   required int month,
 }) async {
   final currentPair = await ref.watch(currentPairProvider.future);
+  final activeFilters = ref.watch(activeEventTypeFiltersProvider);
+
   if (currentPair == null) return [];
 
   final localRepo = ref.watch(calendarLocalRepositoryProvider);
@@ -71,7 +74,10 @@ Future<List<CalendarEvent>> monthlyEvents(
     month: month,
   );
 
-  return localEvents.map((e) => e.toCalendarEvent()).toList();
+  final allEvents = localEvents.map((e) => e.toCalendarEvent()).toList();
+
+  // Apply event type filters to month view
+  return allEvents.where((event) => activeFilters.contains(event.eventType)).toList();
 }
 
 /// Get events for a specific day (from local DB)
@@ -93,25 +99,30 @@ Future<List<CalendarEvent>> dailyEvents(
 }
 
 /// Get events for the currently selected date (from local DB)
-/// Filtered by active event type filters
+/// Derives from monthly events to avoid redundant Hive query
+/// Filtered by active event type filters (applied at monthly level)
 @riverpod
 Future<List<CalendarEvent>> selectedDateEvents(SelectedDateEventsRef ref) async {
   final selectedDate = ref.watch(selectedDateProvider);
   final currentPair = await ref.watch(currentPairProvider.future);
-  final activeFilters = ref.watch(activeEventTypeFiltersProvider);
 
   if (currentPair == null) return [];
 
-  final localRepo = ref.watch(calendarLocalRepositoryProvider);
-  final localEvents = localRepo.getEventsForDay(
-    pairId: currentPair.id,
-    date: selectedDate,
+  // OPTIMIZATION: Use monthly data instead of querying Hive again
+  final monthlyEvents = await ref.watch(
+    monthlyEventsProvider(
+      year: selectedDate.year,
+      month: selectedDate.month,
+    ).future,
   );
 
-  final allEvents = localEvents.map((e) => e.toCalendarEvent()).toList();
-
-  // Filter events by active event type filters
-  return allEvents.where((event) => activeFilters.contains(event.eventType)).toList();
+  // Filter to selected day (events are already filtered by type in monthlyEventsProvider)
+  return monthlyEvents.where((event) {
+    final eventDate = event.startTime.toLocal();
+    return eventDate.year == selectedDate.year &&
+           eventDate.month == selectedDate.month &&
+           eventDate.day == selectedDate.day;
+  }).toList();
 }
 
 /// Get today's events (from local DB)

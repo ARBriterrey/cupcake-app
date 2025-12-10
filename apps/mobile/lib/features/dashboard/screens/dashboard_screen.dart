@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../auth/providers/auth_providers.dart';
 import '../../pairing/providers/pairing_providers.dart';
-import '../../../core/theme/app_theme.dart';
+import 'package:cupcake_ui/ui.dart';
 import '../widgets/app_drawer.dart';
 import '../widgets/couple_status_card.dart';
 import '../widgets/quick_actions_section.dart';
@@ -35,7 +35,7 @@ class DashboardScreen extends ConsumerWidget {
                   },
                   child: CircleAvatar(
                     radius: 18,
-                    backgroundColor: AppTheme.primaryPeach,
+                    backgroundColor: CupcakeTheme.primaryPeach,
                     backgroundImage: currentUserAsync.value?.avatarUrl != null
                         ? NetworkImage(currentUserAsync.value!.avatarUrl!)
                         : null,

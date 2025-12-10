@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../../../core/theme/app_theme.dart';
+import 'package:cupcake_ui/ui.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -8,10 +8,10 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppTheme.warmGray,
+      backgroundColor: CupcakeTheme.warmGray,
       appBar: AppBar(
         title: const Text('Settings'),
-        backgroundColor: AppTheme.warmGray,
+        backgroundColor: CupcakeTheme.warmGray,
       ),
       body: ListView(
         children: [
@@ -20,10 +20,10 @@ class SettingsScreen extends StatelessWidget {
           
           ListTile(
             tileColor: Colors.white,
-            leading: const Icon(Icons.restore_from_trash_outlined, color: AppTheme.textDark),
+            leading: const Icon(Icons.restore_from_trash_outlined, color: CupcakeTheme.textDark),
             title: const Text('Restore Deleted Events'),
             subtitle: const Text('Recover events deleted in the last 30 days'),
-            trailing: const Icon(Icons.chevron_right, color: AppTheme.textLight),
+            trailing: const Icon(Icons.chevron_right, color: CupcakeTheme.textLight),
             onTap: () {
               context.push('/settings/restore-events');
             },
@@ -34,9 +34,9 @@ class SettingsScreen extends StatelessWidget {
           
           const ListTile(
             tileColor: Colors.white,
-            leading: Icon(Icons.info_outline, color: AppTheme.textDark),
+            leading: Icon(Icons.info_outline, color: CupcakeTheme.textDark),
             title: Text('Version'),
-            trailing: Text('1.0.0', style: TextStyle(color: AppTheme.textLight)),
+            trailing: Text('1.0.0', style: TextStyle(color: CupcakeTheme.textLight)),
           ),
         ],
       ),
@@ -51,7 +51,7 @@ class SettingsScreen extends StatelessWidget {
         style: const TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.w600,
-          color: AppTheme.textLight,
+          color: CupcakeTheme.textLight,
           letterSpacing: 0.5,
         ),
       ),

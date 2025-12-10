@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
-import '../../../core/theme/app_theme.dart';
+import 'package:cupcake_ui/ui.dart';
 import '../providers/calendar_providers.dart';
 
 /// Calendar header with month/year display and navigation controls
@@ -24,7 +24,7 @@ class CalendarHeader extends ConsumerWidget {
               ref.read(selectedDateProvider.notifier).previousMonth();
             },
             icon: const Icon(Icons.chevron_left),
-            color: AppTheme.textDark,
+            color: CupcakeTheme.textDark,
             tooltip: 'Previous month',
           ),
 
@@ -41,7 +41,7 @@ class CalendarHeader extends ConsumerWidget {
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
-                      color: AppTheme.textDark,
+                      color: CupcakeTheme.textDark,
                     ),
                     textAlign: TextAlign.center,
                   ),
@@ -50,7 +50,7 @@ class CalendarHeader extends ConsumerWidget {
                       'Tap to go to today',
                       style: TextStyle(
                         fontSize: 11,
-                        color: AppTheme.textLight,
+                        color: CupcakeTheme.textLight,
                       ),
                     ),
                 ],
@@ -64,7 +64,7 @@ class CalendarHeader extends ConsumerWidget {
               ref.read(selectedDateProvider.notifier).nextMonth();
             },
             icon: const Icon(Icons.chevron_right),
-            color: AppTheme.textDark,
+            color: CupcakeTheme.textDark,
             tooltip: 'Next month',
           ),
         ],

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../shared/widgets/empty_state_widget.dart';
+import 'package:cupcake_ui/ui.dart';
 
 class SprinklesOverviewCard extends StatelessWidget {
   const SprinklesOverviewCard({super.key});

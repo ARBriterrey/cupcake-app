@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../shared/widgets/empty_state_widget.dart';
+import 'package:cupcake_ui/ui.dart';
 
 class SprinklesScreen extends ConsumerWidget {
   const SprinklesScreen({super.key});

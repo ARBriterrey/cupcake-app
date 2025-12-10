@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:cupcake_ui/ui.dart';
 import '../providers/auth_providers.dart';
 
 class SignInScreen extends ConsumerStatefulWidget {
@@ -15,7 +16,6 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _isLoading = false;
-  bool _obscurePassword = true;
 
   @override
   void dispose() {
@@ -129,14 +129,8 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 48),
-                  TextFormField(
+                  EmailField(
                     controller: _emailController,
-                    keyboardType: TextInputType.emailAddress,
-                    decoration: const InputDecoration(
-                      labelText: 'Email',
-                      prefixIcon: Icon(Icons.email_outlined),
-                      border: OutlineInputBorder(),
-                    ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter your email';
@@ -149,24 +143,8 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                     enabled: !_isLoading,
                   ),
                   const SizedBox(height: 16),
-                  TextFormField(
+                  PasswordField(
                     controller: _passwordController,
-                    obscureText: _obscurePassword,
-                    decoration: InputDecoration(
-                      labelText: 'Password',
-                      prefixIcon: const Icon(Icons.lock_outlined),
-                      border: const OutlineInputBorder(),
-                      suffixIcon: IconButton(
-                        icon: Icon(
-                          _obscurePassword
-                              ? Icons.visibility_outlined
-                              : Icons.visibility_off_outlined,
-                        ),
-                        onPressed: () {
-                          setState(() => _obscurePassword = !_obscurePassword);
-                        },
-                      ),
-                    ),
                     validator: (value) {
                       if (value == null || value.isEmpty) {
                         return 'Please enter your password';
@@ -179,18 +157,10 @@ class _SignInScreenState extends ConsumerState<SignInScreen> {
                     enabled: !_isLoading,
                   ),
                   const SizedBox(height: 24),
-                  ElevatedButton(
-                    onPressed: _isLoading ? null : _signIn,
-                    style: ElevatedButton.styleFrom(
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                    ),
-                    child: _isLoading
-                        ? const SizedBox(
-                            height: 20,
-                            width: 20,
-                            child: CircularProgressIndicator(strokeWidth: 2),
-                          )
-                        : const Text('Sign In'),
+                  LoadingButton(
+                    onPressed: _signIn,
+                    isLoading: _isLoading,
+                    child: const Text('Sign In'),
                   ),
                   const SizedBox(height: 16),
                   Row(

@@ -15,6 +15,12 @@ dependencies:
   cupertino_icons: ^1.0.8
   flutter_svg: ^2.0.10
 
+  # Shared Packages
+  cupcake_core:
+    path: ../../packages/core
+  cupcake_ui:
+    path: ../../packages/ui
+
   # State Management
   flutter_riverpod: ^2.5.1
   riverpod_annotation: ^2.3.5

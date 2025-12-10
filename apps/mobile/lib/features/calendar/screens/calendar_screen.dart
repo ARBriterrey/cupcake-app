@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import '../../../core/models/calendar_event.dart';
 import '../../../core/models/sync_status.dart';
-import '../../../core/theme/app_theme.dart';
+import 'package:cupcake_ui/ui.dart';
 import '../providers/calendar_providers.dart';
 import '../providers/calendar_sync_provider.dart';
 import '../widgets/calendar_header.dart';
@@ -42,10 +42,10 @@ class CalendarScreen extends ConsumerWidget {
     });
 
     return Scaffold(
-      backgroundColor: AppTheme.warmGray,
+      backgroundColor: CupcakeTheme.warmGray,
       appBar: AppBar(
         title: const Text('Our Calendar'),
-        backgroundColor: AppTheme.warmGray,
+        backgroundColor: CupcakeTheme.warmGray,
         actions: [
           IconButton(
             icon: const Icon(Icons.refresh),
@@ -111,7 +111,7 @@ class CalendarScreen extends ConsumerWidget {
                           style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w600,
-                            color: AppTheme.textDark,
+                            color: CupcakeTheme.textDark,
                           ),
                         ),
                         if (_isToday(selectedDate))
@@ -121,7 +121,7 @@ class CalendarScreen extends ConsumerWidget {
                               vertical: 4,
                             ),
                             decoration: BoxDecoration(
-                              color: AppTheme.primaryPink.withOpacity(0.2),
+                              color: CupcakeTheme.primaryPink.withOpacity(0.2),
                               borderRadius: BorderRadius.circular(6),
                             ),
                             child: const Text(
@@ -129,7 +129,7 @@ class CalendarScreen extends ConsumerWidget {
                               style: TextStyle(
                                 fontSize: 12,
                                 fontWeight: FontWeight.w600,
-                                color: AppTheme.textDark,
+                                color: CupcakeTheme.textDark,
                               ),
                             ),
                           ),
@@ -160,14 +160,14 @@ class CalendarScreen extends ConsumerWidget {
                               const Icon(
                                 Icons.error_outline,
                                 size: 48,
-                                color: AppTheme.textLight,
+                                color: CupcakeTheme.textLight,
                               ),
                               const SizedBox(height: 16),
                               Text(
                                 'Error loading events',
                                 style: TextStyle(
                                   fontSize: 16,
-                                  color: AppTheme.textLight,
+                                  color: CupcakeTheme.textLight,
                                 ),
                               ),
                             ],
@@ -188,7 +188,7 @@ class CalendarScreen extends ConsumerWidget {
         onPressed: () {
           _showAddEventBottomSheet(context, ref);
         },
-        backgroundColor: AppTheme.primaryPink,
+        backgroundColor: CupcakeTheme.primaryPink,
         child: const Icon(Icons.add, color: Colors.white),
         tooltip: 'Add a moment together',
       ),

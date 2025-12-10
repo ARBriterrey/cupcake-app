@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import '../../../core/models/calendar_event.dart';
-import '../../../core/theme/app_theme.dart';
+import 'package:cupcake_ui/ui.dart';
 import '../../calendar/providers/calendar_providers.dart';
 
 class RestoreEventsScreen extends ConsumerWidget {
@@ -13,10 +13,10 @@ class RestoreEventsScreen extends ConsumerWidget {
     final deletedEventsAsync = ref.watch(deletedEventsProvider);
 
     return Scaffold(
-      backgroundColor: AppTheme.warmGray,
+      backgroundColor: CupcakeTheme.warmGray,
       appBar: AppBar(
         title: const Text('Restore Events'),
-        backgroundColor: AppTheme.warmGray,
+        backgroundColor: CupcakeTheme.warmGray,
       ),
       body: deletedEventsAsync.when(
         data: (events) {
@@ -28,14 +28,14 @@ class RestoreEventsScreen extends ConsumerWidget {
                   Icon(
                     Icons.delete_outline,
                     size: 64,
-                    color: AppTheme.textLight.withOpacity(0.5),
+                    color: CupcakeTheme.textLight.withOpacity(0.5),
                   ),
                   const SizedBox(height: 16),
                   Text(
                     'No deleted events found',
                     style: TextStyle(
                       fontSize: 16,
-                      color: AppTheme.textLight,
+                      color: CupcakeTheme.textLight,
                     ),
                   ),
                 ],
@@ -68,7 +68,7 @@ class _DeletedEventCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final textColor = event.isPast ? AppTheme.textLight : AppTheme.textDark;
+    final textColor = event.isPast ? CupcakeTheme.textLight : CupcakeTheme.textDark;
 
     return Card(
       elevation: 0,
@@ -82,7 +82,7 @@ class _DeletedEventCard extends StatelessWidget {
               width: 50,
               padding: const EdgeInsets.symmetric(vertical: 8),
               decoration: BoxDecoration(
-                color: AppTheme.warmGray,
+                color: CupcakeTheme.warmGray,
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Column(
@@ -92,7 +92,7 @@ class _DeletedEventCard extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 10,
                       fontWeight: FontWeight.bold,
-                      color: AppTheme.textLight,
+                      color: CupcakeTheme.textLight,
                     ),
                   ),
                   const SizedBox(height: 4),
@@ -101,7 +101,7 @@ class _DeletedEventCard extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                      color: AppTheme.textDark,
+                      color: CupcakeTheme.textDark,
                     ),
                   ),
                 ],
@@ -137,7 +137,7 @@ class _DeletedEventCard extends StatelessWidget {
 
             // Restore Button
             IconButton(
-              icon: const Icon(Icons.restore, color: AppTheme.primaryPink),
+              icon: const Icon(Icons.restore, color: CupcakeTheme.primaryPink),
               tooltip: 'Restore Event',
               onPressed: () => _showRestoreConfirmation(context, event),
             ),

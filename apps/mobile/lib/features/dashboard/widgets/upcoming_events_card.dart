@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import '../../../core/models/calendar_event.dart';
-import '../../../core/theme/app_theme.dart';
+import 'package:cupcake_ui/ui.dart';
 import '../../calendar/providers/calendar_providers.dart';
 
 /// Widget displaying upcoming calendar events on the dashboard
@@ -29,13 +29,13 @@ class UpcomingEventsCard extends ConsumerWidget {
                     Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: AppTheme.primaryPink.withOpacity(0.2),
+                        color: CupcakeTheme.primaryPink.withOpacity(0.2),
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: const Icon(
                         Icons.calendar_today,
                         size: 20,
-                        color: AppTheme.primaryPink,
+                        color: CupcakeTheme.primaryPink,
                       ),
                     ),
                     const SizedBox(width: 12),
@@ -44,7 +44,7 @@ class UpcomingEventsCard extends ConsumerWidget {
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.w600,
-                        color: AppTheme.textDark,
+                        color: CupcakeTheme.textDark,
                       ),
                     ),
                   ],
@@ -88,36 +88,14 @@ class UpcomingEventsCard extends ConsumerWidget {
   }
 
   Widget _buildEmptyState(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 24),
-      child: Column(
-        children: [
-          Icon(
-            Icons.event_outlined,
-            size: 48,
-            color: AppTheme.textLight.withOpacity(0.5),
-          ),
-          const SizedBox(height: 12),
-          Text(
-            'No upcoming events',
-            style: TextStyle(
-              fontSize: 14,
-              color: AppTheme.textLight,
-            ),
-          ),
-          const SizedBox(height: 8),
-          TextButton.icon(
-            onPressed: () {
-              context.go('/calendar');
-            },
-            icon: const Icon(Icons.add, size: 18),
-            label: const Text('Add your first moment'),
-            style: TextButton.styleFrom(
-              foregroundColor: AppTheme.primaryPink,
-            ),
-          ),
-        ],
-      ),
+    return EmptyStateWidget(
+      icon: Icons.event_outlined,
+      title: 'No upcoming events',
+      description: 'Tap + to add a moment together',
+      actionLabel: 'Add your first moment',
+      onActionPressed: () {
+        context.go('/calendar');
+      },
     );
   }
 
@@ -129,7 +107,7 @@ class UpcomingEventsCard extends ConsumerWidget {
           'Unable to load events',
           style: TextStyle(
             fontSize: 14,
-            color: AppTheme.textLight,
+            color: CupcakeTheme.textLight,
           ),
         ),
       ),
@@ -154,7 +132,7 @@ class _EventItem extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: AppTheme.warmGray,
+            color: CupcakeTheme.warmGray,
             borderRadius: BorderRadius.circular(12),
           ),
           child: Row(
@@ -201,7 +179,7 @@ class _EventItem extends StatelessWidget {
                       style: const TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w600,
-                        color: AppTheme.textDark,
+                        color: CupcakeTheme.textDark,
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -212,14 +190,14 @@ class _EventItem extends StatelessWidget {
                         Icon(
                           Icons.access_time,
                           size: 14,
-                          color: AppTheme.textLight,
+                          color: CupcakeTheme.textLight,
                         ),
                         const SizedBox(width: 4),
                         Text(
                           _formatTime(),
                           style: TextStyle(
                             fontSize: 13,
-                            color: AppTheme.textLight,
+                            color: CupcakeTheme.textLight,
                           ),
                         ),
                         if (_daysUntil() <= 7) ...[
@@ -230,7 +208,7 @@ class _EventItem extends StatelessWidget {
                               vertical: 2,
                             ),
                             decoration: BoxDecoration(
-                              color: AppTheme.accentMint.withOpacity(0.3),
+                              color: CupcakeTheme.accentMint.withOpacity(0.3),
                               borderRadius: BorderRadius.circular(4),
                             ),
                             child: Text(
@@ -242,7 +220,7 @@ class _EventItem extends StatelessWidget {
                               style: const TextStyle(
                                 fontSize: 11,
                                 fontWeight: FontWeight.w600,
-                                color: AppTheme.textDark,
+                                color: CupcakeTheme.textDark,
                               ),
                             ),
                           ),
@@ -256,7 +234,7 @@ class _EventItem extends StatelessWidget {
               // Chevron
               Icon(
                 Icons.chevron_right,
-                color: AppTheme.textLight,
+                color: CupcakeTheme.textLight,
                 size: 20,
               ),
             ],
@@ -267,7 +245,7 @@ class _EventItem extends StatelessWidget {
   }
 
   Color _getEventTypeColor() {
-    return AppTheme.getEventTypeColor(event.eventType);
+    return CupcakeTheme.getEventTypeColor(event.eventType);
   }
 
   String _formatTime() {

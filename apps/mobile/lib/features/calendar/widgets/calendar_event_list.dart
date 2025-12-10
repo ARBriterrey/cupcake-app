@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import '../../../core/models/calendar_event.dart';
-import '../../../core/theme/app_theme.dart';
+import 'package:cupcake_ui/ui.dart';
 
 /// A list widget that displays calendar events for a specific date
 class CalendarEventList extends StatelessWidget {
@@ -17,7 +17,11 @@ class CalendarEventList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (events.isEmpty) {
-      return _buildEmptyState();
+      return const EmptyStateWidget(
+        icon: Icons.event_outlined,
+        title: 'No events today',
+        description: 'Tap + to add a moment together',
+      );
     }
 
     return ListView.separated(
@@ -32,42 +36,6 @@ class CalendarEventList extends StatelessWidget {
           onTap: onEventTap != null ? () => onEventTap!(event) : null,
         );
       },
-    );
-  }
-
-  Widget _buildEmptyState() {
-    return Center(
-      child: Padding(
-        padding: const EdgeInsets.all(32.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Icon(
-              Icons.event_outlined,
-              size: 48,
-              color: AppTheme.textLight.withOpacity(0.5),
-            ),
-            const SizedBox(height: 16),
-            Text(
-              'No events today',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w500,
-                color: AppTheme.textLight,
-              ),
-            ),
-            const SizedBox(height: 8),
-            Text(
-              'Tap + to add a moment together',
-              style: TextStyle(
-                fontSize: 14,
-                color: AppTheme.textLight.withOpacity(0.8),
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
@@ -119,10 +87,9 @@ class _EventCard extends StatelessWidget {
                   // Title
                   Text(
                     event.title,
-                    style: const TextStyle(
-                      fontSize: 16,
+                    style: context.textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w600,
-                      color: AppTheme.textDark,
+                      color: context.colorScheme.onSurface,
                     ),
                   ),
 
@@ -134,14 +101,13 @@ class _EventCard extends StatelessWidget {
                       Icon(
                         Icons.access_time,
                         size: 14,
-                        color: AppTheme.textLight,
+                        color: context.colorScheme.onSurfaceVariant,
                       ),
                       const SizedBox(width: 4),
                       Text(
                         _formatTime(),
-                        style: TextStyle(
-                          fontSize: 13,
-                          color: AppTheme.textLight,
+                        style: context.textTheme.bodySmall?.copyWith(
+                          color: context.colorScheme.onSurfaceVariant,
                         ),
                       ),
                     ],
@@ -155,7 +121,7 @@ class _EventCard extends StatelessWidget {
                         Icon(
                           Icons.location_on_outlined,
                           size: 14,
-                          color: AppTheme.textLight,
+                          color: CupcakeTheme.textLight,
                         ),
                         const SizedBox(width: 4),
                         Expanded(
@@ -163,7 +129,7 @@ class _EventCard extends StatelessWidget {
                             event.location!,
                             style: TextStyle(
                               fontSize: 13,
-                              color: AppTheme.textLight,
+                              color: CupcakeTheme.textLight,
                             ),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
@@ -180,7 +146,7 @@ class _EventCard extends StatelessWidget {
                       event.description!,
                       style: const TextStyle(
                         fontSize: 14,
-                        color: AppTheme.textDark,
+                        color: CupcakeTheme.textDark,
                         height: 1.4,
                       ),
                       maxLines: 2,
@@ -225,7 +191,7 @@ class _EventCard extends StatelessWidget {
               Icon(
                 Icons.lock_outline,
                 size: 16,
-                color: AppTheme.textLight,
+                color: CupcakeTheme.textLight,
               ),
           ],
         ),
@@ -244,7 +210,7 @@ class _EventCard extends StatelessWidget {
     }
 
     // Use event type color
-    return AppTheme.getEventTypeColor(event.eventType);
+    return CupcakeTheme.getEventTypeColor(event.eventType);
   }
 
   String _formatTime() {

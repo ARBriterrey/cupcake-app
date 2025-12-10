@@ -1,22 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:cupcake_core/core.dart';
 
 part 'calendar_event.freezed.dart';
 part 'calendar_event.g.dart';
-
-enum EventType {
-  wellness,
-  reflections,
-  habits,
-  games,
-  annuals,
-  reminders,
-  others,
-}
-
-enum EventVisibility {
-  private,
-  shared,
-}
 
 @freezed
 class CalendarEvent with _$CalendarEvent {

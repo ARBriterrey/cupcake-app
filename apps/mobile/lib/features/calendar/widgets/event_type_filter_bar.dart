@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/models/calendar_event.dart';
-import '../../../core/theme/app_theme.dart';
+import 'package:cupcake_ui/ui.dart';
 import '../providers/calendar_providers.dart';
 
 /// Filter bar for toggling event type visibility
@@ -20,7 +20,7 @@ class EventTypeFilterBar extends ConsumerWidget {
         child: Row(
           children: EventType.values.map((type) {
             final isActive = activeFilters.contains(type);
-            final color = AppTheme.getEventTypeColor(type);
+            final color = CupcakeTheme.getEventTypeColor(type);
 
             return Padding(
               padding: const EdgeInsets.only(right: 8),
@@ -43,12 +43,12 @@ class EventTypeFilterBar extends ConsumerWidget {
                 selectedColor: color.withOpacity(0.2),
                 checkmarkColor: color,
                 labelStyle: TextStyle(
-                  color: isActive ? color : AppTheme.textLight,
+                  color: isActive ? color : CupcakeTheme.textLight,
                   fontWeight: isActive ? FontWeight.w600 : FontWeight.normal,
                   fontSize: 14,
                 ),
                 side: BorderSide(
-                  color: isActive ? color : AppTheme.textLight.withOpacity(0.3),
+                  color: isActive ? color : CupcakeTheme.textLight.withOpacity(0.3),
                   width: isActive ? 2 : 1,
                 ),
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import '../../../core/theme/app_theme.dart';
+import 'package:cupcake_ui/ui.dart';
 import '../../auth/providers/auth_providers.dart';
 
 class AppDrawer extends ConsumerWidget {
@@ -19,7 +19,7 @@ class AppDrawer extends ConsumerWidget {
             width: double.infinity,
             padding: const EdgeInsets.fromLTRB(24, 60, 24, 24),
             decoration: const BoxDecoration(
-              color: AppTheme.primaryPeach,
+              color: CupcakeTheme.primaryPeach,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,7 +31,7 @@ class AppDrawer extends ConsumerWidget {
                       ? NetworkImage(userProfile!.avatarUrl!)
                       : null,
                   child: userProfile?.avatarUrl == null
-                      ? const Icon(Icons.person, size: 40, color: AppTheme.primaryPeach)
+                      ? const Icon(Icons.person, size: 40, color: CupcakeTheme.primaryPeach)
                       : null,
                 ),
                 const SizedBox(height: 16),
@@ -40,7 +40,7 @@ class AppDrawer extends ConsumerWidget {
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
-                    color: AppTheme.textDark,
+                    color: CupcakeTheme.textDark,
                   ),
                 ),
               ],
@@ -51,7 +51,7 @@ class AppDrawer extends ConsumerWidget {
 
           // Menu Items
           ListTile(
-            leading: const Icon(Icons.person_outline, color: AppTheme.textDark),
+            leading: const Icon(Icons.person_outline, color: CupcakeTheme.textDark),
             title: const Text('My Profile'),
             onTap: () {
               // Navigate to profile
@@ -59,14 +59,14 @@ class AppDrawer extends ConsumerWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.notifications_outlined, color: AppTheme.textDark),
+            leading: const Icon(Icons.notifications_outlined, color: CupcakeTheme.textDark),
             title: const Text('Notifications'),
             onTap: () {
               Navigator.pop(context);
             },
           ),
           ListTile(
-            leading: const Icon(Icons.settings_outlined, color: AppTheme.textDark),
+            leading: const Icon(Icons.settings_outlined, color: CupcakeTheme.textDark),
             title: const Text('Settings'),
             onTap: () {
               Navigator.pop(context); // Close drawer first

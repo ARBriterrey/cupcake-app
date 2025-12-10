@@ -4,7 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'core/config/supabase_config.dart';
-import 'core/theme/app_theme.dart';
+import 'package:cupcake_ui/ui.dart';
 import 'core/router/app_router.dart';
 import 'core/models/calendar_event_local.dart';
 
@@ -55,7 +55,7 @@ class CupcakeApp extends ConsumerWidget {
 
     return MaterialApp.router(
       title: 'Cupcake',
-      theme: AppTheme.lightTheme,
+      theme: CupcakeTheme.lightTheme,
       routerConfig: router,
       debugShowCheckedModeBanner: false,
     );

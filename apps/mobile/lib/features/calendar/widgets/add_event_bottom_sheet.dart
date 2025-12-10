@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import '../../../core/models/calendar_event.dart';
-import '../../../core/theme/app_theme.dart';
+import 'package:cupcake_ui/ui.dart';
 import '../providers/calendar_providers.dart';
 
 /// Bottom sheet for adding a new calendar event
@@ -108,13 +108,13 @@ class _AddEventBottomSheetState extends ConsumerState<AddEventBottomSheet> {
                         style: const TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.w600,
-                          color: AppTheme.textDark,
+                          color: CupcakeTheme.textDark,
                         ),
                       ),
                       IconButton(
                         onPressed: () => Navigator.of(context).pop(),
                         icon: const Icon(Icons.close),
-                        color: AppTheme.textLight,
+                        color: CupcakeTheme.textLight,
                       ),
                     ],
                   ),
@@ -200,7 +200,7 @@ class _AddEventBottomSheetState extends ConsumerState<AddEventBottomSheet> {
                         child: ElevatedButton(
                           onPressed: _isLoading ? null : _saveEvent,
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: AppTheme.primaryPink,
+                            backgroundColor: CupcakeTheme.primaryPink,
                             foregroundColor: Colors.white,
                             padding: const EdgeInsets.symmetric(vertical: 16),
                             shape: RoundedRectangleBorder(
@@ -239,7 +239,7 @@ class _AddEventBottomSheetState extends ConsumerState<AddEventBottomSheet> {
           style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.w500,
-            color: AppTheme.textDark,
+            color: CupcakeTheme.textDark,
           ),
         ),
         const SizedBox(height: 8),
@@ -259,17 +259,17 @@ class _AddEventBottomSheetState extends ConsumerState<AddEventBottomSheet> {
                 }
               },
               backgroundColor: Colors.white,
-              selectedColor: AppTheme.primaryPink.withOpacity(0.2),
+              selectedColor: CupcakeTheme.primaryPink.withOpacity(0.2),
               labelStyle: TextStyle(
-                color: isSelected ? AppTheme.textDark : AppTheme.textLight,
+                color: isSelected ? CupcakeTheme.textDark : CupcakeTheme.textLight,
                 fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
               ),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
                 side: BorderSide(
                   color: isSelected
-                      ? AppTheme.primaryPink
-                      : AppTheme.textLight.withOpacity(0.3),
+                      ? CupcakeTheme.primaryPink
+                      : CupcakeTheme.textLight.withOpacity(0.3),
                 ),
               ),
             );
@@ -293,13 +293,13 @@ class _AddEventBottomSheetState extends ConsumerState<AddEventBottomSheet> {
                   _isAllDay = value ?? false;
                 });
               },
-              activeColor: AppTheme.primaryPink,
+              activeColor: CupcakeTheme.primaryPink,
             ),
             const Text(
               'All day',
               style: TextStyle(
                 fontSize: 14,
-                color: AppTheme.textDark,
+                color: CupcakeTheme.textDark,
               ),
             ),
           ],
@@ -313,7 +313,7 @@ class _AddEventBottomSheetState extends ConsumerState<AddEventBottomSheet> {
           child: Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: AppTheme.warmGray,
+              color: CupcakeTheme.warmGray,
               borderRadius: BorderRadius.circular(12),
             ),
             child: Row(
@@ -341,7 +341,7 @@ class _AddEventBottomSheetState extends ConsumerState<AddEventBottomSheet> {
                   child: Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: AppTheme.warmGray,
+                      color: CupcakeTheme.warmGray,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Row(
@@ -364,7 +364,7 @@ class _AddEventBottomSheetState extends ConsumerState<AddEventBottomSheet> {
                   child: Container(
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
-                      color: AppTheme.warmGray,
+                      color: CupcakeTheme.warmGray,
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Row(
@@ -376,8 +376,8 @@ class _AddEventBottomSheetState extends ConsumerState<AddEventBottomSheet> {
                           style: TextStyle(
                             fontSize: 14,
                             color: _endTime == null
-                                ? AppTheme.textLight
-                                : AppTheme.textDark,
+                                ? CupcakeTheme.textLight
+                                : CupcakeTheme.textDark,
                           ),
                         ),
                       ],
@@ -398,14 +398,14 @@ class _AddEventBottomSheetState extends ConsumerState<AddEventBottomSheet> {
         const Icon(
           Icons.visibility_outlined,
           size: 20,
-          color: AppTheme.textLight,
+          color: CupcakeTheme.textLight,
         ),
         const SizedBox(width: 8),
         const Text(
           'Visibility:',
           style: TextStyle(
             fontSize: 14,
-            color: AppTheme.textDark,
+            color: CupcakeTheme.textDark,
           ),
         ),
         const SizedBox(width: 16),
@@ -432,7 +432,7 @@ class _AddEventBottomSheetState extends ConsumerState<AddEventBottomSheet> {
             style: ButtonStyle(
               backgroundColor: WidgetStateProperty.resolveWith((states) {
                 if (states.contains(WidgetState.selected)) {
-                  return AppTheme.primaryPink.withOpacity(0.2);
+                  return CupcakeTheme.primaryPink.withOpacity(0.2);
                 }
                 return Colors.transparent;
               }),
@@ -453,7 +453,7 @@ class _AddEventBottomSheetState extends ConsumerState<AddEventBottomSheet> {
         return Theme(
           data: Theme.of(context).copyWith(
             colorScheme: const ColorScheme.light(
-              primary: AppTheme.primaryPink,
+              primary: CupcakeTheme.primaryPink,
             ),
           ),
           child: child!,
@@ -476,7 +476,7 @@ class _AddEventBottomSheetState extends ConsumerState<AddEventBottomSheet> {
         return Theme(
           data: Theme.of(context).copyWith(
             colorScheme: const ColorScheme.light(
-              primary: AppTheme.primaryPink,
+              primary: CupcakeTheme.primaryPink,
             ),
           ),
           child: child!,
@@ -499,7 +499,7 @@ class _AddEventBottomSheetState extends ConsumerState<AddEventBottomSheet> {
         return Theme(
           data: Theme.of(context).copyWith(
             colorScheme: const ColorScheme.light(
-              primary: AppTheme.primaryPink,
+              primary: CupcakeTheme.primaryPink,
             ),
           ),
           child: child!,

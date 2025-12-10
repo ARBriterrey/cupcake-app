@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/models/calendar_event.dart';
-import '../../../core/theme/app_theme.dart';
+import 'package:cupcake_ui/ui.dart';
 import '../providers/calendar_providers.dart';
 import 'calendar_day_cell.dart';
 
@@ -88,7 +88,7 @@ class CalendarMonthView extends ConsumerWidget {
               style: const TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
-                color: AppTheme.textLight,
+                color: CupcakeTheme.textLight,
               ),
             ),
           ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import '../../../core/models/calendar_event.dart';
-import '../../../core/theme/app_theme.dart';
+import 'package:cupcake_ui/ui.dart';
 import '../providers/calendar_providers.dart';
 import 'add_event_bottom_sheet.dart';
 
@@ -51,14 +51,14 @@ class _EventDetailsBottomSheetState
                         style: const TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.w600,
-                          color: AppTheme.textDark,
+                          color: CupcakeTheme.textDark,
                         ),
                       ),
                     ),
                     IconButton(
                       onPressed: () => Navigator.of(context).pop(),
                       icon: const Icon(Icons.close),
-                      color: AppTheme.textLight,
+                      color: CupcakeTheme.textLight,
                     ),
                   ],
                 ),
@@ -121,7 +121,7 @@ class _EventDetailsBottomSheetState
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
-                      color: AppTheme.textLight,
+                      color: CupcakeTheme.textLight,
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -129,7 +129,7 @@ class _EventDetailsBottomSheetState
                     event.description!,
                     style: const TextStyle(
                       fontSize: 16,
-                      color: AppTheme.textDark,
+                      color: CupcakeTheme.textDark,
                       height: 1.5,
                     ),
                   ),
@@ -143,7 +143,7 @@ class _EventDetailsBottomSheetState
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w600,
-                      color: AppTheme.textLight,
+                      color: CupcakeTheme.textLight,
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -157,14 +157,14 @@ class _EventDetailsBottomSheetState
                           vertical: 6,
                         ),
                         decoration: BoxDecoration(
-                          color: AppTheme.primaryPink.withOpacity(0.1),
+                          color: CupcakeTheme.primaryPink.withOpacity(0.1),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Text(
                           tag,
                           style: const TextStyle(
                             fontSize: 13,
-                            color: AppTheme.textDark,
+                            color: CupcakeTheme.textDark,
                           ),
                         ),
                       );
@@ -218,7 +218,7 @@ class _EventDetailsBottomSheetState
                         icon: const Icon(Icons.edit_outlined),
                         label: const Text('Edit'),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: AppTheme.primaryPink,
+                          backgroundColor: CupcakeTheme.primaryPink,
                           foregroundColor: Colors.white,
                           padding: const EdgeInsets.symmetric(vertical: 16),
                           shape: RoundedRectangleBorder(
@@ -248,7 +248,7 @@ class _EventDetailsBottomSheetState
         Icon(
           icon,
           size: 20,
-          color: AppTheme.textLight,
+          color: CupcakeTheme.textLight,
         ),
         const SizedBox(width: 12),
         Expanded(
@@ -259,7 +259,7 @@ class _EventDetailsBottomSheetState
                 label,
                 style: const TextStyle(
                   fontSize: 12,
-                  color: AppTheme.textLight,
+                  color: CupcakeTheme.textLight,
                 ),
               ),
               const SizedBox(height: 2),
@@ -267,7 +267,7 @@ class _EventDetailsBottomSheetState
                 value,
                 style: const TextStyle(
                   fontSize: 16,
-                  color: AppTheme.textDark,
+                  color: CupcakeTheme.textDark,
                 ),
               ),
             ],
@@ -291,7 +291,7 @@ class _EventDetailsBottomSheetState
   }
 
   Color _getEventTypeColor(EventType type) {
-    return AppTheme.getEventTypeColor(type);
+    return CupcakeTheme.getEventTypeColor(type);
   }
 
   String _getEventTypeLabel(EventType type) {

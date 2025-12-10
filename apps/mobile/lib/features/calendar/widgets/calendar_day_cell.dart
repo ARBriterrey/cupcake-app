@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../../core/models/calendar_event.dart';
-import '../../../core/theme/app_theme.dart';
+import 'package:cupcake_ui/ui.dart';
 
 /// A single day cell in the calendar month view
 class CalendarDayCell extends StatelessWidget {
@@ -31,7 +31,7 @@ class CalendarDayCell extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
           border: isToday
               ? Border.all(
-                  color: AppTheme.primaryPink,
+                  color: CupcakeTheme.primaryPink,
                   width: 2,
                 )
               : null,
@@ -61,10 +61,10 @@ class CalendarDayCell extends StatelessWidget {
 
   Color _getBackgroundColor() {
     if (isSelected) {
-      return AppTheme.primaryPink;
+      return CupcakeTheme.primaryPink;
     }
     if (isToday) {
-      return AppTheme.primaryPink.withOpacity(0.1);
+      return CupcakeTheme.primaryPink.withOpacity(0.1);
     }
     return Colors.transparent;
   }
@@ -74,9 +74,9 @@ class CalendarDayCell extends StatelessWidget {
       return Colors.white;
     }
     if (isToday) {
-      return AppTheme.textDark;
+      return CupcakeTheme.textDark;
     }
-    return AppTheme.textDark;
+    return CupcakeTheme.textDark;
   }
 
   Widget _buildEventIndicators() {
@@ -103,7 +103,7 @@ class CalendarDayCell extends StatelessWidget {
               dotColor = _getEventTypeColor(events[index].eventType);
             }
           } else {
-            dotColor = AppTheme.primaryPeach;
+            dotColor = CupcakeTheme.primaryPeach;
           }
 
           // If selected, make dots white
@@ -126,6 +126,6 @@ class CalendarDayCell extends StatelessWidget {
   }
 
   Color _getEventTypeColor(EventType type) {
-    return AppTheme.getEventTypeColor(type);
+    return CupcakeTheme.getEventTypeColor(type);
   }
 }
