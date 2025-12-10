@@ -89,7 +89,7 @@ class CalendarRepository {
     required String title,
     required DateTime startTime,
     String? description,
-    EventType eventType = EventType.moment,
+    EventType eventType = EventType.reminders,
     DateTime? endTime,
     bool isAllDay = false,
     String? location,
@@ -177,6 +177,39 @@ class CalendarRepository {
     await _supabase.rpc('soft_delete_calendar_event', params: {
       'p_event_id': eventId,
     });
+  }
+
+  /// Get soft-deleted events
+  Future<List<CalendarEvent>> getDeletedEvents() async {
+    final userId = _supabase.auth.currentUser?.id;
+    if (userId == null) return [];
+
+    try {
+      final response = await _supabase
+          .from('calendar_events')
+          .select()
+          .eq('is_deleted', true)
+          .order('deleted_at', ascending: false);
+
+      return (response as List)
+          .map((json) => CalendarEvent.fromJson(json))
+          .toList();
+    } catch (e) {
+      return [];
+    }
+  }
+
+  /// Restore a soft-deleted event
+  Future<void> restoreEvent(String eventId) async {
+    final userId = _supabase.auth.currentUser?.id;
+    if (userId == null) throw Exception('User not authenticated');
+
+    await _supabase.from('calendar_events').update({
+      'is_deleted': false,
+      'deleted_at': null,
+      'deleted_by': null,
+      'updated_at': DateTime.now().toIso8601String(),
+    }).eq('id', eventId);
   }
 
   /// Hard delete a calendar event (permanently remove from database)

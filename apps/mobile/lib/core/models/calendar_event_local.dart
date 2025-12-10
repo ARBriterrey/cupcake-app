@@ -117,7 +117,7 @@ class CalendarEventLocal extends HiveObject {
       description: description,
       eventType: EventType.values.firstWhere(
         (e) => e.name == eventType,
-        orElse: () => EventType.other,
+        orElse: () => EventType.others,
       ),
       startTime: startTime,
       endTime: endTime,

@@ -291,36 +291,25 @@ class _EventDetailsBottomSheetState
   }
 
   Color _getEventTypeColor(EventType type) {
-    switch (type) {
-      case EventType.moment:
-        return AppTheme.primaryPink;
-      case EventType.date:
-        return AppTheme.accentLavender;
-      case EventType.appointment:
-        return AppTheme.primaryPeach;
-      case EventType.reminder:
-        return AppTheme.accentMint;
-      case EventType.anniversary:
-        return const Color(0xFFFF6B9D);
-      case EventType.other:
-        return AppTheme.textLight;
-    }
+    return AppTheme.getEventTypeColor(type);
   }
 
   String _getEventTypeLabel(EventType type) {
     switch (type) {
-      case EventType.moment:
-        return 'Moment';
-      case EventType.date:
-        return 'Date';
-      case EventType.appointment:
-        return 'Appointment';
-      case EventType.reminder:
-        return 'Reminder';
-      case EventType.anniversary:
-        return 'Anniversary';
-      case EventType.other:
-        return 'Other';
+      case EventType.wellness:
+        return 'Wellness';
+      case EventType.reflections:
+        return 'Reflections';
+      case EventType.habits:
+        return 'Habits';
+      case EventType.games:
+        return 'Games';
+      case EventType.annuals:
+        return 'Annuals';
+      case EventType.reminders:
+        return 'Reminders';
+      case EventType.others:
+        return 'Others';
     }
   }
 

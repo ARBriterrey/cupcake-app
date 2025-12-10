@@ -254,6 +254,49 @@ class CalendarLocalRepository {
     }
   }
 
+  /// Get soft-deleted events (for Trash/Restore UI)
+  List<CalendarEventLocal> getDeletedEvents() {
+    try {
+      // Filter for deleted events, sorted by deletedAt descending (most recently deleted first)
+      final deleted = box.values
+          .where((event) => event.isDeleted)
+          .toList();
+      
+      deleted.sort((a, b) {
+        final aDate = a.deletedAt ?? DateTime(0);
+        final bDate = b.deletedAt ?? DateTime(0);
+        return bDate.compareTo(aDate);
+      });
+
+      _logger.d('Found ${deleted.length} deleted events');
+      return deleted;
+    } catch (e, stack) {
+      _logger.e('Failed to get deleted events', error: e, stackTrace: stack);
+      return [];
+    }
+  }
+
+  /// Restore a soft-deleted event
+  Future<void> restoreEvent(String eventId) async {
+    try {
+      final event = box.get(eventId);
+      if (event != null) {
+        event.isDeleted = false;
+        event.deletedAt = null;
+        event.deletedBy = null;
+        event.isPendingDelete = false;
+        event.updatedAt = DateTime.now();
+        event.isSynced = false; // Mark as needing sync (update)
+        
+        await event.save();
+        _logger.d('Restored event: $eventId');
+      }
+    } catch (e, stack) {
+      _logger.e('Failed to restore event', error: e, stackTrace: stack);
+      rethrow;
+    }
+  }
+
   /// Get events pending delete sync (soft-deleted but not yet synced to cloud)
   List<CalendarEventLocal> getEventsPendingDeleteSync() {
     try {

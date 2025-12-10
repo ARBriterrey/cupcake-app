@@ -348,9 +348,10 @@ class _DailyEventsProviderElement
 }
 
 String _$selectedDateEventsHash() =>
-    r'42751f329df7d2ff3cefec5cb563edfff47b25ed';
+    r'885868fe586afc6aed5c3318b0d280a4c6e89a05';
 
 /// Get events for the currently selected date (from local DB)
+/// Filtered by active event type filters
 ///
 /// Copied from [selectedDateEvents].
 @ProviderFor(selectedDateEvents)
@@ -1046,6 +1047,24 @@ final selectedMonthEventsStreamProvider =
 
 typedef SelectedMonthEventsStreamRef
     = AutoDisposeStreamProviderRef<List<CalendarEvent>>;
+String _$deletedEventsHash() => r'033d11a698d71fe2e3892bd89bb1c1451b38e76b';
+
+/// Get deleted events (for Trash bin)
+///
+/// Copied from [deletedEvents].
+@ProviderFor(deletedEvents)
+final deletedEventsProvider =
+    AutoDisposeFutureProvider<List<CalendarEvent>>.internal(
+  deletedEvents,
+  name: r'deletedEventsProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$deletedEventsHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef DeletedEventsRef = AutoDisposeFutureProviderRef<List<CalendarEvent>>;
 String _$calendarEventHash() => r'44a04f03aade2b8633a18ba08300d6d872f2e627';
 
 /// Get a single event by ID (from local DB)
@@ -1361,7 +1380,7 @@ final selectedDateProvider =
 
 typedef _$SelectedDate = AutoDisposeNotifier<DateTime>;
 String _$calendarEventCreatorHash() =>
-    r'e8eaf2582fafac6f5e04cce54f918899d8cc34a0';
+    r'160ac62afbd894d7ec7bc1e9a3e3dfe393e3d661';
 
 /// Controller for creating calendar events
 ///
@@ -1399,7 +1418,7 @@ final calendarEventUpdaterProvider = AutoDisposeAsyncNotifierProvider<
 
 typedef _$CalendarEventUpdater = AutoDisposeAsyncNotifier<CalendarEvent?>;
 String _$calendarEventDeleterHash() =>
-    r'b1b7653a3cb9fe81b93c4b5915206c27a9dc3796';
+    r'a529137c8b22238e5a444f64fc1be8e75b475105';
 
 /// Controller for deleting calendar events
 ///

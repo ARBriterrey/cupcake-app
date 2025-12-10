@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../models/calendar_event.dart';
 
 /// Cupcake app theme following brand guidelines:
 /// - Warm, soft, minimal, intimate, gentle
@@ -13,6 +14,27 @@ class AppTheme {
   static const Color warmGray = Color(0xFFF5F5F0);
   static const Color textDark = Color(0xFF4A4A4A);
   static const Color textLight = Color(0xFF8A8A8A);
+
+  /// Get color for a specific event type
+  /// Each event type has a unique color aligned with the addon categories
+  static Color getEventTypeColor(EventType type) {
+    switch (type) {
+      case EventType.wellness:
+        return accentMint; // Soft green for health
+      case EventType.reflections:
+        return accentLavender; // Soft purple for reflection
+      case EventType.habits:
+        return primaryPeach; // Warm peach for habits
+      case EventType.games:
+        return primaryPink; // Playful pink for games
+      case EventType.annuals:
+        return const Color(0xFFFF6B9D); // Deep pink for celebrations
+      case EventType.reminders:
+        return const Color(0xFFFFF4B8); // Soft yellow for reminders
+      case EventType.others:
+        return textLight; // Gray for misc
+    }
+  }
 
   /// Light theme (primary theme for Cupcake)
   static ThemeData lightTheme = ThemeData(

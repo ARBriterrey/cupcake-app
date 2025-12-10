@@ -3,6 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import '../../auth/providers/auth_providers.dart';
 import '../../pairing/providers/pairing_providers.dart';
+import '../../../core/theme/app_theme.dart';
+import '../widgets/app_drawer.dart';
 import '../widgets/couple_status_card.dart';
 import '../widgets/quick_actions_section.dart';
 import '../widgets/sprinkles_overview_card.dart';
@@ -22,23 +24,32 @@ class DashboardScreen extends ConsumerWidget {
       appBar: AppBar(
         title: const Text('Cupcake'),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.settings),
-            onPressed: () {
-              // TODO: Navigate to settings
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: () async {
-              await ref.read(authServiceProvider).signOut();
-              if (context.mounted) {
-                context.go('/sign-in');
+          // User Avatar Bubble (Opens End Drawer)
+          Padding(
+            padding: const EdgeInsets.only(right: 16),
+            child: Builder(
+              builder: (context) {
+                return GestureDetector(
+                  onTap: () {
+                    Scaffold.of(context).openEndDrawer();
+                  },
+                  child: CircleAvatar(
+                    radius: 18,
+                    backgroundColor: AppTheme.primaryPeach,
+                    backgroundImage: currentUserAsync.value?.avatarUrl != null
+                        ? NetworkImage(currentUserAsync.value!.avatarUrl!)
+                        : null,
+                    child: currentUserAsync.value?.avatarUrl == null
+                        ? const Icon(Icons.person, size: 20, color: Colors.white)
+                        : null,
+                  ),
+                );
               }
-            },
+            ),
           ),
         ],
       ),
+      endDrawer: const AppDrawer(),
       body: RefreshIndicator(
         onRefresh: () async {
           ref.invalidate(currentUserProfileProvider);
@@ -98,7 +109,16 @@ class DashboardScreen extends ConsumerWidget {
               const SizedBox(height: 16),
               const SprinklesOverviewCard(),
               const SizedBox(height: 24),
-
+              
+              // No Bottom Profile Card anymore since we have it in drawer
+              // But keeping it as per original design might be desired?
+              // The user said "replace the setting icon... move logout...".
+              // User didn't explicitly say "remove the bottom profile card".
+              // But duplicate profile info is weird.
+              // I'll keep it for now as "User Profile Card" usually shows more details (stats, etc)
+              // Actually looking at code (line 102), it shows UserProfileCard.
+              // I'll leave it be for now to be safe.
+              
               // User Profile Card
               currentUserAsync.when(
                 data: (profile) {

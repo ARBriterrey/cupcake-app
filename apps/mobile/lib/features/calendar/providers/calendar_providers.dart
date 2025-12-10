@@ -9,6 +9,11 @@ import '../../pairing/providers/pairing_providers.dart';
 
 part 'calendar_providers.g.dart';
 
+/// Active event type filters - all types enabled by default
+final activeEventTypeFiltersProvider = StateProvider<Set<EventType>>((ref) {
+  return EventType.values.toSet();
+});
+
 /// Provides the CalendarRepository (for Supabase sync)
 @riverpod
 CalendarRepository calendarRepository(CalendarRepositoryRef ref) {
@@ -88,10 +93,13 @@ Future<List<CalendarEvent>> dailyEvents(
 }
 
 /// Get events for the currently selected date (from local DB)
+/// Filtered by active event type filters
 @riverpod
 Future<List<CalendarEvent>> selectedDateEvents(SelectedDateEventsRef ref) async {
   final selectedDate = ref.watch(selectedDateProvider);
   final currentPair = await ref.watch(currentPairProvider.future);
+  final activeFilters = ref.watch(activeEventTypeFiltersProvider);
+
   if (currentPair == null) return [];
 
   final localRepo = ref.watch(calendarLocalRepositoryProvider);
@@ -100,7 +108,10 @@ Future<List<CalendarEvent>> selectedDateEvents(SelectedDateEventsRef ref) async 
     date: selectedDate,
   );
 
-  return localEvents.map((e) => e.toCalendarEvent()).toList();
+  final allEvents = localEvents.map((e) => e.toCalendarEvent()).toList();
+
+  // Filter events by active event type filters
+  return allEvents.where((event) => activeFilters.contains(event.eventType)).toList();
 }
 
 /// Get today's events (from local DB)
@@ -243,7 +254,7 @@ class CalendarEventCreator extends _$CalendarEventCreator {
     required String title,
     required DateTime startTime,
     String? description,
-    EventType eventType = EventType.moment,
+    EventType eventType = EventType.reminders,
     DateTime? endTime,
     bool isAllDay = false,
     String? location,
@@ -485,6 +496,66 @@ class CalendarEventDeleter extends _$CalendarEventDeleter {
       await localRepo.markSyncFailed(eventId);
     }
   }
+
+  /// Restore a deleted event
+  Future<void> restoreEvent(String eventId) async {
+    final currentUser = Supabase.instance.client.auth.currentUser;
+    if (currentUser == null) {
+      final error = Exception('User not authenticated');
+      state = AsyncError(error, StackTrace.current);
+      throw error;
+    }
+
+    try {
+      // PHASE 1: Restore locally (immediate UI update)
+      final localRepo = ref.read(calendarLocalRepositoryProvider);
+      await localRepo.restoreEvent(eventId);
+
+      state = const AsyncData(null);
+
+      // Invalidate relevant providers to refresh the UI
+      ref.invalidate(monthlyEventsProvider);
+      ref.invalidate(monthlyEventsStreamProvider);
+      ref.invalidate(todaysEventsProvider);
+      ref.invalidate(upcomingEventsProvider);
+      ref.invalidate(selectedDateEventsProvider);
+      ref.invalidate(deletedEventsProvider); // Refresh deleted list
+
+      // PHASE 2: Background sync to cloud (async, non-blocking)
+      _syncRestoreToCloud(eventId);
+    } catch (e, stack) {
+      state = AsyncError(e, stack);
+      rethrow;
+    }
+  }
+
+  /// Background sync restore to Supabase
+  Future<void> _syncRestoreToCloud(String eventId) async {
+    try {
+      final cloudRepo = ref.read(calendarRepositoryProvider);
+      await cloudRepo.restoreEvent(eventId);
+
+      // Mark as successfully synced
+      final localRepo = ref.read(calendarLocalRepositoryProvider);
+      await localRepo.markAsSynced(eventId);
+    } catch (e) {
+      // Sync failed - mark for retry
+      final localRepo = ref.read(calendarLocalRepositoryProvider);
+      await localRepo.markSyncFailed(eventId);
+    }
+  }
+}
+
+/// Get deleted events (for Trash bin)
+@riverpod
+Future<List<CalendarEvent>> deletedEvents(DeletedEventsRef ref) async {
+  final currentPair = await ref.watch(currentPairProvider.future);
+  if (currentPair == null) return [];
+
+  final localRepo = ref.watch(calendarLocalRepositoryProvider);
+  final localEvents = localRepo.getDeletedEvents();
+
+  return localEvents.map((e) => e.toCalendarEvent()).toList();
 }
 
 /// Get a single event by ID (from local DB)

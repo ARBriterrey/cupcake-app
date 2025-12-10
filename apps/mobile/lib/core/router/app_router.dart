@@ -6,6 +6,9 @@ import '../../features/calendar/screens/calendar_screen.dart';
 import '../../features/dashboard/screens/dashboard_screen.dart';
 import '../../features/pairing/screens/pairing_screen.dart';
 import '../../features/pairing/screens/send_invitation_screen.dart';
+import '../../features/pairing/screens/send_invitation_screen.dart';
+import '../../features/settings/screens/restore_events_screen.dart';
+import '../../features/settings/screens/settings_screen.dart';
 import '../../features/sprinkles/screens/sprinkles_screen.dart';
 import '../providers/supabase_providers.dart';
 import 'navigation_shell.dart';
@@ -87,6 +90,18 @@ final appRouterProvider = Provider<GoRouter>((ref) {
                 builder: (context, state) => const SprinklesScreen(),
               ),
             ],
+          ),
+        ],
+      ),
+      GoRoute(
+        path: '/settings',
+        name: 'settings',
+        builder: (context, state) => const SettingsScreen(),
+        routes: [
+          GoRoute(
+            path: 'restore-events',
+            name: 'restore-events',
+            builder: (context, state) => const RestoreEventsScreen(),
           ),
         ],
       ),

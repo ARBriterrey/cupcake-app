@@ -11,6 +11,7 @@ import '../widgets/calendar_month_view.dart';
 import '../widgets/calendar_event_list.dart';
 import '../widgets/add_event_bottom_sheet.dart';
 import '../widgets/event_details_bottom_sheet.dart';
+import '../widgets/event_type_filter_bar.dart';
 
 class CalendarScreen extends ConsumerWidget {
   const CalendarScreen({super.key});
@@ -89,6 +90,9 @@ class CalendarScreen extends ConsumerWidget {
                   ),
                 ),
               ),
+
+              // Event type filter bar
+              const EventTypeFilterBar(),
 
               const SizedBox(height: 24),
 

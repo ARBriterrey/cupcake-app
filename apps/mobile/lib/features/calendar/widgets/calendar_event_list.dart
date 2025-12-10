@@ -244,20 +244,7 @@ class _EventCard extends StatelessWidget {
     }
 
     // Use event type color
-    switch (event.eventType) {
-      case EventType.moment:
-        return AppTheme.primaryPink;
-      case EventType.date:
-        return AppTheme.accentLavender;
-      case EventType.appointment:
-        return AppTheme.primaryPeach;
-      case EventType.reminder:
-        return AppTheme.accentMint;
-      case EventType.anniversary:
-        return const Color(0xFFFF6B9D);
-      case EventType.other:
-        return AppTheme.textLight;
-    }
+    return AppTheme.getEventTypeColor(event.eventType);
   }
 
   String _formatTime() {

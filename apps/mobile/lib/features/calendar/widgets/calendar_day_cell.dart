@@ -126,19 +126,6 @@ class CalendarDayCell extends StatelessWidget {
   }
 
   Color _getEventTypeColor(EventType type) {
-    switch (type) {
-      case EventType.moment:
-        return AppTheme.primaryPink;
-      case EventType.date:
-        return AppTheme.accentLavender;
-      case EventType.appointment:
-        return AppTheme.primaryPeach;
-      case EventType.reminder:
-        return AppTheme.accentMint;
-      case EventType.anniversary:
-        return const Color(0xFFFF6B9D);
-      case EventType.other:
-        return AppTheme.textLight;
-    }
+    return AppTheme.getEventTypeColor(type);
   }
 }

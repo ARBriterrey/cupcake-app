@@ -48,7 +48,7 @@ class _AddEventBottomSheetState extends ConsumerState<AddEventBottomSheet> {
     
     _selectedType = event != null
         ? event.eventType
-        : EventType.moment;
+        : EventType.reminders;
 
     _visibility = event != null
         ? event.visibility
@@ -633,18 +633,20 @@ class _AddEventBottomSheetState extends ConsumerState<AddEventBottomSheet> {
 
   String _getEventTypeLabel(EventType type) {
     switch (type) {
-      case EventType.moment:
-        return 'Moment';
-      case EventType.date:
-        return 'Date';
-      case EventType.appointment:
-        return 'Appointment';
-      case EventType.reminder:
-        return 'Reminder';
-      case EventType.anniversary:
-        return 'Anniversary';
-      case EventType.other:
-        return 'Other';
+      case EventType.wellness:
+        return 'Wellness';
+      case EventType.reflections:
+        return 'Reflections';
+      case EventType.habits:
+        return 'Habits';
+      case EventType.games:
+        return 'Games';
+      case EventType.annuals:
+        return 'Annuals';
+      case EventType.reminders:
+        return 'Reminders';
+      case EventType.others:
+        return 'Others';
     }
   }
 }

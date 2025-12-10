@@ -4,12 +4,13 @@ part 'calendar_event.freezed.dart';
 part 'calendar_event.g.dart';
 
 enum EventType {
-  moment,
-  date,
-  appointment,
-  reminder,
-  anniversary,
-  other,
+  wellness,
+  reflections,
+  habits,
+  games,
+  annuals,
+  reminders,
+  others,
 }
 
 enum EventVisibility {
@@ -155,7 +156,7 @@ class CalendarEventBuilder {
     required String title,
     required DateTime startTime,
     String? description,
-    EventType eventType = EventType.moment,
+    EventType eventType = EventType.reminders,
     DateTime? endTime,
     bool isAllDay = false,
     String? location,

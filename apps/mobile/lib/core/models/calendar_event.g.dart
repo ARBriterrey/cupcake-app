@@ -63,12 +63,13 @@ Map<String, dynamic> _$$CalendarEventImplToJson(_$CalendarEventImpl instance) =>
     };
 
 const _$EventTypeEnumMap = {
-  EventType.moment: 'moment',
-  EventType.date: 'date',
-  EventType.appointment: 'appointment',
-  EventType.reminder: 'reminder',
-  EventType.anniversary: 'anniversary',
-  EventType.other: 'other',
+  EventType.wellness: 'wellness',
+  EventType.reflections: 'reflections',
+  EventType.habits: 'habits',
+  EventType.games: 'games',
+  EventType.annuals: 'annuals',
+  EventType.reminders: 'reminders',
+  EventType.others: 'others',
 };
 
 const _$EventVisibilityEnumMap = {
