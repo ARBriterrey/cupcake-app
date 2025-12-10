@@ -10,6 +10,7 @@ import '../../features/pairing/screens/send_invitation_screen.dart';
 import '../../features/settings/screens/restore_events_screen.dart';
 import '../../features/settings/screens/settings_screen.dart';
 import '../../features/sprinkles/screens/sprinkles_screen.dart';
+import '../../features/journal/screens/journal_list_screen.dart';
 import '../providers/supabase_providers.dart';
 import 'navigation_shell.dart';
 
@@ -104,6 +105,11 @@ final appRouterProvider = Provider<GoRouter>((ref) {
             builder: (context, state) => const RestoreEventsScreen(),
           ),
         ],
+      ),
+      GoRoute(
+        path: '/journal',
+        name: 'journal',
+        builder: (context, state) => const JournalListScreen(),
       ),
     ],
   );
