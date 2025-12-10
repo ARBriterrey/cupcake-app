@@ -10,6 +10,7 @@ import '../widgets/quick_actions_section.dart';
 import '../widgets/sprinkles_overview_card.dart';
 import '../widgets/user_profile_card.dart';
 import '../widgets/upcoming_events_card.dart';
+import '../../nudge/widgets/nudge_card.dart';
 
 class DashboardScreen extends ConsumerWidget {
   const DashboardScreen({super.key});
@@ -97,6 +98,10 @@ class DashboardScreen extends ConsumerWidget {
 
               // Upcoming Events
               const UpcomingEventsCard(),
+              const SizedBox(height: 24),
+
+              // Nudge Card
+              const NudgeCard(),
               const SizedBox(height: 24),
 
               // Sprinkles Section

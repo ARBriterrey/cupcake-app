@@ -473,7 +473,7 @@ class _PrivateJournalEntriesProviderElement
 }
 
 String _$journalEntryCreatorHash() =>
-    r'765acfcceb411182cf76b99230af27566ce926ae';
+    r'9465077c2d29876575e736bf9a0b7637a40728f5';
 
 /// See also [JournalEntryCreator].
 @ProviderFor(JournalEntryCreator)
@@ -490,7 +490,7 @@ final journalEntryCreatorProvider =
 
 typedef _$JournalEntryCreator = AutoDisposeAsyncNotifier<void>;
 String _$journalEntryUpdaterHash() =>
-    r'3891ee385d6b98d43fff52dc5b12c4b913595092';
+    r'29ffb763f41ad27a80b723c6a9aeff9f1c564237';
 
 /// See also [JournalEntryUpdater].
 @ProviderFor(JournalEntryUpdater)
@@ -507,7 +507,7 @@ final journalEntryUpdaterProvider =
 
 typedef _$JournalEntryUpdater = AutoDisposeAsyncNotifier<void>;
 String _$journalEntryDeleterHash() =>
-    r'71b16d473e05141d04c85f567b156bc3902dc9ac';
+    r'b4b6db935df88b43ae4f60a157dfb02247c0ee9e';
 
 /// See also [JournalEntryDeleter].
 @ProviderFor(JournalEntryDeleter)

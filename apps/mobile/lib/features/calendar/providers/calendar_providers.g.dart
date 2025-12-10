@@ -25,7 +25,7 @@ final calendarRepositoryProvider =
 );
 
 typedef CalendarRepositoryRef = AutoDisposeProviderRef<CalendarRepository>;
-String _$monthlyEventsHash() => r'00ac324753a230c2c7f8d5c0afdce5468152b965';
+String _$monthlyEventsHash() => r'30e4624f957504d67882dd4c16d42b51f65df44c';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -49,21 +49,25 @@ class _SystemHash {
 }
 
 /// Get events for a specific month (from local DB)
+/// Filtered by active event type filters
 ///
 /// Copied from [monthlyEvents].
 @ProviderFor(monthlyEvents)
 const monthlyEventsProvider = MonthlyEventsFamily();
 
 /// Get events for a specific month (from local DB)
+/// Filtered by active event type filters
 ///
 /// Copied from [monthlyEvents].
 class MonthlyEventsFamily extends Family<AsyncValue<List<CalendarEvent>>> {
   /// Get events for a specific month (from local DB)
+  /// Filtered by active event type filters
   ///
   /// Copied from [monthlyEvents].
   const MonthlyEventsFamily();
 
   /// Get events for a specific month (from local DB)
+  /// Filtered by active event type filters
   ///
   /// Copied from [monthlyEvents].
   MonthlyEventsProvider call({
@@ -102,11 +106,13 @@ class MonthlyEventsFamily extends Family<AsyncValue<List<CalendarEvent>>> {
 }
 
 /// Get events for a specific month (from local DB)
+/// Filtered by active event type filters
 ///
 /// Copied from [monthlyEvents].
 class MonthlyEventsProvider
     extends AutoDisposeFutureProvider<List<CalendarEvent>> {
   /// Get events for a specific month (from local DB)
+  /// Filtered by active event type filters
   ///
   /// Copied from [monthlyEvents].
   MonthlyEventsProvider({
@@ -348,10 +354,11 @@ class _DailyEventsProviderElement
 }
 
 String _$selectedDateEventsHash() =>
-    r'885868fe586afc6aed5c3318b0d280a4c6e89a05';
+    r'546a15f033b7b694dc0520538cec4dc9fa83ef0d';
 
 /// Get events for the currently selected date (from local DB)
-/// Filtered by active event type filters
+/// Derives from monthly events to avoid redundant Hive query
+/// Filtered by active event type filters (applied at monthly level)
 ///
 /// Copied from [selectedDateEvents].
 @ProviderFor(selectedDateEvents)
@@ -548,7 +555,7 @@ class EventsByTypeFamily extends Family<AsyncValue<List<CalendarEvent>>> {
   ///
   /// Copied from [eventsByType].
   EventsByTypeProvider call({
-    required EventType eventType,
+    required InvalidType eventType,
     DateTime? startDate,
     DateTime? endDate,
   }) {
@@ -594,7 +601,7 @@ class EventsByTypeProvider
   ///
   /// Copied from [eventsByType].
   EventsByTypeProvider({
-    required EventType eventType,
+    required InvalidType eventType,
     DateTime? startDate,
     DateTime? endDate,
   }) : this._internal(
@@ -630,7 +637,7 @@ class EventsByTypeProvider
     required this.endDate,
   }) : super.internal();
 
-  final EventType eventType;
+  final InvalidType eventType;
   final DateTime? startDate;
   final DateTime? endDate;
 
@@ -680,7 +687,7 @@ class EventsByTypeProvider
 
 mixin EventsByTypeRef on AutoDisposeFutureProviderRef<List<CalendarEvent>> {
   /// The parameter `eventType` of this provider.
-  EventType get eventType;
+  InvalidType get eventType;
 
   /// The parameter `startDate` of this provider.
   DateTime? get startDate;
@@ -695,7 +702,7 @@ class _EventsByTypeProviderElement
   _EventsByTypeProviderElement(super.provider);
 
   @override
-  EventType get eventType => (origin as EventsByTypeProvider).eventType;
+  InvalidType get eventType => (origin as EventsByTypeProvider).eventType;
   @override
   DateTime? get startDate => (origin as EventsByTypeProvider).startDate;
   @override
