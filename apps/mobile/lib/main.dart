@@ -9,6 +9,8 @@ import 'core/router/app_router.dart';
 import 'core/models/calendar_event_local.dart';
 import 'features/journal/models/journal_entry_local.dart';
 import 'features/nudge/models/nudge_local.dart';
+import 'features/lists/models/list_local.dart';
+import 'features/lists/models/list_item_local.dart';
 import 'features/journal/providers/journal_context_providers.dart';
 import 'features/auth/providers/auth_providers.dart';
 
@@ -26,11 +28,15 @@ void main() async {
     Hive.registerAdapter(CalendarEventLocalAdapter());
     Hive.registerAdapter(JournalEntryLocalAdapter());
     Hive.registerAdapter(NudgeLocalAdapter());
+    Hive.registerAdapter(ListLocalAdapter());
+    Hive.registerAdapter(ListItemLocalAdapter());
 
     // Open Hive boxes
     await Hive.openBox<CalendarEventLocal>('calendar_events');
     await Hive.openBox<JournalEntryLocal>('journal_entries');
     await Hive.openBox<NudgeLocal>('nudges');
+    await Hive.openBox<ListLocal>('lists');
+    await Hive.openBox<ListItemLocal>('list_items');
 
     // Initialize Supabase
     await SupabaseConfig.initialize();

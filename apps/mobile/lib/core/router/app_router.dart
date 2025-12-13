@@ -11,6 +11,8 @@ import '../../features/settings/screens/restore_events_screen.dart';
 import '../../features/settings/screens/settings_screen.dart';
 import '../../features/sprinkles/screens/sprinkles_screen.dart';
 import '../../features/journal/screens/journal_list_screen.dart';
+import '../../features/lists/screens/lists_overview_screen.dart';
+import '../../features/lists/screens/list_detail_screen.dart';
 import '../providers/supabase_providers.dart';
 import 'navigation_shell.dart';
 
@@ -110,6 +112,25 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: '/journal',
         name: 'journal',
         builder: (context, state) => const JournalListScreen(),
+      ),
+      GoRoute(
+        path: '/lists',
+        name: 'lists',
+        builder: (context, state) => const ListsOverviewScreen(),
+        routes: [
+          GoRoute(
+            path: ':listId',
+            name: 'list-detail',
+            builder: (context, state) {
+              final listId = state.pathParameters['listId']!;
+              final initialList = state.extra;
+              return ListDetailScreen(
+                listId: listId,
+                initialList: initialList as dynamic,
+              );
+            },
+          ),
+        ],
       ),
     ],
   );

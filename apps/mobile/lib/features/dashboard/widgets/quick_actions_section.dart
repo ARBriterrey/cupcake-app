@@ -33,18 +33,22 @@ class QuickActionsSection extends StatelessWidget {
                 onTap: () => context.go('/calendar'),
               ),
               _QuickActionCard(
-                icon: Icons.extension,
-                label: 'Sprinkles',
+                icon: Icons.book,
+                label: 'Journal',
                 color: theme.colorScheme.secondary,
-                onTap: () => context.go('/sprinkles'),
+                onTap: () => context.push('/journal'),
               ),
               _QuickActionCard(
-                icon: Icons.favorite,
-                label: 'Moments',
+                icon: Icons.checklist,
+                label: 'Lists',
                 color: theme.colorScheme.tertiary,
-                onTap: () {
-                  // TODO: Navigate to moments when implemented
-                },
+                onTap: () => context.push('/lists'),
+              ),
+              _QuickActionCard(
+                icon: Icons.extension,
+                label: 'Sprinkles',
+                color: theme.colorScheme.primary,
+                onTap: () => context.go('/sprinkles'),
               ),
             ],
           ),
