@@ -109,7 +109,7 @@ class _JournalList extends ConsumerWidget {
       return Center(
         child: EmptyStateWidget(
           title: 'Empty Journal',
-          message: emptyMessage,
+          description: emptyMessage,
           icon: Icons.book_outlined,
         ),
       );

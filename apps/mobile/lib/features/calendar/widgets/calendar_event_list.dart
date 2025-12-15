@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cupcake_core/core.dart';
 import 'package:intl/intl.dart';
 import '../../../core/models/calendar_event.dart';
 import 'package:cupcake_ui/ui.dart';
@@ -87,9 +88,9 @@ class _EventCard extends StatelessWidget {
                   // Title
                   Text(
                     event.title,
-                    style: context.textTheme.titleMedium?.copyWith(
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w600,
-                      color: context.colorScheme.onSurface,
+                      color: Theme.of(context).colorScheme.onSurface,
                     ),
                   ),
 
@@ -101,13 +102,13 @@ class _EventCard extends StatelessWidget {
                       Icon(
                         Icons.access_time,
                         size: 14,
-                        color: context.colorScheme.onSurfaceVariant,
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
                       ),
                       const SizedBox(width: 4),
                       Text(
                         _formatTime(),
-                        style: context.textTheme.bodySmall?.copyWith(
-                          color: context.colorScheme.onSurfaceVariant,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
                       ),
                     ],

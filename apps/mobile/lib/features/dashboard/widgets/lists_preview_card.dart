@@ -22,7 +22,7 @@ class ListsPreviewCard extends ConsumerWidget {
         }
 
         final pairId = pair.id;
-        final listsAsync = ref.watch(listsForPairProvider(pairId));
+        final AsyncValue<List<CollaborativeList>> listsAsync = ref.watch(listsForPairProvider(pairId));
 
         return _buildCard(context, ref, listsAsync);
       },
@@ -31,7 +31,11 @@ class ListsPreviewCard extends ConsumerWidget {
     );
   }
 
-  Widget _buildCard(BuildContext context, WidgetRef ref, dynamic listsAsync) {
+  Widget _buildCard(
+    BuildContext context,
+    WidgetRef ref,
+    AsyncValue<List<CollaborativeList>> listsAsync,
+  ) {
 
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),

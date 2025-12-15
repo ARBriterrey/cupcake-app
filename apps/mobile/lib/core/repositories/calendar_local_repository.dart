@@ -1,6 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:logger/logger.dart';
-import '../models/calendar_event.dart';
+import 'package:cupcake_core/core.dart';
 import '../models/calendar_event_local.dart';
 
 /// Local repository for calendar events using Hive

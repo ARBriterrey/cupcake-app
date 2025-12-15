@@ -30,6 +30,10 @@ mixin _$UserProfile {
   Map<String, dynamic> get preferences => throw _privateConstructorUsedError;
   @JsonKey(name: 'active_pair_id')
   String? get activePairId => throw _privateConstructorUsedError;
+  @JsonKey(name: 'phone_number')
+  String? get phoneNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: 'fcm_token')
+  String? get fcmToken => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
   DateTime get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
@@ -55,6 +59,8 @@ abstract class $UserProfileCopyWith<$Res> {
       String? timezone,
       Map<String, dynamic> preferences,
       @JsonKey(name: 'active_pair_id') String? activePairId,
+      @JsonKey(name: 'phone_number') String? phoneNumber,
+      @JsonKey(name: 'fcm_token') String? fcmToken,
       @JsonKey(name: 'created_at') DateTime createdAt,
       @JsonKey(name: 'updated_at') DateTime updatedAt});
 }
@@ -79,6 +85,8 @@ class _$UserProfileCopyWithImpl<$Res, $Val extends UserProfile>
     Object? timezone = freezed,
     Object? preferences = null,
     Object? activePairId = freezed,
+    Object? phoneNumber = freezed,
+    Object? fcmToken = freezed,
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
@@ -111,6 +119,14 @@ class _$UserProfileCopyWithImpl<$Res, $Val extends UserProfile>
           ? _value.activePairId
           : activePairId // ignore: cast_nullable_to_non_nullable
               as String?,
+      phoneNumber: freezed == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fcmToken: freezed == fcmToken
+          ? _value.fcmToken
+          : fcmToken // ignore: cast_nullable_to_non_nullable
+              as String?,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -139,6 +155,8 @@ abstract class _$$UserProfileImplCopyWith<$Res>
       String? timezone,
       Map<String, dynamic> preferences,
       @JsonKey(name: 'active_pair_id') String? activePairId,
+      @JsonKey(name: 'phone_number') String? phoneNumber,
+      @JsonKey(name: 'fcm_token') String? fcmToken,
       @JsonKey(name: 'created_at') DateTime createdAt,
       @JsonKey(name: 'updated_at') DateTime updatedAt});
 }
@@ -161,6 +179,8 @@ class __$$UserProfileImplCopyWithImpl<$Res>
     Object? timezone = freezed,
     Object? preferences = null,
     Object? activePairId = freezed,
+    Object? phoneNumber = freezed,
+    Object? fcmToken = freezed,
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
@@ -193,6 +213,14 @@ class __$$UserProfileImplCopyWithImpl<$Res>
           ? _value.activePairId
           : activePairId // ignore: cast_nullable_to_non_nullable
               as String?,
+      phoneNumber: freezed == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fcmToken: freezed == fcmToken
+          ? _value.fcmToken
+          : fcmToken // ignore: cast_nullable_to_non_nullable
+              as String?,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -216,6 +244,8 @@ class _$UserProfileImpl implements _UserProfile {
       this.timezone,
       final Map<String, dynamic> preferences = const {},
       @JsonKey(name: 'active_pair_id') this.activePairId,
+      @JsonKey(name: 'phone_number') this.phoneNumber,
+      @JsonKey(name: 'fcm_token') this.fcmToken,
       @JsonKey(name: 'created_at') required this.createdAt,
       @JsonKey(name: 'updated_at') required this.updatedAt})
       : _preferences = preferences;
@@ -248,6 +278,12 @@ class _$UserProfileImpl implements _UserProfile {
   @JsonKey(name: 'active_pair_id')
   final String? activePairId;
   @override
+  @JsonKey(name: 'phone_number')
+  final String? phoneNumber;
+  @override
+  @JsonKey(name: 'fcm_token')
+  final String? fcmToken;
+  @override
   @JsonKey(name: 'created_at')
   final DateTime createdAt;
   @override
@@ -256,7 +292,7 @@ class _$UserProfileImpl implements _UserProfile {
 
   @override
   String toString() {
-    return 'UserProfile(id: $id, email: $email, displayName: $displayName, avatarUrl: $avatarUrl, timezone: $timezone, preferences: $preferences, activePairId: $activePairId, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'UserProfile(id: $id, email: $email, displayName: $displayName, avatarUrl: $avatarUrl, timezone: $timezone, preferences: $preferences, activePairId: $activePairId, phoneNumber: $phoneNumber, fcmToken: $fcmToken, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -276,6 +312,10 @@ class _$UserProfileImpl implements _UserProfile {
                 .equals(other._preferences, _preferences) &&
             (identical(other.activePairId, activePairId) ||
                 other.activePairId == activePairId) &&
+            (identical(other.phoneNumber, phoneNumber) ||
+                other.phoneNumber == phoneNumber) &&
+            (identical(other.fcmToken, fcmToken) ||
+                other.fcmToken == fcmToken) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -293,6 +333,8 @@ class _$UserProfileImpl implements _UserProfile {
       timezone,
       const DeepCollectionEquality().hash(_preferences),
       activePairId,
+      phoneNumber,
+      fcmToken,
       createdAt,
       updatedAt);
 
@@ -319,6 +361,8 @@ abstract class _UserProfile implements UserProfile {
           final String? timezone,
           final Map<String, dynamic> preferences,
           @JsonKey(name: 'active_pair_id') final String? activePairId,
+          @JsonKey(name: 'phone_number') final String? phoneNumber,
+          @JsonKey(name: 'fcm_token') final String? fcmToken,
           @JsonKey(name: 'created_at') required final DateTime createdAt,
           @JsonKey(name: 'updated_at') required final DateTime updatedAt}) =
       _$UserProfileImpl;
@@ -343,6 +387,12 @@ abstract class _UserProfile implements UserProfile {
   @override
   @JsonKey(name: 'active_pair_id')
   String? get activePairId;
+  @override
+  @JsonKey(name: 'phone_number')
+  String? get phoneNumber;
+  @override
+  @JsonKey(name: 'fcm_token')
+  String? get fcmToken;
   @override
   @JsonKey(name: 'created_at')
   DateTime get createdAt;

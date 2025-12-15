@@ -15,6 +15,8 @@ _$UserProfileImpl _$$UserProfileImplFromJson(Map<String, dynamic> json) =>
       timezone: json['timezone'] as String?,
       preferences: json['preferences'] as Map<String, dynamic>? ?? const {},
       activePairId: json['active_pair_id'] as String?,
+      phoneNumber: json['phone_number'] as String?,
+      fcmToken: json['fcm_token'] as String?,
       createdAt: DateTime.parse(json['created_at'] as String),
       updatedAt: DateTime.parse(json['updated_at'] as String),
     );
@@ -28,6 +30,8 @@ Map<String, dynamic> _$$UserProfileImplToJson(_$UserProfileImpl instance) =>
       'timezone': instance.timezone,
       'preferences': instance.preferences,
       'active_pair_id': instance.activePairId,
+      'phone_number': instance.phoneNumber,
+      'fcm_token': instance.fcmToken,
       'created_at': instance.createdAt.toIso8601String(),
       'updated_at': instance.updatedAt.toIso8601String(),
     };

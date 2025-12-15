@@ -13,6 +13,8 @@ class UserProfile with _$UserProfile {
     String? timezone,
     @Default({}) Map<String, dynamic> preferences,
     @JsonKey(name: 'active_pair_id') String? activePairId,
+    @JsonKey(name: 'phone_number') String? phoneNumber,
+    @JsonKey(name: 'fcm_token') String? fcmToken,
     @JsonKey(name: 'created_at') required DateTime createdAt,
     @JsonKey(name: 'updated_at') required DateTime updatedAt,
   }) = _UserProfile;

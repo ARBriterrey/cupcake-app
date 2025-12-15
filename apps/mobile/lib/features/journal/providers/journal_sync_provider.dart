@@ -1,7 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:logger/logger.dart';
-import 'package:cupcake_core/core.dart';
 import '../models/journal_entry.dart';
 import '../models/journal_entry_local.dart';
 import 'journal_providers.dart';

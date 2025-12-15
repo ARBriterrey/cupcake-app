@@ -4,6 +4,7 @@ import 'package:cupcake_ui/ui.dart';
 import '../../auth/providers/auth_providers.dart';
 import '../../pairing/providers/pairing_providers.dart';
 import '../models/collaborative_list.dart';
+import '../models/list_item.dart'; // Added import
 import '../providers/lists_providers.dart';
 import '../widgets/list_item_tile.dart';
 import '../widgets/chit_jar_header.dart';
@@ -37,7 +38,7 @@ class _ListDetailScreenState extends ConsumerState<ListDetailScreen> {
   @override
   Widget build(BuildContext context) {
     final currentUser = ref.watch(currentUserProvider);
-    final currentPair = ref.watch(currentPairProvider);
+    final currentPair = ref.watch(currentPairProvider).value;
 
     if (currentUser == null || currentPair == null) {
       return Scaffold(
@@ -46,8 +47,8 @@ class _ListDetailScreenState extends ConsumerState<ListDetailScreen> {
       );
     }
 
-    final listAsync = ref.watch(listByIdProvider(widget.listId));
-    final itemsAsync = ref.watch(itemsForListProvider(widget.listId));
+    final AsyncValue<CollaborativeList?> listAsync = ref.watch(listByIdProvider(widget.listId));
+    final AsyncValue<List<ListItem>> itemsAsync = ref.watch(itemsForListProvider(widget.listId));
 
     return Scaffold(
       appBar: AppBar(

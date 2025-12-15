@@ -40,6 +40,7 @@ class UserRepository {
     String? displayName,
     String? avatarUrl,
     String? timezone,
+    String? fcmToken,
     Map<String, dynamic>? preferences,
   }) async {
     final updates = <String, dynamic>{
@@ -49,6 +50,7 @@ class UserRepository {
     if (displayName != null) updates['display_name'] = displayName;
     if (avatarUrl != null) updates['avatar_url'] = avatarUrl;
     if (timezone != null) updates['timezone'] = timezone;
+    if (fcmToken != null) updates['fcm_token'] = fcmToken;
     if (preferences != null) updates['preferences'] = preferences;
 
     final response = await _supabase

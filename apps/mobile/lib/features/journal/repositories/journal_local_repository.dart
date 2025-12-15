@@ -1,5 +1,4 @@
 import 'package:hive/hive.dart';
-import 'package:cupcake_core/core.dart';
 import '../models/journal_entry_local.dart';
 
 class JournalLocalRepository {

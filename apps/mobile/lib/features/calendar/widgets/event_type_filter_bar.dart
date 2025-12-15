@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:cupcake_core/core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../core/models/calendar_event.dart';
 import 'package:cupcake_ui/ui.dart';
 import '../providers/calendar_providers.dart';
 

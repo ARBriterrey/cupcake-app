@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 import '../../auth/providers/auth_providers.dart';
 import '../../pairing/providers/pairing_providers.dart';
 import '../../journal/providers/journal_providers.dart';
+import '../../journal/models/journal_entry_local.dart';
 
 class JournalPreviewCard extends ConsumerWidget {
   const JournalPreviewCard({super.key});
@@ -22,16 +23,16 @@ class JournalPreviewCard extends ConsumerWidget {
         }
 
         final pairId = pair.id;
-        final entriesAsync = ref.watch(journalEntriesProvider(pairId));
+        final entries = ref.watch(journalEntriesProvider(pairId));
 
-        return _buildCard(context, entriesAsync);
+        return _buildCard(context, entries);
       },
       loading: () => const SizedBox.shrink(),
       error: (_, __) => const SizedBox.shrink(),
     );
   }
 
-  Widget _buildCard(BuildContext context, dynamic entriesAsync) {
+  Widget _buildCard(BuildContext context, List<JournalEntryLocal> entries) {
 
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -73,78 +74,65 @@ class JournalPreviewCard extends ConsumerWidget {
             const SizedBox(height: 16),
 
             // Recent entries
-            entriesAsync.when(
-              data: (entries) {
-                if (entries.isEmpty) {
-                  return _buildEmptyState(context);
-                }
-
-                // Show up to 3 recent entries
-                final recentEntries = entries.take(3).toList();
-
-                return Column(
-                  children: recentEntries.map((entry) {
-                    return Padding(
-                      padding: const EdgeInsets.only(bottom: 12),
-                      child: Container(
-                        padding: const EdgeInsets.all(12),
-                        decoration: BoxDecoration(
-                          color: CupcakeColors.backgroundLight,
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Row(
-                          children: [
-                            // Visibility icon
-                            Icon(
-                              entry.visibility == 'shared'
-                                  ? Icons.people
-                                  : Icons.lock,
-                              size: 16,
-                              color: entry.visibility == 'shared'
-                                  ? CupcakeColors.accentLavender
-                                  : CupcakeColors.textSecondary,
-                            ),
-                            const SizedBox(width: 12),
-
-                            // Content
-                            Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    entry.title,
-                                    style: CupcakeTypography.body.copyWith(
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                  const SizedBox(height: 2),
-                                  Text(
-                                    DateFormat('MMM d, h:mm a')
-                                        .format(entry.createdAt),
-                                    style: CupcakeTypography.bodySmall.copyWith(
-                                      color: CupcakeColors.textSecondary,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ),
+            if (entries.isEmpty) ...[
+              _buildEmptyState(context),
+            ] else ...[
+              // Show up to 3 recent entries
+              Column(
+                children: entries.take(3).map((entry) {
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 12),
+                    child: Container(
+                      padding: const EdgeInsets.all(12),
+                      decoration: BoxDecoration(
+                        color: CupcakeColors.backgroundLight,
+                        borderRadius: BorderRadius.circular(12),
                       ),
-                    );
-                  }).toList(),
-                );
-              },
-              loading: () => const Center(
-                child: Padding(
-                  padding: EdgeInsets.all(16.0),
-                  child: CircularProgressIndicator(),
-                ),
+                      child: Row(
+                        children: [
+                          // Visibility icon
+                          Icon(
+                            entry.visibility == 'shared'
+                                ? Icons.people
+                                : Icons.lock,
+                            size: 16,
+                            color: entry.visibility == 'shared'
+                                ? CupcakeColors.accentLavender
+                                : CupcakeColors.textSecondary,
+                          ),
+                          const SizedBox(width: 12),
+
+                          // Content
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  entry.title,
+                                  style: CupcakeTypography.body.copyWith(
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                const SizedBox(height: 2),
+                                Text(
+                                  DateFormat('MMM d, h:mm a')
+                                      .format(entry.createdAt),
+                                  style: CupcakeTypography.bodySmall.copyWith(
+                                    color: CupcakeColors.textSecondary,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }).toList(),
               ),
-              error: (error, _) => _buildErrorState(),
-            ),
+            ],
           ],
         ),
       ),
@@ -176,17 +164,6 @@ class JournalPreviewCard extends ConsumerWidget {
           ),
         ),
       ],
-    );
-  }
-
-  Widget _buildErrorState() {
-    return Center(
-      child: Text(
-        'Could not load entries',
-        style: CupcakeTypography.bodySmall.copyWith(
-          color: CupcakeColors.textSecondary,
-        ),
-      ),
     );
   }
 }

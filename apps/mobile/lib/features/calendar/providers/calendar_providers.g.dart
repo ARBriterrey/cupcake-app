@@ -555,7 +555,7 @@ class EventsByTypeFamily extends Family<AsyncValue<List<CalendarEvent>>> {
   ///
   /// Copied from [eventsByType].
   EventsByTypeProvider call({
-    required InvalidType eventType,
+    required EventType eventType,
     DateTime? startDate,
     DateTime? endDate,
   }) {
@@ -601,7 +601,7 @@ class EventsByTypeProvider
   ///
   /// Copied from [eventsByType].
   EventsByTypeProvider({
-    required InvalidType eventType,
+    required EventType eventType,
     DateTime? startDate,
     DateTime? endDate,
   }) : this._internal(
@@ -637,7 +637,7 @@ class EventsByTypeProvider
     required this.endDate,
   }) : super.internal();
 
-  final InvalidType eventType;
+  final EventType eventType;
   final DateTime? startDate;
   final DateTime? endDate;
 
@@ -687,7 +687,7 @@ class EventsByTypeProvider
 
 mixin EventsByTypeRef on AutoDisposeFutureProviderRef<List<CalendarEvent>> {
   /// The parameter `eventType` of this provider.
-  InvalidType get eventType;
+  EventType get eventType;
 
   /// The parameter `startDate` of this provider.
   DateTime? get startDate;
@@ -702,7 +702,7 @@ class _EventsByTypeProviderElement
   _EventsByTypeProviderElement(super.provider);
 
   @override
-  InvalidType get eventType => (origin as EventsByTypeProvider).eventType;
+  EventType get eventType => (origin as EventsByTypeProvider).eventType;
   @override
   DateTime? get startDate => (origin as EventsByTypeProvider).startDate;
   @override

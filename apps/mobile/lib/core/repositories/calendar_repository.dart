@@ -1,4 +1,5 @@
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:cupcake_core/core.dart';
 import '../models/calendar_event.dart';
 
 class CalendarRepository {

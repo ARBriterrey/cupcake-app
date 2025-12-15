@@ -56,7 +56,12 @@
       "Bash(cmd.exe /c \"cd /d D:\\Project\\Cupcake app\\apps\\mobile && flutter build web --release --no-pub 2>&1 | findstr /C:\"\"Error:\"\" /C:\"\"error:\"\"\")",
       "Bash(cmd.exe /c \"cd /d D:\\Project\\Cupcake app\\apps\\mobile && flutter clean\")",
       "Bash(flutter analyze:*)",
-      "Bash(findstr:*)"
+      "Bash(findstr:*)",
+      "Bash(cmd.exe /c \"flutter analyze --no-fatal-infos\")",
+      "Bash(cmd.exe /c \"flutter analyze --no-fatal-infos 2>&1 | findstr /C:\"\"Error\"\" /C:\"\"error\"\" /C:\"\"No issues found\"\" /I\")",
+      "Bash(cmd.exe /c \"cd /d D:\\Project\\Cupcake app\\apps\\mobile && flutter analyze --no-fatal-infos 2>&1 | findstr /C:\"\"lib\\features\\lists\"\" /C:\"\"Error\"\" /C:\"\"error\"\" /I\")",
+      "Bash(cmd.exe /c \"cd /d D:\\Project\\Cupcake app\\apps\\mobile && flutter analyze --no-fatal-infos 2>&1 | findstr /C:\"\"issues found\"\" /C:\"\"No issues found\"\"\")",
+      "Bash(cmd.exe /c \"cd /d D:\\Project\\Cupcake app\\apps\\mobile && flutter analyze --no-fatal-infos 2>&1\")"
     ],
     "deny": [],
     "ask": []

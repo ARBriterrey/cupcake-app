@@ -5,6 +5,7 @@ import 'package:cupcake_ui/ui.dart';
 import '../../auth/providers/auth_providers.dart';
 import '../../pairing/providers/pairing_providers.dart';
 import '../providers/lists_providers.dart';
+import '../models/collaborative_list.dart'; // Added import
 import '../widgets/list_card.dart';
 import '../widgets/create_list_bottom_sheet.dart';
 
@@ -14,7 +15,7 @@ class ListsOverviewScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentUser = ref.watch(currentUserProvider);
-    final currentPair = ref.watch(currentPairProvider);
+    final currentPair = ref.watch(currentPairProvider).value;
 
     if (currentUser == null || currentPair == null) {
       return Scaffold(
@@ -28,7 +29,8 @@ class ListsOverviewScreen extends ConsumerWidget {
     }
 
     final pairId = currentPair.id;
-    final listsAsync = ref.watch(listsForPairProvider(pairId));
+    // Explicitly typed to avoid dynamic inference issues
+    final AsyncValue<List<CollaborativeList>> listsAsync = ref.watch(listsForPairProvider(pairId));
 
     return Scaffold(
       appBar: AppBar(
@@ -146,3 +148,4 @@ class ListsOverviewScreen extends ConsumerWidget {
     );
   }
 }
+

@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:cupcake_core/core.dart';
 import 'package:uuid/uuid.dart';
 import 'calendar_event.dart';
 

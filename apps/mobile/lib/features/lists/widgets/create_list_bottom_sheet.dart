@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:cupcake_ui/ui.dart';
 import '../models/collaborative_list.dart';
 import '../providers/lists_providers.dart';
-import '../../pairing/providers/pairing_providers.dart';
 
 class CreateListBottomSheet extends ConsumerStatefulWidget {
   final String pairId;
@@ -35,8 +34,6 @@ class _CreateListBottomSheetState extends ConsumerState<CreateListBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    final currentPair = ref.watch(currentPairProvider);
-
     return Container(
       decoration: const BoxDecoration(
         color: CupcakeColors.cream,
@@ -185,15 +182,6 @@ class _CreateListBottomSheetState extends ConsumerState<CreateListBottomSheet> {
     required String description,
   }) {
     final isSelected = _selectedType == type;
-    final currentPair = ref.watch(currentPairProvider);
-
-    // Get partner ID for Chit Jar initialization
-    String? partnerId;
-    if (currentPair != null) {
-      partnerId = currentPair.user1Id == widget.userId
-          ? currentPair.user2Id
-          : currentPair.user1Id;
-    }
 
     return InkWell(
       onTap: () => setState(() => _selectedType = type),
@@ -266,7 +254,6 @@ class _CreateListBottomSheetState extends ConsumerState<CreateListBottomSheet> {
     setState(() => _isCreating = true);
 
     try {
-      final currentPair = ref.read(currentPairProvider);
       String? currentTurnUserId;
 
       // For Chit Jar mode, initialize with current user's turn

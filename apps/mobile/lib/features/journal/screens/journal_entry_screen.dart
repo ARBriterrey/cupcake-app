@@ -159,10 +159,13 @@ class _JournalEntryScreenState extends ConsumerState<JournalEntryScreen> {
              child: Center(
                child: _isLoading 
                  ? const SizedBox(width: 24, height: 24, child: CircularProgressIndicator(strokeWidth: 2))
-                 : PrimaryButton(
-                     label: 'Save',
+                 : FilledButton(
                      onPressed: _save,
-                     compact: true,
+                     style: FilledButton.styleFrom(
+                       visualDensity: VisualDensity.compact,
+                       padding: const EdgeInsets.symmetric(horizontal: 16),
+                     ),
+                     child: const Text('Save'),
                    ),
              ),
           ),

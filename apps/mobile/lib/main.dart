@@ -13,6 +13,7 @@ import 'features/lists/models/list_local.dart';
 import 'features/lists/models/list_item_local.dart';
 import 'features/journal/providers/journal_context_providers.dart';
 import 'features/auth/providers/auth_providers.dart';
+import 'core/services/notification_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -71,11 +72,25 @@ void main() async {
   }
 }
 
-class CupcakeApp extends ConsumerWidget {
+class CupcakeApp extends ConsumerStatefulWidget {
   const CupcakeApp({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<CupcakeApp> createState() => _CupcakeAppState();
+}
+
+class _CupcakeAppState extends ConsumerState<CupcakeApp> {
+  @override
+  void initState() {
+    super.initState();
+    // Initialize notifications
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref.read(notificationServiceProvider).initialize();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final router = ref.watch(appRouterProvider);
 
     return MaterialApp.router(

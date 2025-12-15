@@ -129,12 +129,77 @@ class CupcakeTheme {
   );
 }
 
-/// Interface for future custom themes
-abstract class CupcakeColors {
-  Color get primary;
-  Color get secondary;
-  Color get surface;
-  Color get background;
-  Color get textPrimary;
-  Color get textSecondary;
+/// Brand Colors & Design Tokens
+class CupcakeColors {
+  // Core
+  static const Color cream = Color(0xFFFFFDD0); // Classic cream
+  static const Color backgroundLight = Color(0xFFFAFAFA);
+  
+  // Text
+  static const Color textPrimary = Color(0xFF2D2D2D);
+  static const Color textSecondary = Color(0xFF757575);
+  static const Color textTertiary = Color(0xFFBDBDBD);
+
+  // Accents
+  static const Color accentPeach = Color(0xFFFFD4B8);
+  static const Color accentLavender = Color(0xFFE6D5F5);
+  static const Color accentMint = Color(0xFFD4F4E6);
+  static const Color accentBlue = Color(0xFFD4E6F4); // Added missing blue
+  static const Color primaryPink = Color(0xFFFFC3D0);
+}
+
+/// Cupcake Typography System
+class CupcakeTypography {
+  static const TextStyle h1 = TextStyle(
+    fontSize: 32,
+    fontWeight: FontWeight.w700,
+    color: CupcakeColors.textPrimary,
+    letterSpacing: -0.5,
+  );
+
+  static const TextStyle h2 = TextStyle(
+    fontSize: 24,
+    fontWeight: FontWeight.w600,
+    color: CupcakeColors.textPrimary,
+    letterSpacing: -0.3,
+  );
+
+  static const TextStyle h3 = TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.w600,
+    color: CupcakeColors.textPrimary,
+  );
+
+  static const TextStyle heading2 = h2;
+  static const TextStyle heading4 = TextStyle(
+    fontSize: 18,
+    fontWeight: FontWeight.w600,
+    color: CupcakeColors.textPrimary,
+  );
+
+  static const TextStyle body = TextStyle(
+    fontSize: 16,
+    color: CupcakeColors.textPrimary,
+    height: 1.5,
+  );
+  
+  static const TextStyle bodyLarge = TextStyle(
+    fontSize: 18,
+    color: CupcakeColors.textPrimary,
+    height: 1.5,
+  );
+
+  static const TextStyle bodyMedium = body;
+
+  static const TextStyle bodySmall = TextStyle(
+    fontSize: 14,
+    color: CupcakeColors.textSecondary,
+    height: 1.4,
+  );
+
+  static const TextStyle caption = TextStyle(
+    fontSize: 12,
+    color: CupcakeColors.textTertiary,
+    height: 1.2,
+  );
 }

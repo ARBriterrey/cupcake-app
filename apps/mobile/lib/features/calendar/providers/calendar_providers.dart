@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:cupcake_core/core.dart';
 import '../../../core/models/calendar_event.dart';
 import '../../../core/models/calendar_event_local.dart';
 import '../../../core/repositories/calendar_repository.dart';

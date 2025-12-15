@@ -6,7 +6,6 @@ import '../../features/calendar/screens/calendar_screen.dart';
 import '../../features/dashboard/screens/dashboard_screen.dart';
 import '../../features/pairing/screens/pairing_screen.dart';
 import '../../features/pairing/screens/send_invitation_screen.dart';
-import '../../features/pairing/screens/send_invitation_screen.dart';
 import '../../features/settings/screens/restore_events_screen.dart';
 import '../../features/settings/screens/settings_screen.dart';
 import '../../features/sprinkles/screens/sprinkles_screen.dart';

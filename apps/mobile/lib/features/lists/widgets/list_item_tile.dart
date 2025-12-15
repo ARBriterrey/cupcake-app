@@ -21,7 +21,6 @@ class ListItemTile extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isAssignedToMe = item.assignedTo == currentUserId;
-    final isAssignedToPartner = item.assignedTo != null && !isAssignedToMe;
 
     return Padding(
       padding: const EdgeInsets.only(bottom: 8),

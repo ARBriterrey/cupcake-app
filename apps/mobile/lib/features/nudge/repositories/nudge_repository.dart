@@ -36,7 +36,7 @@ class NudgeRepository {
         .from('nudges')
         .select()
         .eq('receiver_id', userId)
-        .is_('viewed_at', null)
+        .filter('viewed_at', 'is', null)
         .gt('expires_at', DateTime.now().toIso8601String())
         .order('created_at', ascending: false);
 
